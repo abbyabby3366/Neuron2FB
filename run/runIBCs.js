@@ -1,0 +1,77 @@
+const fsSync = require("fs");
+const fs = require("fs").promises;
+const { checkBrowserAndPage } = require("../utils/checkBrowserAndPage");
+const { clearPendingBetList } = require("../utils/clearPendingBetList");
+const { SBB } = require("../utils/SBB");
+const { setupBookie } = require("../utils/setupBookie");
+const { createTicketEventQueue } = require("../utils/createTicketEventQueue");
+
+let browsers = {};
+let pages = {};
+let isSetupReady = {};
+let lastStartTime = {};
+let ticketEventQueueIBC = createTicketEventQueue();
+
+// Set up accounts one by one to prevent crashing
+const setupIBCs = async (args) => {
+  for (const accNo of args) {
+    if (!isSetupReady[`ibc${accNo}`]) {
+      let acc = `ibc${accNo}`;
+      await setupBookie(acc, browsers, pages, isSetupReady);
+      lastStartTime[accNo] = new Date();
+    }
+  }
+};
+
+const runIBCs = async ([...args]) => {
+  clearPendingBetList();
+  setupIBCs(args);
+  checkBrowserAndPage(
+    "ibc",
+    isSetupReady,
+    browsers,
+    pages,
+    lastStartTime,
+    args,
+  );
+
+  //run main loop
+  while (true) {
+    const readyAccounts = args.filter(
+      (accNo) => isSetupReady[`ibc${accNo}`] === true,
+    );
+
+    if (readyAccounts.length > 0) {
+      for (const accNo of readyAccounts) {
+        let acc = `ibc${accNo}`;
+
+        try {
+          let params = JSON.parse(
+            fsSync.readFileSync(`TargetBookie/${acc}.json`, "utf-8"),
+          );
+          if (isSetupReady[acc] === true) {
+            //check again if there is account (because of delay)
+            await SBB("ps38380", acc, pages, isSetupReady);
+            await new Promise((resolve) =>
+              setTimeout(resolve, params.msBetweenSBB),
+            );
+          }
+        } catch (e) {
+          console.log(
+            `IBC - Caught error for ${acc}, continuing... Error: ${e.message}`,
+          );
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+      }
+    } else {
+      // console.log('IBC - No accounts ready now');
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    }
+  }
+};
+
+const getDataIBC = () => {
+  return { browsers, pages, isSetupReady, ticketEventQueueIBC };
+};
+
+module.exports = { runIBCs, browsers, pages, isSetupReady, getDataIBC };

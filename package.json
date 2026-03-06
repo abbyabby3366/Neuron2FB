@@ -1,0 +1,37 @@
+{
+  "name": "init",
+  "version": "1.0.0",
+  "description": "NeuronWin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon express.js",
+    "start": "node express.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0",
+    "chart.js": "^4.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "fuzzball": "^2.1.2",
+    "googleapis": "^105.0.0",
+    "helmet": "^7.1.0",
+    "http-proxy": "^1.18.1",
+    "https-proxy-agent": "^7.0.5",
+    "lodash": "^4.17.21",
+    "mongodb": "^6.8.0",
+    "ngrok": "^5.0.0-beta.2",
+    "node-telegram-bot-api": "^0.66.0",
+    "nodemon": "^3.1.0",
+    "openai": "^4.95.0",
+    "papaparse": "^5.4.1",
+    "path": "^0.12.7",
+    "puppeteer": "^22.8.0",
+    "tesseract.js": "^5.1.0",
+    "ws": "^8.18.0"
+  }
+}

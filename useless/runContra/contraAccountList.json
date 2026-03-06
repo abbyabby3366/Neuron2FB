@@ -1,0 +1,20 @@
+[
+  {
+    "acc1": "ps38381",
+    "acc2": "sbo11",
+    "acc1canBet": false,
+    "acc2canBet": true
+  },
+  {
+    "acc1": "ps38381",
+    "acc2": "sbo12"
+  },
+  {
+    "acc1": "ps38382",
+    "acc2": "sbo11"
+  },
+  {
+    "acc1": "ps38382",
+    "acc2": "sbo12"
+  }
+]

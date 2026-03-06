@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neuron Win</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+
+  <body>
+    <div>
+      <h1>Success Bet List</h1>
+      <div id="lastRefresh">Waiting for API response...</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Bet Placed Time</th>
+          <th>TargetBookie</th>
+          <th>League</th>
+          <th>Home/Away</th>
+          <th>3838 Home/Away</th>
+          <th>Period</th>
+          <th>Market</th>
+          <th>Initial Odds / EU</th>
+          <th>Betted (ticketted EU)</th>
+          <th>3838 Odds (NoVig)</th>
+          <th>Ticketted 3838 (NoVig)</th>
+          <th>Final Overvalue</th>
+          <th>Stake</th>
+          <!-- <th>3838 Time Scraped</th>
+        <th>3838 Time Ticketted</th>
+        <th>3838 Min/Max Stake</th> -->
+        </tr>
+      </thead>
+      <tbody id="success-bet-table">
+        <!-- Rows will be inserted here by JavaScript -->
+      </tbody>
+    </table>
+    <script src="/getSuccessBetList.js"></script>
+  </body>
+</html>

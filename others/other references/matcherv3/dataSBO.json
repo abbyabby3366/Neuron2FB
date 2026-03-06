@@ -1,0 +1,1066 @@
+[
+  {
+    "leagueName": "ENGLISH PREMIER LEAGUE",
+    "homeTeam": "Crystal Palace",
+    "awayTeam": "Manchester United",
+    "homeWin": "2.305",
+    "awayWin": "2.699",
+    "draw": "3.63"
+  },
+  {
+    "leagueName": "ITALY SERIE A",
+    "homeTeam": "Salernitana",
+    "awayTeam": "Atalanta",
+    "homeWin": "8.488",
+    "awayWin": "1.297",
+    "draw": "5.416"
+  },
+  {
+    "leagueName": "ITALY SERIE A",
+    "homeTeam": "Udinese",
+    "awayTeam": "Napoli",
+    "homeWin": "3.62",
+    "awayWin": "1.96",
+    "draw": "3.428"
+  },
+  {
+    "leagueName": "FRANCE LIGUE 1",
+    "homeTeam": "Lille",
+    "awayTeam": "Lyon",
+    "homeWin": "1.979",
+    "awayWin": "3.294",
+    "draw": "3.582"
+  },
+  {
+    "leagueName": "NETHERLANDS EREDIVISIE",
+    "homeTeam": "Excelsior Rotterdam",
+    "awayTeam": "NEC Nijmegen",
+    "homeWin": "2.488",
+    "awayWin": "2.468",
+    "draw": "3.544"
+  },
+  {
+    "leagueName": "SWEDEN ALLSVENSKAN",
+    "homeTeam": "GAIS Goteborg",
+    "awayTeam": "IFK Goteborg",
+    "homeWin": "2.766",
+    "awayWin": "2.411",
+    "draw": "3.198"
+  },
+  {
+    "leagueName": "DENMARK SUPER LEAGUE PLAYOFF",
+    "homeTeam": "Vejle",
+    "awayTeam": "Odense BK",
+    "homeWin": "2.593",
+    "awayWin": "2.641",
+    "draw": "3.073"
+  },
+  {
+    "leagueName": "TURKIYE SUPER LEAGUE",
+    "homeTeam": "Antalyaspor",
+    "awayTeam": "Pendikspor",
+    "homeWin": "2.257",
+    "awayWin": "2.68",
+    "draw": "3.40"
+  },
+  {
+    "leagueName": "TURKIYE SUPER LEAGUE",
+    "homeTeam": "Konyaspor",
+    "awayTeam": "Fenerbahce",
+    "homeWin": "6.376",
+    "awayWin": "1.393",
+    "draw": "4.34"
+  },
+  {
+    "leagueName": "RUSSIA PREMIER LEAGUE",
+    "homeTeam": "Ural Sverdlovsk Oblast",
+    "awayTeam": "Baltika Kaliningrad",
+    "homeWin": "2.344",
+    "awayWin": "3.083",
+    "draw": "2.776"
+  },
+  {
+    "leagueName": "RUSSIA PREMIER LEAGUE",
+    "homeTeam": "Fakel Voronezh",
+    "awayTeam": "Zenit St. Petersburg",
+    "homeWin": "5.992",
+    "awayWin": "1.499",
+    "draw": "3.678"
+  },
+  {
+    "leagueName": "RUSSIA PREMIER LEAGUE",
+    "homeTeam": "CSKA Moscow",
+    "awayTeam": "Rubin Kazan",
+    "homeWin": "1.796",
+    "awayWin": "4.129",
+    "draw": "3.246"
+  },
+  {
+    "leagueName": "RUSSIA PREMIER LEAGUE",
+    "homeTeam": "Lokomotiv Moscow",
+    "awayTeam": "Rostov FK",
+    "homeWin": "2.084",
+    "awayWin": "3.044",
+    "draw": "3.313"
+  },
+  {
+    "leagueName": "SWEDEN SUPERETTAN",
+    "homeTeam": "Varbergs BoIS",
+    "awayTeam": "Trelleborgs FF",
+    "homeWin": "1.94",
+    "awayWin": "3.467",
+    "draw": "3.294"
+  },
+  {
+    "leagueName": "Poland Ekstraklasa",
+    "homeTeam": "Pogon Szczecin",
+    "awayTeam": "Puszcza Niepolomice",
+    "homeWin": "1.412",
+    "awayWin": "5.704",
+    "draw": "4.475"
+  },
+  {
+    "leagueName": "Ireland Premier Division",
+    "homeTeam": "Bohemians",
+    "awayTeam": "Galway United",
+    "homeWin": "2.43",
+    "awayWin": "2.785",
+    "draw": "2.948"
+  },
+  {
+    "leagueName": "Ireland Premier Division",
+    "homeTeam": "Shamrock Rovers",
+    "awayTeam": "Waterford FC",
+    "homeWin": "1.288",
+    "awayWin": "7.912",
+    "draw": "4.936"
+  },
+  {
+    "leagueName": "Ireland Premier Division",
+    "homeTeam": "Sligo Rovers",
+    "awayTeam": "St. Patricks Athletic",
+    "homeWin": "2.91",
+    "awayWin": "2.305",
+    "draw": "2.996"
+  },
+  {
+    "leagueName": "Ireland Premier Division",
+    "homeTeam": "Derry City",
+    "awayTeam": "Shelbourne",
+    "homeWin": "1.825",
+    "awayWin": "4.504",
+    "draw": "2.968"
+  },
+  {
+    "leagueName": "Iceland Premier League",
+    "homeTeam": "Breidablik",
+    "awayTeam": "Valur Reykjavik",
+    "homeWin": "1.864",
+    "awayWin": "3.486",
+    "draw": "3.515"
+  },
+  {
+    "leagueName": "Romania Superliga Playoff",
+    "homeTeam": "UTA Arad",
+    "awayTeam": "FC U Craiova 1948",
+    "homeWin": "2.113",
+    "awayWin": "2.872",
+    "draw": "3.035"
+  },
+  {
+    "leagueName": "Romania Superliga Playoff",
+    "homeTeam": "CS Universitatea Craiova",
+    "awayTeam": "FCSB",
+    "homeWin": "1.921",
+    "awayWin": "3.217",
+    "draw": "3.15"
+  },
+  {
+    "leagueName": "Egypt Premier League",
+    "homeTeam": "Tala.ea El Giesh",
+    "awayTeam": "Al Masry",
+    "homeWin": "3.006",
+    "awayWin": "2.238",
+    "draw": "2.689"
+  },
+  {
+    "leagueName": "Egypt Premier League",
+    "homeTeam": "Pyramids FC",
+    "awayTeam": "Future FC",
+    "homeWin": "1.585",
+    "awayWin": "4.571",
+    "draw": "3.38"
+  },
+  {
+    "leagueName": "Saudi Arabia Pro League",
+    "homeTeam": "Al Ahli Jeddah",
+    "awayTeam": "Al Hilal Riyadh",
+    "homeWin": "3.025",
+    "awayWin": "1.988",
+    "draw": "3.38"
+  },
+  {
+    "leagueName": "Poland 1st Liga",
+    "homeTeam": "Zaglebie Sosnowiec",
+    "awayTeam": "Wisla Krakow",
+    "homeWin": "4.379",
+    "awayWin": "1.614",
+    "draw": "3.572"
+  },
+  {
+    "leagueName": "Bulgaria First Professional Football League Playoff",
+    "homeTeam": "Slavia Sofia",
+    "awayTeam": "Arda Kardzhali",
+    "homeWin": "1.854",
+    "awayWin": "3.649",
+    "draw": "2.987"
+  },
+  {
+    "leagueName": "Bulgaria First Professional Football League Playoff",
+    "homeTeam": "Botev Plovdiv",
+    "awayTeam": "CSKA 1948 Sofia",
+    "homeWin": "1.71",
+    "awayWin": "3.812",
+    "draw": "3.332"
+  },
+  {
+    "leagueName": "Azerbaijan Premier League",
+    "homeTeam": "Sabail FK",
+    "awayTeam": "Qabala FK",
+    "homeWin": "1.864",
+    "awayWin": "3.448",
+    "draw": "3.112"
+  },
+  {
+    "leagueName": "Latvia Virsliga",
+    "homeTeam": "FK Liepaja",
+    "awayTeam": "FK Metta",
+    "homeWin": "1.691",
+    "awayWin": "4.196",
+    "draw": "3.16"
+  },
+  {
+    "leagueName": "Liga Portugal 2",
+    "homeTeam": "AVS",
+    "awayTeam": "CD Mafra",
+    "homeWin": "1.307",
+    "awayWin": "7.048",
+    "draw": "4.657"
+  },
+  {
+    "leagueName": "ENGLISH LEAGUE TWO PLAYOFF",
+    "homeTeam": "Crewe Alexandra",
+    "awayTeam": "Doncaster Rovers",
+    "homeWin": "2.603",
+    "awayWin": "2.382",
+    "draw": "3.064"
+  },
+  {
+    "leagueName": "Ireland 1st Div",
+    "homeTeam": "Bray Wanderers",
+    "awayTeam": "Finn Harps",
+    "homeWin": "2.161",
+    "awayWin": "2.958",
+    "draw": "2.852"
+  },
+  {
+    "leagueName": "Ireland 1st Div",
+    "homeTeam": "Cork City",
+    "awayTeam": "Wexford FC",
+    "homeWin": "1.518",
+    "awayWin": "4.936",
+    "draw": "3.467"
+  },
+  {
+    "leagueName": "Ireland 1st Div",
+    "homeTeam": "Longford Town",
+    "awayTeam": "Kerry FC",
+    "homeWin": "2.526",
+    "awayWin": "2.411",
+    "draw": "2.939"
+  },
+  {
+    "leagueName": "Ireland 1st Div",
+    "homeTeam": "Treaty United",
+    "awayTeam": "Athlone Town",
+    "homeWin": "2.449",
+    "awayWin": "2.449",
+    "draw": "3.006"
+  },
+  {
+    "leagueName": "Ireland 1st Div",
+    "homeTeam": "UC Dublin",
+    "awayTeam": "Cobh Ramblers",
+    "homeWin": "1.969",
+    "awayWin": "3.361",
+    "draw": "2.91"
+  },
+  {
+    "leagueName": "UAE Pro League",
+    "homeTeam": "Al Ittihad Kalba",
+    "awayTeam": "Emirates Club",
+    "homeWin": "1.451",
+    "awayWin": "4.619",
+    "draw": "4.187"
+  },
+  {
+    "leagueName": "UAE Pro League",
+    "homeTeam": "Khorfakkan FC",
+    "awayTeam": "Al Ain Abu Dhabi",
+    "homeWin": "3.112",
+    "awayWin": "1.787",
+    "draw": "3.716"
+  },
+  {
+    "leagueName": "UAE Pro League",
+    "homeTeam": "Al Bataeh Club",
+    "awayTeam": "Al Wasl Dubai",
+    "homeWin": "6.184",
+    "awayWin": "1.288",
+    "draw": "4.84"
+  },
+  {
+    "leagueName": "UAE Pro League",
+    "homeTeam": "Shabab Al Ahli Dubai",
+    "awayTeam": "Al Sharjah",
+    "homeWin": "1.70",
+    "awayWin": "3.62",
+    "draw": "3.534"
+  },
+  {
+    "leagueName": "Israel Premier League Playoff",
+    "homeTeam": "Beitar Jerusalem",
+    "awayTeam": "FC Ashdod",
+    "homeWin": "1.969",
+    "awayWin": "3.16",
+    "draw": "3.073"
+  },
+  {
+    "leagueName": "Israel Premier League Playoff",
+    "homeTeam": "Bnei Sakhnin",
+    "awayTeam": "Maccabi Tel Aviv",
+    "homeWin": "6.568",
+    "awayWin": "1.326",
+    "draw": "4.216"
+  },
+  {
+    "leagueName": "Israel Premier League Playoff",
+    "homeTeam": "Hapoel Hadera",
+    "awayTeam": "Maccabi Petah Tikva",
+    "homeWin": "2.296",
+    "awayWin": "2.641",
+    "draw": "2.977"
+  },
+  {
+    "leagueName": "Ukraine Premier League",
+    "homeTeam": "Veres Rivne",
+    "awayTeam": "FC Minaj",
+    "homeWin": "1.969",
+    "awayWin": "3.38",
+    "draw": "2.90"
+  },
+  {
+    "leagueName": "Uzbekistan Super League",
+    "homeTeam": "Qizilqum Zarafshon",
+    "awayTeam": "Neftchi Fargona",
+    "homeWin": "2.795",
+    "awayWin": "2.276",
+    "draw": "2.833"
+  },
+  {
+    "leagueName": "Iran Pro League",
+    "homeTeam": "Sepahan Esfahan",
+    "awayTeam": "Esteghlal Khuzestan",
+    "homeWin": "1.297",
+    "awayWin": "7.432",
+    "draw": "4.196"
+  },
+  {
+    "leagueName": "Iran Pro League",
+    "homeTeam": "Foolad Khuzestan",
+    "awayTeam": "Tractor Sazi",
+    "homeWin": "3.707",
+    "awayWin": "1.94",
+    "draw": "2.756"
+  },
+  {
+    "leagueName": "Iran Pro League",
+    "homeTeam": "Malavan Bandar Anzali",
+    "awayTeam": "Havadar SC",
+    "homeWin": "1.988",
+    "awayWin": "3.476",
+    "draw": "2.785"
+  },
+  {
+    "leagueName": "Iran Pro League",
+    "homeTeam": "Sanat Naft Abadan",
+    "awayTeam": "Mes Rafsanjan",
+    "homeWin": "3.294",
+    "awayWin": "1.998",
+    "draw": "2.881"
+  },
+  {
+    "leagueName": "Iran Pro League",
+    "homeTeam": "Esteghlal Tehran",
+    "awayTeam": "Zob Ahan",
+    "homeWin": "1.422",
+    "awayWin": "6.568",
+    "draw": "3.467"
+  },
+  {
+    "leagueName": "Algeria Professional Ligue 1",
+    "homeTeam": "USM Alger",
+    "awayTeam": "JS Kabylie",
+    "homeWin": "1.816",
+    "awayWin": "3.822",
+    "draw": "2.968"
+  },
+  {
+    "leagueName": "Italy Primavera 1 Championship",
+    "homeTeam": "Lecce U19",
+    "awayTeam": "AC Milan U19",
+    "homeWin": "3.304",
+    "awayWin": "1.825",
+    "draw": "3.361"
+  },
+  {
+    "leagueName": "Italy Primavera 1 Championship",
+    "homeTeam": "Torino U19",
+    "awayTeam": "Sampdoria U19",
+    "homeWin": "1.748",
+    "awayWin": "3.515",
+    "draw": "3.438"
+  },
+  {
+    "leagueName": "Saudi Arabia 1st Div",
+    "homeTeam": "Al Adalah",
+    "awayTeam": "Al Bukiryah FC",
+    "homeWin": "1.47",
+    "awayWin": "5.32",
+    "draw": "3.601"
+  },
+  {
+    "leagueName": "Saudi Arabia 1st Div",
+    "homeTeam": "Al Jabalain",
+    "awayTeam": "Al Ain Atawlah",
+    "homeWin": "1.921",
+    "awayWin": "3.352",
+    "draw": "3.006"
+  },
+  {
+    "leagueName": "Saudi Arabia 1st Div",
+    "homeTeam": "Ohod Medina",
+    "awayTeam": "Al Qadisiyah Khobar",
+    "homeWin": "4.11",
+    "awayWin": "1.662",
+    "draw": "3.284"
+  },
+  {
+    "leagueName": "Northern Ireland Premiership Playoff",
+    "homeTeam": "Crusaders FC",
+    "awayTeam": "Coleraine",
+    "homeWin": null,
+    "awayWin": null,
+    "draw": null
+  },
+  {
+    "leagueName": "English National League South Playoff",
+    "homeTeam": "Worthing",
+    "awayTeam": "Braintree Town",
+    "homeWin": "2.036",
+    "awayWin": "2.891",
+    "draw": "3.198"
+  },
+  {
+    "leagueName": "Norway 2nd Div",
+    "homeTeam": "Flekkeroy IL",
+    "awayTeam": "Viking 2",
+    "homeWin": "1.96",
+    "awayWin": "2.584",
+    "draw": "3.515"
+  },
+  {
+    "leagueName": "English Southern Premier Division Central Playoff",
+    "homeTeam": "AFC Telford United",
+    "awayTeam": "Leamington",
+    "homeWin": "1.95",
+    "awayWin": "3.39",
+    "draw": "2.929"
+  },
+  {
+    "leagueName": "English Isthmian League Premier Division Playoff",
+    "homeTeam": "Chatham Town",
+    "awayTeam": "Enfield Town",
+    "homeWin": "2.392",
+    "awayWin": "2.401",
+    "draw": "3.16"
+  },
+  {
+    "leagueName": "Germany Oberliga",
+    "homeTeam": "FV Dudenhofen",
+    "awayTeam": "Eintracht Trier",
+    "homeWin": "7.912",
+    "awayWin": "1.163",
+    "draw": "5.416"
+  },
+  {
+    "leagueName": "Hungary Merkantil Bank Liga NB 2",
+    "homeTeam": "Budapest Honved",
+    "awayTeam": "Vasas Budapest",
+    "homeWin": "2.507",
+    "awayWin": "2.286",
+    "draw": "2.90"
+  },
+  {
+    "leagueName": "Poland 2nd Liga",
+    "homeTeam": "GKS Jastrzebie",
+    "awayTeam": "Chojniczanka Chojnice",
+    "homeWin": "2.20",
+    "awayWin": "2.612",
+    "draw": "2.91"
+  },
+  {
+    "leagueName": "Estonia Esiliiga",
+    "homeTeam": "FCI Levadia Tallinn U21",
+    "awayTeam": "Tallinna Kalev U21",
+    "homeWin": "1.278",
+    "awayWin": "5.512",
+    "draw": "4.734"
+  },
+  {
+    "leagueName": "Turkiye 3rd Lig Playoff",
+    "homeTeam": "Belediye Kutahyaspor",
+    "awayTeam": "Kusadasispor",
+    "homeWin": "2.084",
+    "awayWin": "2.872",
+    "draw": "2.843"
+  },
+  {
+    "leagueName": "Turkiye 3rd Lig Playoff",
+    "homeTeam": "Tokat Belediye Plevnespor",
+    "awayTeam": "Mus 1984 Musspor",
+    "homeWin": "2.017",
+    "awayWin": "3.025",
+    "draw": "2.824"
+  },
+  {
+    "leagueName": "Turkiye 3rd Lig Playoff",
+    "homeTeam": "52 Orduspor",
+    "awayTeam": "Ayvalikgucu Belediyespor",
+    "homeWin": "1.96",
+    "awayWin": "3.083",
+    "draw": "2.90"
+  },
+  {
+    "leagueName": "Turkiye 3rd Lig Playoff",
+    "homeTeam": "Anadolu Universitesi (n)",
+    "awayTeam": "Efeler 09 Sfk",
+    "homeWin": "2.276",
+    "awayWin": "2.564",
+    "draw": "2.843"
+  },
+  {
+    "leagueName": "Germany Women Bundesliga",
+    "homeTeam": "Nurnberg (w)",
+    "awayTeam": "RB Leipzig (w)",
+    "homeWin": "4.523",
+    "awayWin": "1.48",
+    "draw": "3.716"
+  },
+  {
+    "leagueName": "Italy Women Serie A Playoff",
+    "homeTeam": "Fiorentina (w)",
+    "awayTeam": "Juventus (w)",
+    "homeWin": "3.582",
+    "awayWin": "1.72",
+    "draw": "3.496"
+  },
+  {
+    "leagueName": "Iceland Women 1st Div",
+    "homeTeam": "Fram Reykjavik (w)",
+    "awayTeam": "IR Reykjavik (w)",
+    "homeWin": "1.364",
+    "awayWin": "4.628",
+    "draw": "4.465"
+  },
+  {
+    "leagueName": "Iceland Women 1st Div",
+    "homeTeam": "IA Akranes (w)",
+    "awayTeam": "Grindavik (w)",
+    "homeWin": "2.008",
+    "awayWin": "2.468",
+    "draw": "3.62"
+  },
+  {
+    "leagueName": "English Premier League 2 U21 Playoff",
+    "homeTeam": "Sunderland U21",
+    "awayTeam": "Wolverhampton Wanderers U21",
+    "homeWin": null,
+    "awayWin": null,
+    "draw": null
+  },
+  {
+    "leagueName": "Brazil Serie B",
+    "homeTeam": "Ceara SC",
+    "awayTeam": "CRB Maceio",
+    "homeWin": "1.787",
+    "awayWin": "4.129",
+    "draw": "3.073"
+  },
+  {
+    "leagueName": "Brazil Serie B",
+    "homeTeam": "Ponte Preta",
+    "awayTeam": "Amazonas FC",
+    "homeWin": "2.036",
+    "awayWin": "3.457",
+    "draw": "2.862"
+  },
+  {
+    "leagueName": "Brazil Serie B",
+    "homeTeam": "Santos",
+    "awayTeam": "Guarani SP",
+    "homeWin": "1.499",
+    "awayWin": "5.704",
+    "draw": "3.524"
+  },
+  {
+    "leagueName": "Ecuador Liga Pro Serie A",
+    "homeTeam": "Tecnico Universitario Ambato",
+    "awayTeam": "Imbabura SC",
+    "homeWin": "1.672",
+    "awayWin": "4.12",
+    "draw": "3.265"
+  },
+  {
+    "leagueName": "Peru Liga 1",
+    "homeTeam": "Atletico Grau",
+    "awayTeam": "Sport Huancayo",
+    "homeWin": "1.384",
+    "awayWin": "6.376",
+    "draw": "3.793"
+  },
+  {
+    "leagueName": "Brazil Serie C",
+    "homeTeam": "Londrina EC",
+    "awayTeam": "CSA Maceio",
+    "homeWin": "2.459",
+    "awayWin": "2.603",
+    "draw": "2.776"
+  },
+  {
+    "leagueName": "Brazil Serie C",
+    "homeTeam": "Sao Bernardo FC",
+    "awayTeam": "Ferroviario Fortaleza",
+    "homeWin": "1.652",
+    "awayWin": "4.456",
+    "draw": "3.16"
+  },
+  {
+    "leagueName": "Chile Primera B",
+    "homeTeam": "Deportes La Serena",
+    "awayTeam": "San Marcos Arica",
+    "homeWin": "1.998",
+    "awayWin": "3.198",
+    "draw": "2.977"
+  },
+  {
+    "leagueName": "Colombia Primera B",
+    "homeTeam": "Internacional FC de Palmira",
+    "awayTeam": "Atletico Huila",
+    "homeWin": "2.372",
+    "awayWin": "2.593",
+    "draw": "2.90"
+  },
+  {
+    "leagueName": "Colombia Primera B",
+    "homeTeam": "Llaneros FC",
+    "awayTeam": "Real Santander",
+    "homeWin": null,
+    "awayWin": null,
+    "draw": null
+  },
+  {
+    "leagueName": "Colombia Primera B",
+    "homeTeam": "Deportes Quindio",
+    "awayTeam": "Cucuta Deportivo",
+    "homeWin": "1.854",
+    "awayWin": "3.592",
+    "draw": "3.025"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Hungary",
+    "awayTeam": "e-Argentina",
+    "homeWin": "6.568",
+    "awayWin": "1.259",
+    "draw": "4.456"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Poland",
+    "awayTeam": "e-Wales",
+    "homeWin": "1.412",
+    "awayWin": "4.936",
+    "draw": "3.784"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Denmark",
+    "awayTeam": "e-Spain",
+    "homeWin": "2.795",
+    "awayWin": "1.969",
+    "draw": "3.188"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-England",
+    "awayTeam": "e-Netherlands",
+    "homeWin": "3.179",
+    "awayWin": "1.835",
+    "draw": "3.131"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Finland",
+    "awayTeam": "e-Belgium",
+    "homeWin": "12.52",
+    "awayWin": "1.063",
+    "draw": "7.144"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Poland",
+    "awayTeam": "e-Germany",
+    "homeWin": "5.032",
+    "awayWin": "1.345",
+    "draw": "4.312"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Wales",
+    "awayTeam": "e-France",
+    "homeWin": "8.872",
+    "awayWin": "1.144",
+    "draw": "5.32"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Spain",
+    "awayTeam": "e-Argentina",
+    "homeWin": "2.008",
+    "awayWin": "2.401",
+    "draw": "3.774"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Hungary",
+    "awayTeam": "e-England",
+    "homeWin": "7.624",
+    "awayWin": "1.201",
+    "draw": "4.84"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Denmark",
+    "awayTeam": "e-Finland",
+    "homeWin": "1.105",
+    "awayWin": "9.64",
+    "draw": "6.28"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Portugal",
+    "awayTeam": "e-Italy",
+    "homeWin": "1.508",
+    "awayWin": "3.64",
+    "draw": "4.139"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Poland",
+    "awayTeam": "e-France",
+    "homeWin": "4.062",
+    "awayWin": "1.528",
+    "draw": "3.64"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Belgium",
+    "awayTeam": "e-Argentina",
+    "homeWin": "2.632",
+    "awayWin": "1.883",
+    "draw": "3.726"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Denmark",
+    "awayTeam": "e-Netherlands",
+    "homeWin": "2.046",
+    "awayWin": "2.516",
+    "draw": "3.39"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-England",
+    "awayTeam": "e-Spain",
+    "homeWin": "1.873",
+    "awayWin": "2.929",
+    "draw": "3.284"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-Portugal",
+    "awayTeam": "e-Germany",
+    "homeWin": "2.027",
+    "awayWin": "2.449",
+    "draw": "3.592"
+  },
+  {
+    "leagueName": "e-Football F23 International Friendly",
+    "homeTeam": "e-France",
+    "awayTeam": "e-Hungary",
+    "homeWin": "1.192",
+    "awayWin": "7.528",
+    "draw": "4.936"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Bayern Munchen",
+    "awayTeam": "e-Everton",
+    "homeWin": "1.403",
+    "awayWin": "5.032",
+    "draw": "3.755"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Inter Milan",
+    "awayTeam": "e-AS Monaco",
+    "homeWin": "1.432",
+    "awayWin": "4.225",
+    "draw": "4.139"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-RB Leipzig",
+    "awayTeam": "e-Borussia Dortmund",
+    "homeWin": "1.921",
+    "awayWin": "2.766",
+    "draw": "3.371"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Bayer Leverkusen",
+    "awayTeam": "e-Manchester City",
+    "homeWin": "3.745",
+    "awayWin": "1.48",
+    "draw": "4.244"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Barcelona",
+    "awayTeam": "e-Ajax",
+    "homeWin": "1.537",
+    "awayWin": "3.764",
+    "draw": "3.803"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Paris Saint Germain",
+    "awayTeam": "e-Bayer Leverkusen",
+    "homeWin": "1.326",
+    "awayWin": "4.936",
+    "draw": "4.532"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Arsenal",
+    "awayTeam": "e-RB Leipzig",
+    "homeWin": "1.614",
+    "awayWin": "3.62",
+    "draw": "3.553"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Borussia Dortmund",
+    "awayTeam": "e-Manchester United",
+    "homeWin": "2.084",
+    "awayWin": "2.401",
+    "draw": "3.505"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Feyenoord",
+    "awayTeam": "e-Chelsea",
+    "homeWin": "4.014",
+    "awayWin": "1.499",
+    "draw": "3.832"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Feyenoord",
+    "awayTeam": "e-Bayer Leverkusen",
+    "homeWin": "3.592",
+    "awayWin": "1.576",
+    "draw": "3.803"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Napoli",
+    "awayTeam": "e-Southampton",
+    "homeWin": "1.883",
+    "awayWin": "2.872",
+    "draw": "3.332"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-AS Monaco",
+    "awayTeam": "e-Bayern Munchen",
+    "homeWin": "5.896",
+    "awayWin": "1.23",
+    "draw": "5.128"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Everton",
+    "awayTeam": "e-Atletico Madrid",
+    "homeWin": "4.331",
+    "awayWin": "1.47",
+    "draw": "3.745"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Barcelona",
+    "awayTeam": "e-Arsenal",
+    "homeWin": "1.931",
+    "awayWin": "3.092",
+    "draw": "2.958"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Manchester City",
+    "awayTeam": "e-Arsenal",
+    "homeWin": "2.881",
+    "awayWin": "1.825",
+    "draw": "3.524"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Paris Saint Germain",
+    "awayTeam": "e-Leicester City",
+    "homeWin": "1.384",
+    "awayWin": "4.753",
+    "draw": "4.091"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Feyenoord",
+    "awayTeam": "e-Sevilla",
+    "homeWin": "3.63",
+    "awayWin": "1.556",
+    "draw": "3.87"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Chelsea",
+    "awayTeam": "e-Atletico Madrid",
+    "homeWin": "2.094",
+    "awayWin": "2.603",
+    "draw": "3.121"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Real Madrid",
+    "awayTeam": "e-Liverpool",
+    "homeWin": "1.902",
+    "awayWin": "2.747",
+    "draw": "3.467"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Ajax",
+    "awayTeam": "e-Bayer Leverkusen",
+    "homeWin": "3.16",
+    "awayWin": "1.796",
+    "draw": "3.275"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Paris Saint Germain",
+    "awayTeam": "e-AS Monaco",
+    "homeWin": "1.134",
+    "awayWin": "7.624",
+    "draw": "6.28"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-RB Leipzig",
+    "awayTeam": "e-Napoli",
+    "homeWin": "2.891",
+    "awayWin": "1.892",
+    "draw": "3.284"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Southampton",
+    "awayTeam": "e-Bayern Munchen",
+    "homeWin": "5.992",
+    "awayWin": "1.297",
+    "draw": "4.177"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-RB Leipzig",
+    "awayTeam": "e-Ajax",
+    "homeWin": "1.96",
+    "awayWin": "2.689",
+    "draw": "3.361"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Barcelona",
+    "awayTeam": "e-Paris Saint Germain",
+    "homeWin": "2.459",
+    "awayWin": "2.152",
+    "draw": "3.236"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Chelsea",
+    "awayTeam": "e-Sevilla",
+    "homeWin": "1.806",
+    "awayWin": "3.275",
+    "draw": "3.131"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Borussia Dortmund",
+    "awayTeam": "e-Southampton",
+    "homeWin": "1.355",
+    "awayWin": "5.224",
+    "draw": "4.004"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Valencia",
+    "awayTeam": "e-RB Leipzig",
+    "homeWin": "3.486",
+    "awayWin": "1.70",
+    "draw": "3.304"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-AS Monaco",
+    "awayTeam": "e-Lille",
+    "homeWin": "2.161",
+    "awayWin": "2.296",
+    "draw": "3.524"
+  },
+  {
+    "leagueName": "e-Football F23 Elite Club Friendly",
+    "homeTeam": "e-Lille",
+    "awayTeam": "e-Bayer Leverkusen",
+    "homeWin": "4.792",
+    "awayWin": "1.355",
+    "draw": "4.35"
+  }
+]

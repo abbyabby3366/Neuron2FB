@@ -1,0 +1,12 @@
+/node_modules
+.env
+/database/SBODB/scrapedSBOLeagues.json
+/database/3838DB/scraped3838Leagues.json
+**/index.js
+TargetBookie/
+mongodb/spreadsheetID.json
+
+index.js
+TargetBookie/*.json
+
+mongodb/credentials.json

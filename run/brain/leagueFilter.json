@@ -1,0 +1,35 @@
+{
+  "sbo0": {
+    "whitelist": [
+      "ENGLISH PREMIER LEAGUE",
+      "ITALY SERIE A",
+      "SPAIN LA LIGA",
+      "GERMANY BUNDESLIGA",
+      "UEFA CHAMPIONS LEAGUE",
+      "UEFA EUROPA LEAGUE",
+      "FRANCE LIGUE 1",
+      "NETHERLANDS EREDIVISIE"
+    ],
+    "blacklist": ["vietnam"]
+  },
+  "sbo": {
+    "whitelist": [],
+    "blacklist": []
+  },
+  "hga": {
+    "whitelist": [],
+    "blacklist": []
+  },
+  "ibc": {
+    "whitelist": [],
+    "blacklist": []
+  },
+  "isn": {
+    "whitelist": [],
+    "blacklist": []
+  },
+  "obet": {
+    "whitelist": [],
+    "blacklist": ["special"]
+  }
+}

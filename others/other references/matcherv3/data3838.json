@@ -1,0 +1,914 @@
+[
+  {
+    "leagueName": "Italy - Serie A",
+    "homeTeam": "Salernitana",
+    "awayTeam": "Atalanta BC",
+    "homeWin": "10.170",
+    "awayWin": "1.309",
+    "draw": "5.890"
+  },
+  {
+    "leagueName": "Italy - Serie A",
+    "homeTeam": "Udinese",
+    "awayTeam": "Napoli",
+    "homeWin": "3.960",
+    "awayWin": "1.961",
+    "draw": "3.750"
+  },
+  {
+    "leagueName": "England - Premier League",
+    "homeTeam": "Crystal Palace",
+    "awayTeam": "Manchester United",
+    "homeWin": "2.330",
+    "awayWin": "2.880",
+    "draw": "3.980"
+  },
+  {
+    "leagueName": "France - Ligue 1",
+    "homeTeam": "Lille",
+    "awayTeam": "Lyon",
+    "homeWin": "2.050",
+    "awayWin": "3.510",
+    "draw": "3.900"
+  },
+  {
+    "leagueName": "Turkey - Super League",
+    "homeTeam": "Antalyaspor",
+    "awayTeam": "Pendikspor",
+    "homeWin": "2.350",
+    "awayWin": "3.000",
+    "draw": "3.640"
+  },
+  {
+    "leagueName": "Turkey - Super League",
+    "homeTeam": "Konyaspor",
+    "awayTeam": "Fenerbahce",
+    "homeWin": "6.810",
+    "awayWin": "1.440",
+    "draw": "5.070"
+  },
+  {
+    "leagueName": "Sweden - Allsvenskan",
+    "homeTeam": "GAIS",
+    "awayTeam": "IFK Gothenburg",
+    "homeWin": "2.980",
+    "awayWin": "2.490",
+    "draw": "3.370"
+  },
+  {
+    "leagueName": "Netherlands - Eredivisie",
+    "homeTeam": "Excelsior",
+    "awayTeam": "NEC Nijmegen",
+    "homeWin": "2.600",
+    "awayWin": "2.670",
+    "draw": "3.640"
+  },
+  {
+    "leagueName": "Russia - Premier League",
+    "homeTeam": "FK Ural Yekaterinburg",
+    "awayTeam": "FC Baltika Kaliningrad",
+    "homeWin": "2.310",
+    "awayWin": "3.530",
+    "draw": "3.100"
+  },
+  {
+    "leagueName": "Russia - Premier League",
+    "homeTeam": "FC Fakel Voronezh",
+    "awayTeam": "FK Zenit Saint Petersburg",
+    "homeWin": "7.040",
+    "awayWin": "1.549",
+    "draw": "3.890"
+  },
+  {
+    "leagueName": "Russia - Premier League",
+    "homeTeam": "CSKA Moscow",
+    "awayTeam": "FK Rubin Kazan",
+    "homeWin": "1.847",
+    "awayWin": "4.710",
+    "draw": "3.470"
+  },
+  {
+    "leagueName": "Russia - Premier League",
+    "homeTeam": "Lokomotiv Moscow",
+    "awayTeam": "FK Rostov",
+    "homeWin": "2.120",
+    "awayWin": "3.310",
+    "draw": "3.760"
+  },
+  {
+    "leagueName": "England - League 2",
+    "homeTeam": "Crawley Town",
+    "awayTeam": "MK Dons",
+    "homeWin": "2.670",
+    "awayWin": "2.540",
+    "draw": "3.700"
+  },
+  {
+    "leagueName": "England - League 2",
+    "homeTeam": "Crewe Alexandra",
+    "awayTeam": "Doncaster",
+    "homeWin": "2.830",
+    "awayWin": "2.500",
+    "draw": "3.500"
+  },
+  {
+    "leagueName": "Ireland - Premier",
+    "homeTeam": "Bohemians FC",
+    "awayTeam": "Galway FC",
+    "homeWin": "2.650",
+    "awayWin": "3.100",
+    "draw": "2.950"
+  },
+  {
+    "leagueName": "Ireland - Premier",
+    "homeTeam": "Shamrock Rovers",
+    "awayTeam": "Waterford",
+    "homeWin": "1.314",
+    "awayWin": "9.800",
+    "draw": "5.500"
+  },
+  {
+    "leagueName": "Ireland - Premier",
+    "homeTeam": "Sligo Rovers",
+    "awayTeam": "St Patrick's Athletic FC",
+    "homeWin": "3.260",
+    "awayWin": "2.410",
+    "draw": "3.150"
+  },
+  {
+    "leagueName": "Ireland - Premier",
+    "homeTeam": "Derry City",
+    "awayTeam": "Shelbourne",
+    "homeWin": "1.877",
+    "awayWin": "5.160",
+    "draw": "3.180"
+  },
+  {
+    "leagueName": "Denmark - Superliga",
+    "homeTeam": "Vejle",
+    "awayTeam": "OB Odense BK",
+    "homeWin": "2.670",
+    "awayWin": "2.920",
+    "draw": "3.110"
+  },
+  {
+    "leagueName": "Poland - Ekstraklasa",
+    "homeTeam": "Pogon Szczecin",
+    "awayTeam": "Puszcza Niepolomice",
+    "homeWin": "1.476",
+    "awayWin": "5.890",
+    "draw": "5.060"
+  },
+  {
+    "leagueName": "Iceland - Premier League",
+    "homeTeam": "Breidablik",
+    "awayTeam": "Valur Reykjavik",
+    "homeWin": "1.877",
+    "awayWin": "3.720",
+    "draw": "4.180"
+  },
+  {
+    "leagueName": "Portugal - Liga 2",
+    "homeTeam": "AVS",
+    "awayTeam": "Mafra",
+    "homeWin": "1.323",
+    "awayWin": "9.390",
+    "draw": "5.490"
+  },
+  {
+    "leagueName": "Brazil - Serie B",
+    "homeTeam": "Ceara",
+    "awayTeam": "CRB",
+    "homeWin": "1.833",
+    "awayWin": "5.050",
+    "draw": "3.360"
+  },
+  {
+    "leagueName": "Brazil - Serie B",
+    "homeTeam": "Ponte Preta",
+    "awayTeam": "Amazonas",
+    "homeWin": "2.070",
+    "awayWin": "4.010",
+    "draw": "3.250"
+  },
+  {
+    "leagueName": "Brazil - Serie B",
+    "homeTeam": "Santos",
+    "awayTeam": "Guarani",
+    "homeWin": "1.552",
+    "awayWin": "7.260",
+    "draw": "3.820"
+  },
+  {
+    "leagueName": "Saudi Arabia - Pro League",
+    "homeTeam": "Al-Ahli (KSA)",
+    "awayTeam": "Al-Hilal (KSA)",
+    "homeWin": "3.530",
+    "awayWin": "1.943",
+    "draw": "3.930"
+  },
+  {
+    "leagueName": "Romania - Liga 1",
+    "homeTeam": "UTA Arad",
+    "awayTeam": "FC U Craiova 1948",
+    "homeWin": "2.280",
+    "awayWin": "3.300",
+    "draw": "3.240"
+  },
+  {
+    "leagueName": "Romania - Liga 1",
+    "homeTeam": "Universitatea Craiova",
+    "awayTeam": "FCSB",
+    "homeWin": "1.892",
+    "awayWin": "4.060",
+    "draw": "3.600"
+  },
+  {
+    "leagueName": "Sweden - Superettan",
+    "homeTeam": "Varbergs BoIS",
+    "awayTeam": "Trelleborgs",
+    "homeWin": "1.900",
+    "awayWin": "3.900",
+    "draw": "3.710"
+  },
+  {
+    "leagueName": "Egypt - Premier League",
+    "homeTeam": "Pyramids FC",
+    "awayTeam": "Future FC",
+    "homeWin": "1.613",
+    "awayWin": "6.460",
+    "draw": "3.560"
+  },
+  {
+    "leagueName": "Egypt - Premier League",
+    "homeTeam": "Talaea El Gaish",
+    "awayTeam": "Al Masry",
+    "homeWin": "3.770",
+    "awayWin": "2.330",
+    "draw": "2.810"
+  },
+  {
+    "leagueName": "Northern Ireland - Premiership",
+    "homeTeam": "Crusaders",
+    "awayTeam": "Coleraine",
+    "homeWin": "1.847",
+    "awayWin": "3.830",
+    "draw": "3.990"
+  },
+  {
+    "leagueName": "UAE - Pro League",
+    "homeTeam": "Al Ittihad Kalba",
+    "awayTeam": "Emirates Club",
+    "homeWin": "1.531",
+    "awayWin": "5.090",
+    "draw": "4.840"
+  },
+  {
+    "leagueName": "UAE - Pro League",
+    "homeTeam": "Khor Fakkan Club",
+    "awayTeam": "Al Ain (UAE)",
+    "homeWin": "3.670",
+    "awayWin": "1.800",
+    "draw": "4.430"
+  },
+  {
+    "leagueName": "UAE - Pro League",
+    "homeTeam": "Al Bataeh",
+    "awayTeam": "Al Wasl Sports Club (UAE)",
+    "homeWin": "10.130",
+    "awayWin": "1.242",
+    "draw": "6.290"
+  },
+  {
+    "leagueName": "UAE - Pro League",
+    "homeTeam": "Shabab Al-Ahli",
+    "awayTeam": "Sharjah FC",
+    "homeWin": "1.775",
+    "awayWin": "4.250",
+    "draw": "3.940"
+  },
+  {
+    "leagueName": "Bulgaria - First League",
+    "homeTeam": "Slavia Sofia",
+    "awayTeam": "Arda",
+    "homeWin": "1.934",
+    "awayWin": "4.380",
+    "draw": "3.250"
+  },
+  {
+    "leagueName": "Bulgaria - First League",
+    "homeTeam": "Botev Plovdiv",
+    "awayTeam": "CSKA 1948",
+    "homeWin": "1.719",
+    "awayWin": "4.780",
+    "draw": "3.790"
+  },
+  {
+    "leagueName": "Ukraine - Premier League",
+    "homeTeam": "FC Veres Rivne",
+    "awayTeam": "FK Minai",
+    "homeWin": "1.990",
+    "awayWin": "4.040",
+    "draw": "3.310"
+  },
+  {
+    "leagueName": "Ireland - Division 1",
+    "homeTeam": "Bray Wanderers",
+    "awayTeam": "Finn Harps",
+    "homeWin": "2.220",
+    "awayWin": "3.470",
+    "draw": "3.220"
+  },
+  {
+    "leagueName": "Ireland - Division 1",
+    "homeTeam": "Cork City",
+    "awayTeam": "Wexford",
+    "homeWin": "1.645",
+    "awayWin": "5.350",
+    "draw": "3.850"
+  },
+  {
+    "leagueName": "Ireland - Division 1",
+    "homeTeam": "Longford",
+    "awayTeam": "Kerry",
+    "homeWin": "2.820",
+    "awayWin": "2.690",
+    "draw": "3.100"
+  },
+  {
+    "leagueName": "Ireland - Division 1",
+    "homeTeam": "Treaty United",
+    "awayTeam": "Athlone",
+    "homeWin": "2.680",
+    "awayWin": "2.660",
+    "draw": "3.330"
+  },
+  {
+    "leagueName": "Ireland - Division 1",
+    "homeTeam": "Univ. College Dublin",
+    "awayTeam": "Cobh Ramblers",
+    "homeWin": "1.970",
+    "awayWin": "4.170",
+    "draw": "3.280"
+  },
+  {
+    "leagueName": "Poland - 1st Liga",
+    "homeTeam": "Zaglebie Sosnowiec",
+    "awayTeam": "Wisla Krakow",
+    "homeWin": "4.690",
+    "awayWin": "1.657",
+    "draw": "4.180"
+  },
+  {
+    "leagueName": "Israel - Premier League",
+    "homeTeam": "Beitar Jerusalem",
+    "awayTeam": "FC Ashdod",
+    "homeWin": "2.140",
+    "awayWin": "3.300",
+    "draw": "3.560"
+  },
+  {
+    "leagueName": "Israel - Premier League",
+    "homeTeam": "Bnei Sakhnin",
+    "awayTeam": "Maccabi Tel Aviv",
+    "homeWin": "7.650",
+    "awayWin": "1.390",
+    "draw": "4.820"
+  },
+  {
+    "leagueName": "Israel - Premier League",
+    "homeTeam": "Hapoel Hadera",
+    "awayTeam": "Maccabi Petach Tikva",
+    "homeWin": "2.720",
+    "awayWin": "3.050",
+    "draw": "2.830"
+  },
+  {
+    "leagueName": "Ecuador - Serie A",
+    "homeTeam": "Tecnico Universitario",
+    "awayTeam": "Imbabura",
+    "homeWin": "1.740",
+    "awayWin": "4.980",
+    "draw": "3.600"
+  },
+  {
+    "leagueName": "Peru - Liga 1",
+    "homeTeam": "Atletico Grau",
+    "awayTeam": "Sport Huancayo",
+    "homeWin": "1.448",
+    "awayWin": "7.370",
+    "draw": "4.210"
+  },
+  {
+    "leagueName": "Colombia - Primera B",
+    "homeTeam": "Internacional FC de Palmira",
+    "awayTeam": "Atletico Huila",
+    "homeWin": "2.780",
+    "awayWin": "2.740",
+    "draw": "2.950"
+  },
+  {
+    "leagueName": "Colombia - Primera B",
+    "homeTeam": "Llaneros FC",
+    "awayTeam": "Real Santander",
+    "homeWin": "1.284",
+    "awayWin": "10.210",
+    "draw": "5.410"
+  },
+  {
+    "leagueName": "Colombia - Primera B",
+    "homeTeam": "Deportes Quindio",
+    "awayTeam": "Cucuta Deportivo",
+    "homeWin": "1.909",
+    "awayWin": "4.150",
+    "draw": "3.350"
+  },
+  {
+    "leagueName": "England - Premier League 2 U21",
+    "homeTeam": "Sunderland",
+    "awayTeam": "Wolverhampton Wanderers",
+    "homeWin": "2.540",
+    "awayWin": "2.190",
+    "draw": "4.290"
+  },
+  {
+    "leagueName": "England - Premier League 2 U21",
+    "homeTeam": "Fulham",
+    "awayTeam": "Nottingham Forest",
+    "homeWin": "1.450",
+    "awayWin": "4.500",
+    "draw": "5.780"
+  },
+  {
+    "leagueName": "Italy - Primavera U19",
+    "homeTeam": "Lecce",
+    "awayTeam": "AC Milan",
+    "homeWin": "3.410",
+    "awayWin": "1.909",
+    "draw": "4.030"
+  },
+  {
+    "leagueName": "Italy - Primavera U19",
+    "homeTeam": "Torino",
+    "awayTeam": "Sampdoria",
+    "homeWin": "1.689",
+    "awayWin": "4.290",
+    "draw": "4.170"
+  },
+  {
+    "leagueName": "Uzbekistan - Super League",
+    "homeTeam": "Qizliqum",
+    "awayTeam": "Neftchi Fargona",
+    "homeWin": "3.230",
+    "awayWin": "2.420",
+    "draw": "2.920"
+  },
+  {
+    "leagueName": "England - National League South",
+    "homeTeam": "Worthing",
+    "awayTeam": "Braintree Town",
+    "homeWin": "2.120",
+    "awayWin": "3.190",
+    "draw": "3.570"
+  },
+  {
+    "leagueName": "Algeria - Ligue 1",
+    "homeTeam": "USM Alger",
+    "awayTeam": "JS Kabilye",
+    "homeWin": "1.833",
+    "awayWin": "4.950",
+    "draw": "3.160"
+  },
+  {
+    "leagueName": "Hungary - NB 2",
+    "homeTeam": "Budapest Honved",
+    "awayTeam": "Vasas",
+    "homeWin": "3.030",
+    "awayWin": "2.320",
+    "draw": "3.290"
+  },
+  {
+    "leagueName": "Chile - Primera B",
+    "homeTeam": "Deportes La Serena",
+    "awayTeam": "San Marcos",
+    "homeWin": "2.070",
+    "awayWin": "3.480",
+    "draw": "3.390"
+  },
+  {
+    "leagueName": "Brazil - Serie C",
+    "homeTeam": "Londrina",
+    "awayTeam": "Centro Sportivo Alagoano",
+    "homeWin": "2.590",
+    "awayWin": "2.970",
+    "draw": "2.810"
+  },
+  {
+    "leagueName": "Brazil - Serie C",
+    "homeTeam": "Sao Bernardo",
+    "awayTeam": "Ferroviario AC Fortaleza",
+    "homeWin": "1.625",
+    "awayWin": "5.590",
+    "draw": "3.520"
+  },
+  {
+    "leagueName": "Latvia - Virsliga",
+    "homeTeam": "FK Liepaja",
+    "awayTeam": "FK Metta",
+    "homeWin": "1.657",
+    "awayWin": "4.940",
+    "draw": "3.740"
+  },
+  {
+    "leagueName": "England - Isthmian Premier League",
+    "homeTeam": "Chatham Town",
+    "awayTeam": "Enfield Town",
+    "homeWin": "2.510",
+    "awayWin": "2.510",
+    "draw": "3.630"
+  },
+  {
+    "leagueName": "England - Northern Premier League",
+    "homeTeam": "Macclesfield FC",
+    "awayTeam": "Marine FC",
+    "homeWin": "2.220",
+    "awayWin": "2.770",
+    "draw": "3.850"
+  },
+  {
+    "leagueName": "England - Southern Premier League",
+    "homeTeam": "AFC Totton",
+    "awayTeam": "Salisbury FC",
+    "homeWin": "1.787",
+    "awayWin": "3.810",
+    "draw": "4.000"
+  },
+  {
+    "leagueName": "England - Southern Premier League",
+    "homeTeam": "Telford",
+    "awayTeam": "Leamington FC",
+    "homeWin": "1.980",
+    "awayWin": "3.780",
+    "draw": "3.300"
+  },
+  {
+    "leagueName": "Norway - 2nd Division",
+    "homeTeam": "Floy Flekkeroy",
+    "awayTeam": "Viking II",
+    "homeWin": "2.010",
+    "awayWin": "3.050",
+    "draw": "3.950"
+  },
+  {
+    "leagueName": "Poland - 2nd Liga",
+    "homeTeam": "GkS Jastrzebie",
+    "awayTeam": "Chojniczanka Chojnice",
+    "homeWin": "2.440",
+    "awayWin": "2.840",
+    "draw": "3.160"
+  },
+  {
+    "leagueName": "Germany - Oberliga Rheinland-Pfalz/Saar",
+    "homeTeam": "FV 1920 Dudenhofen",
+    "awayTeam": "Eintracht Trier",
+    "homeWin": "10.320",
+    "awayWin": "1.190",
+    "draw": "6.970"
+  },
+  {
+    "leagueName": "Germany - Bundesliga Women",
+    "homeTeam": "Nurnberg",
+    "awayTeam": "RB Leipzig",
+    "homeWin": "4.780",
+    "awayWin": "1.558",
+    "draw": "4.390"
+  },
+  {
+    "leagueName": "Iran - Pro League",
+    "homeTeam": "Paykan FC",
+    "awayTeam": "Aluminium Arak",
+    "homeWin": "2.540",
+    "awayWin": "4.520",
+    "draw": "2.200"
+  },
+  {
+    "leagueName": "Iran - Pro League",
+    "homeTeam": "Sepahan",
+    "awayTeam": "Esteghal Khozestan",
+    "homeWin": "1.322",
+    "awayWin": "8.440",
+    "draw": "4.960"
+  },
+  {
+    "leagueName": "Iran - Pro League",
+    "homeTeam": "Foolad Khuzestan",
+    "awayTeam": "Tractor Sazi",
+    "homeWin": "4.820",
+    "awayWin": "1.917",
+    "draw": "2.870"
+  },
+  {
+    "leagueName": "Iran - Pro League",
+    "homeTeam": "Malavan",
+    "awayTeam": "Havadar SC",
+    "homeWin": "2.000",
+    "awayWin": "4.840",
+    "draw": "2.700"
+  },
+  {
+    "leagueName": "Iran - Pro League",
+    "homeTeam": "Sanat Naft Abadan",
+    "awayTeam": "Mes Rafsanjan",
+    "homeWin": "3.940",
+    "awayWin": "2.080",
+    "draw": "2.910"
+  },
+  {
+    "leagueName": "Iran - Pro League",
+    "homeTeam": "Esteghlal",
+    "awayTeam": "Zob Ahan",
+    "homeWin": "1.456",
+    "awayWin": "7.870",
+    "draw": "3.800"
+  },
+  {
+    "leagueName": "Azerbaijan - Premier League",
+    "homeTeam": "Sabail FK",
+    "awayTeam": "FK Qabala",
+    "homeWin": "1.943",
+    "awayWin": "3.690",
+    "draw": "3.430"
+  },
+  {
+    "leagueName": "Saudi Arabia - Division 1",
+    "homeTeam": "Al-Adalah",
+    "awayTeam": "Al-Bukayriyah (KSA)",
+    "homeWin": "1.549",
+    "awayWin": "5.640",
+    "draw": "3.920"
+  },
+  {
+    "leagueName": "Saudi Arabia - Division 1",
+    "homeTeam": "Al-Jabalain",
+    "awayTeam": "Al-Ain",
+    "homeWin": "2.090",
+    "awayWin": "3.630",
+    "draw": "3.080"
+  },
+  {
+    "leagueName": "Saudi Arabia - Division 1",
+    "homeTeam": "Ohod",
+    "awayTeam": "Al-Quadisiya",
+    "homeWin": "4.180",
+    "awayWin": "1.833",
+    "draw": "3.410"
+  },
+  {
+    "leagueName": "Italy - Serie A Women",
+    "homeTeam": "Fiorentina",
+    "awayTeam": "Juventus",
+    "homeWin": "4.450",
+    "awayWin": "1.641",
+    "draw": "4.080"
+  },
+  {
+    "leagueName": "Brazil - Brasileiro Women",
+    "homeTeam": "Botafogo FR RJ",
+    "awayTeam": "Corinthians",
+    "homeWin": "15.210",
+    "awayWin": "1.137",
+    "draw": "6.380"
+  },
+  {
+    "leagueName": "Estonia - Esiliiga A",
+    "homeTeam": "Levadia Tallinn II",
+    "awayTeam": "JK Tallinna Kalev II",
+    "homeWin": "1.285",
+    "awayWin": "5.620",
+    "draw": "7.030"
+  },
+  {
+    "leagueName": "Argentina - Primera B Metropolitana",
+    "homeTeam": "CA Fenix",
+    "awayTeam": "CA Colegiales",
+    "homeWin": "2.910",
+    "awayWin": "2.730",
+    "draw": "2.620"
+  },
+  {
+    "leagueName": "England - Southern Football League Division 1",
+    "homeTeam": "Bedford Town FC",
+    "awayTeam": "Waltham Abbey",
+    "homeWin": "2.020",
+    "awayWin": "3.040",
+    "draw": "3.830"
+  },
+  {
+    "leagueName": "England - Southern Football League Division 1",
+    "homeTeam": "Frome",
+    "awayTeam": "Bristol Manor Farm",
+    "homeWin": "1.862",
+    "awayWin": "3.280",
+    "draw": "4.100"
+  },
+  {
+    "leagueName": "UAE - U21 League",
+    "homeTeam": "Bani Yas FC",
+    "awayTeam": "Al Jazira",
+    "homeWin": "6.500",
+    "awayWin": "1.359",
+    "draw": "5.110"
+  },
+  {
+    "leagueName": "Jordan - Cup",
+    "homeTeam": "Sahab SC",
+    "awayTeam": "Al Faisaly Amman",
+    "homeWin": "9.980",
+    "awayWin": "1.280",
+    "draw": "4.820"
+  },
+  {
+    "leagueName": "Jordan - Cup",
+    "homeTeam": "Moghayer Al Sarhan",
+    "awayTeam": "Al Wehdat",
+    "homeWin": "7.260",
+    "awayWin": "1.390",
+    "draw": "4.260"
+  },
+  {
+    "leagueName": "Tanzania - Premier League",
+    "homeTeam": "Simba SC",
+    "awayTeam": "Tabora United FC",
+    "homeWin": "1.147",
+    "awayWin": "14.300",
+    "draw": "6.740"
+  },
+  {
+    "leagueName": "Kuwait - Premier League",
+    "homeTeam": "Al Fehaiheel",
+    "awayTeam": "Kuwait SC",
+    "homeWin": "10.320",
+    "awayWin": "1.173",
+    "draw": "5.820"
+  },
+  {
+    "leagueName": "Iceland - 1. Deild Women",
+    "homeTeam": "Fram",
+    "awayTeam": "IR Reykjavik",
+    "homeWin": "1.330",
+    "awayWin": "6.500",
+    "draw": "5.390"
+  },
+  {
+    "leagueName": "Iceland - 1. Deild Women",
+    "homeTeam": "IA Akranes",
+    "awayTeam": "Grindavik",
+    "homeWin": "2.100",
+    "awayWin": "2.850",
+    "draw": "3.780"
+  },
+  {
+    "leagueName": "Argentina - Primera C Metropolitana",
+    "homeTeam": "Berazategui",
+    "awayTeam": "Leandro Niceforo Alem",
+    "homeWin": "1.709",
+    "awayWin": "4.710",
+    "draw": "3.180"
+  },
+  {
+    "leagueName": "Nigeria - NPFL",
+    "homeTeam": "Remo Stars",
+    "awayTeam": "Rivers United",
+    "homeWin": "1.330",
+    "awayWin": "9.040",
+    "draw": "4.030"
+  },
+  {
+    "leagueName": "Norway - 3rd Division Group 1",
+    "homeTeam": "Djerv 1919",
+    "awayTeam": "Haugesund II",
+    "homeWin": "2.060",
+    "awayWin": "2.770",
+    "draw": "3.690"
+  },
+  {
+    "leagueName": "Peru - Liga 2",
+    "homeTeam": "San Martin FC",
+    "awayTeam": "Deportivo Coopsol",
+    "homeWin": "1.588",
+    "awayWin": "5.330",
+    "draw": "3.390"
+  },
+  {
+    "leagueName": "Peru - Liga 2",
+    "homeTeam": "Llacuabamba",
+    "awayTeam": "Juan Pablo II",
+    "homeWin": "1.609",
+    "awayWin": "4.730",
+    "draw": "3.570"
+  },
+  {
+    "leagueName": "Norway - 3rd Division Group 4",
+    "homeTeam": "Stromsgodset IF II",
+    "awayTeam": "Mosjoen IL",
+    "homeWin": "1.036",
+    "awayWin": "21.810",
+    "draw": "13.450"
+  },
+  {
+    "leagueName": "Uruguay - Reserve League",
+    "homeTeam": "Deportivo Maldonado",
+    "awayTeam": "Defensor Sporting",
+    "homeWin": "2.920",
+    "awayWin": "2.250",
+    "draw": "3.140"
+  },
+  {
+    "leagueName": "Norway - 3rd Division Group 2",
+    "homeTeam": "Sandefjord Fotball II",
+    "awayTeam": "Sandnes Ulf II",
+    "homeWin": "1.735",
+    "awayWin": "3.150",
+    "draw": "4.700"
+  },
+  {
+    "leagueName": "Tunisia - League 2",
+    "homeTeam": "CO Medenine",
+    "awayTeam": "CS Chebba",
+    "homeWin": "1.462",
+    "awayWin": "5.930",
+    "draw": "3.560"
+  },
+  {
+    "leagueName": "Qatar - Emir Cup",
+    "homeTeam": "Al Duhail SC",
+    "awayTeam": "Al Shamal",
+    "homeWin": "1.456",
+    "awayWin": "5.110",
+    "draw": "4.460"
+  },
+  {
+    "leagueName": "Norway - 3rd Division Group 5",
+    "homeTeam": "Skedsmo",
+    "awayTeam": "Kristiansund BK II",
+    "homeWin": "1.892",
+    "awayWin": "3.060",
+    "draw": "3.870"
+  },
+  {
+    "leagueName": "Norway - 3rd Division Group 6",
+    "homeTeam": "Ham-Kam II",
+    "awayTeam": "Elverum",
+    "homeWin": "2.020",
+    "awayWin": "2.750",
+    "draw": "3.930"
+  },
+  {
+    "leagueName": "Lithuania - Cup",
+    "homeTeam": "Zalgiris Vilnius",
+    "awayTeam": "FK Panevezys",
+    "homeWin": "1.662",
+    "awayWin": "4.690",
+    "draw": "3.370"
+  },
+  {
+    "leagueName": "Norway - 3rd Division Group 3",
+    "homeTeam": "Assiden IF",
+    "awayTeam": "KFUM Oslo II",
+    "homeWin": "2.270",
+    "awayWin": "2.470",
+    "draw": "3.740"
+  },
+  {
+    "leagueName": "Norway - 3rd Division Group 3",
+    "homeTeam": "Ullern FC",
+    "awayTeam": "Sarpsborg 08 FF II",
+    "homeWin": "1.675",
+    "awayWin": "3.740",
+    "draw": "4.010"
+  },
+  {
+    "leagueName": "Iceland - U19 League",
+    "homeTeam": "Throttur/SR",
+    "awayTeam": "KR/KV",
+    "homeWin": "2.110",
+    "awayWin": "2.370",
+    "draw": "4.630"
+  },
+  {
+    "leagueName": "Turkey - 3rd League",
+    "homeTeam": "Kutahyaspor",
+    "awayTeam": "Kusadasispor",
+    "homeWin": "2.260",
+    "awayWin": "2.820",
+    "draw": "2.930"
+  },
+  {
+    "leagueName": "Turkey - 3rd League",
+    "homeTeam": "Tokat Belediye Plevnespor",
+    "awayTeam": "1984 Musspor",
+    "homeWin": "1.990",
+    "awayWin": "3.390",
+    "draw": "2.940"
+  }
+]

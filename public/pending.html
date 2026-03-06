@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neuron Win</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  <div>
+    <div class="header-container">
+      <h1>Pending Bet List</h1>
+      <div id="links" class="file-list"></div>
+      <div></div>
+    </div>
+
+    <div id="lastRefresh">Waiting for API response...</div>
+    <div id="settings" class="container">
+      <div>
+        <input type="number" id="cooldownInput" placeholder="Enter cooldown time in seconds">
+        <button id="saveButton">Save Cooldown (in Seconds)</button>
+        <div id="cooldown-timer">Cooldown Timer: <span id="timer">-</span> seconds</div>
+      </div>
+      <button id="toggleButton">Auto Bet On</button>
+    </div>
+  </div id="navigation">
+  </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>TargetBookie</th>
+        <th>Overvalue</th>
+        <th>League</th>
+        <th>Home</th>
+        <th>Away</th>
+        <th>Period</th>
+        <th>Market</th>
+        <th>Odds / EU</th>
+        <th>3838 (NoVig)</th>
+        <th>buttonID3838</th>
+        <th>SBO Time Scraped</th>
+        <th>Ref Time Scraped</th>
+      </tr>
+    </thead>
+    <tbody id="data-table">
+      <!-- Rows will be inserted here by JavaScript -->
+    </tbody>
+  </table>
+  <hr />
+
+  <script src="/getPendingBetList.js"></script>
+</body>
+
+</html>

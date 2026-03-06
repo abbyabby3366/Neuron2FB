@@ -1,0 +1,20 @@
+{
+  "oddsType": "MY",
+  "brainParams": {
+    "MYOddsMinSum": -0.005,
+    "EUOddsMaxVig": 0.005,
+    "minOdds": 1.2,
+    "maxOdds": 5,
+    "maxNumberOfRepeatedEvents": 4,
+    "maxNumberOfRepeatedEvents1stHalf": 2,
+    "maxNumberOfRepeatedEventsAH": 2,
+    "maxNumberOfRepeatedEventsOU": 2,
+    "maxNumberOfRepeatBets": 1,
+    "matchLeagueBoolean": false,
+    "fuzzMatchMinScore": 60,
+    "timeBetweenTicketFail": 15,
+    "timeBetweenContraFail": 15,
+    "dataStaleTimeInSeconds": 15,
+    "consoleLogPendingBetList": true
+  }
+}

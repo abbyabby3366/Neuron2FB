@@ -1,0 +1,75 @@
+{
+  "instance_id": "ins001",
+  "webhook_ip": "http://192.168.100.38:3000/api/save-params/",
+  "run": true,
+  "SBO_params": {
+    "proxy": "154.219.247.176:64014:mrPLFVKp:CKb9aYcJ8888",
+    "user": {
+      "modHeaderIP": "154.219.247.176",
+      "username": "hqem700000",
+      "password": "Aaaa8888",
+      "description": "[0] CK 10k",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+      "website": "https://www.tek789.com"
+    },
+    "headless": false,
+    "removeCSS": false,
+    "mode": 0,
+    "oddsType": "EU",
+    "autoBet": true,
+    "cooldownTimeInSeconds": 50,
+    "stakeInput": {
+      "calcStakeMethod": "kelly",
+      "kellyMultiplier": 0.3,
+      "capital": 10000,
+      "maxBet": 0.1,
+      "round": 1,
+      "EVForceCut": -0.01,
+      "flatRatio": 0.05
+    },
+    "brainParams": {
+      "minEV": 0.07,
+      "maxEV": 0.16,
+      "maxEVCap": 0.15,
+      "minOdds": 1.2,
+      "maxOdds": 4,
+      "sameGameDelayInSeconds": 15,
+      "maxNumberOfRepeatedEvents": 4,
+      "maxNumberOfRepeatedEvents1stHalf": 3,
+      "maxNumberOfRepeatedEventsAH": 2,
+      "maxNumberOfRepeatedEventsOU": 2,
+      "maxNumberOfRepeatedEvents1X2": 2,
+      "maxNumberOfRepeatBets": 1,
+      "matchLeagueBoolean": false,
+      "fuzzMatchMinScore": 75,
+      "timeBetweenTicketFail": 20,
+      "timeBetweenEVFail": 10,
+      "dataStaleTimeInSeconds": 15,
+      "consoleLogPendingBetList": false
+    },
+    "devigMethod": "pow",
+    "refVigThreshold": 0,
+    "consoleLog3838Scrape": false,
+    "consoleLogSBOScrape": false,
+    "createScrapedDataJSON": false,
+    "targetBrowserRestartIntervalInMins": 16,
+    "delayedTicketContraSBOAcc": ""
+  },
+  "PS3838_params": {
+    "user": {
+      "username": "HZ97878000",
+      "password": "Aaaa8888",
+      "description": "[0] CK1",
+      "userAgent": "",
+      "website": "https://www.ps3838.com/en/compact/sports"
+    },
+    "mode": 0,
+    "headless": false,
+    "removeCSS": false,
+    "proxy": null,
+    "devigMethod": "pow",
+    "targetBrowserRestartIntervalInMins": 12,
+    "consoleLog3838Scrape": false,
+    "createScrapedDataJSON": false
+  }
+}

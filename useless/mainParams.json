@@ -1,0 +1,5 @@
+{
+  "instance_id": "ins001",
+  "webhook_ip": "https://47a2-2001-f40-948-6d2f-ed46-89d0-c125-29df.ngrok-free.app/api/save-params/",
+  "run": true
+}

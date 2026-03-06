@@ -1,0 +1,1706 @@
+[
+  {
+    "leagueId": "leagueId",
+    "leagueName": "teamId"
+  },
+  {
+    "leagueId": "1",
+    "leagueName": "England - Premier League"
+  },
+  {
+    "leagueId": "2",
+    "leagueName": "Germany - Bundesliga"
+  },
+  {
+    "leagueId": "3",
+    "leagueName": "Italy - Serie A"
+  },
+  {
+    "leagueId": "4",
+    "leagueName": "Spain - La Liga"
+  },
+  {
+    "leagueId": "5",
+    "leagueName": "France - Ligue 1"
+  },
+  {
+    "leagueId": "6",
+    "leagueName": "France - Ligue 2"
+  },
+  {
+    "leagueId": "7",
+    "leagueName": "Argentina - Copa de la Liga Profesional"
+  },
+  {
+    "leagueId": "8",
+    "leagueName": "Netherlands - Eredivisie"
+  },
+  {
+    "leagueId": "9",
+    "leagueName": "Portugal - Primeira Liga"
+  },
+  {
+    "leagueId": "10",
+    "leagueName": "Turkey - Super League"
+  },
+  {
+    "leagueId": "11",
+    "leagueName": "Argentina - Primera C Metropolitana"
+  },
+  {
+    "leagueId": "12",
+    "leagueName": "Argentina - Reserve League"
+  },
+  {
+    "leagueId": "13",
+    "leagueName": "Argentina - Primera B Nacional"
+  },
+  {
+    "leagueId": "14",
+    "leagueName": "Argentina - Torneo Federal A"
+  },
+  {
+    "leagueId": "15",
+    "leagueName": "Argentina - Torneo Regional Federal Amateur"
+  },
+  {
+    "leagueId": "16",
+    "leagueName": "Argentina - Cup"
+  },
+  {
+    "leagueId": "17",
+    "leagueName": "Argentina - Primera Division Women"
+  },
+  {
+    "leagueId": "18",
+    "leagueName": "Argentina - Primera B Metropolitana"
+  },
+  {
+    "leagueId": "19",
+    "leagueName": "Argentina - Liga Pro Reserves"
+  },
+  {
+    "leagueId": "20",
+    "leagueName": "Armenia - Premier League"
+  },
+  {
+    "leagueId": "21",
+    "leagueName": "AFC - Champions League"
+  },
+  {
+    "leagueId": "22",
+    "leagueName": "AFC - U23 Cup"
+  },
+  {
+    "leagueId": "23",
+    "leagueName": "Azerbaijan - Division 1"
+  },
+  {
+    "leagueId": "24",
+    "leagueName": "Australia - Queensland Premier League Women"
+  },
+  {
+    "leagueId": "25",
+    "leagueName": "Australia - NPL Victoria Women"
+  },
+  {
+    "leagueId": "26",
+    "leagueName": "Australia - NPL South Australia"
+  },
+  {
+    "leagueId": "27",
+    "leagueName": "Australia - NPL Capital Territory"
+  },
+  {
+    "leagueId": "28",
+    "leagueName": "Australia - New South Wales League 1"
+  },
+  {
+    "leagueId": "29",
+    "leagueName": "Australia - Queensland Premier League 2"
+  },
+  {
+    "leagueId": "30",
+    "leagueName": "Australia - A League"
+  },
+  {
+    "leagueId": "31",
+    "leagueName": "Australia - NPL South Australia Women"
+  },
+  {
+    "leagueId": "32",
+    "leagueName": "Australia - NPL Queensland Women"
+  },
+  {
+    "leagueId": "33",
+    "leagueName": "Australia - A-League Women"
+  },
+  {
+    "leagueId": "34",
+    "leagueName": "Australia - NPL Western Australia"
+  },
+  {
+    "leagueId": "35",
+    "leagueName": "Australia - NPL Victoria"
+  },
+  {
+    "leagueId": "36",
+    "leagueName": "Australia - NPL New South Wales"
+  },
+  {
+    "leagueId": "37",
+    "leagueName": "Australia - NorZone Premier League"
+  },
+  {
+    "leagueId": "38",
+    "leagueName": "Australia - Victoria Premier League 1"
+  },
+  {
+    "leagueId": "39",
+    "leagueName": "Australia - NPL Queensland"
+  },
+  {
+    "leagueId": "40",
+    "leagueName": "Australia - NPL Northern NSW"
+  },
+  {
+    "leagueId": "41",
+    "leagueName": "Australia - Queensland Premier League"
+  },
+  {
+    "leagueId": "42",
+    "leagueName": "Algeria - Ligue 1"
+  },
+  {
+    "leagueId": "43",
+    "leagueName": "Algeria - League 1 U21"
+  },
+  {
+    "leagueId": "44",
+    "leagueName": "Algeria - League 2 U21"
+  },
+  {
+    "leagueId": "45",
+    "leagueName": "Algeria - Cup"
+  },
+  {
+    "leagueId": "46",
+    "leagueName": "Algeria - Ligue 2"
+  },
+  {
+    "leagueId": "47",
+    "leagueName": "Aruba - Divison di Honor"
+  },
+  {
+    "leagueId": "48",
+    "leagueName": "Andorra - Premier Division"
+  },
+  {
+    "leagueId": "49",
+    "leagueName": "Azerbaijan - Premier League"
+  },
+  {
+    "leagueId": "50",
+    "leagueName": "Austria - Regionalliga Mitte"
+  },
+  {
+    "leagueId": "51",
+    "leagueName": "Austria - Regionalliga Ost"
+  },
+  {
+    "leagueId": "52",
+    "leagueName": "Austria - 2. Liga"
+  },
+  {
+    "leagueId": "53",
+    "leagueName": "Austria - Regionalliga West"
+  },
+  {
+    "leagueId": "54",
+    "leagueName": "Austria - Landesliga"
+  },
+  {
+    "leagueId": "55",
+    "leagueName": "Austria - Bundesliga"
+  },
+  {
+    "leagueId": "56",
+    "leagueName": "Bahrain - 2nd Division"
+  },
+  {
+    "leagueId": "57",
+    "leagueName": "Bahrain - Premier League"
+  },
+  {
+    "leagueId": "58",
+    "leagueName": "Belarus - Premier League"
+  },
+  {
+    "leagueId": "59",
+    "leagueName": "Bosnia and Herzegovina - Premier Liga"
+  },
+  {
+    "leagueId": "60",
+    "leagueName": "Belgium - Super League Women"
+  },
+  {
+    "leagueId": "61",
+    "leagueName": "Belgium - First Amateur Division"
+  },
+  {
+    "leagueId": "62",
+    "leagueName": "Belgium - Challenger Pro League"
+  },
+  {
+    "leagueId": "63",
+    "leagueName": "Belgium - Pro League"
+  },
+  {
+    "leagueId": "64",
+    "leagueName": "Belgium - Reserve Pro League U21"
+  },
+  {
+    "leagueId": "65",
+    "leagueName": "Belgium - 2nd Amateur Division"
+  },
+  {
+    "leagueId": "66",
+    "leagueName": "Brazil - Serie C"
+  },
+  {
+    "leagueId": "67",
+    "leagueName": "Brazil - Serie B"
+  },
+  {
+    "leagueId": "68",
+    "leagueName": "Brazil - Cup"
+  },
+  {
+    "leagueId": "69",
+    "leagueName": "Brazil - Serie A"
+  },
+  {
+    "leagueId": "70",
+    "leagueName": "Brazil - Goiano U20"
+  },
+  {
+    "leagueId": "71",
+    "leagueName": "Brazil - Paraibano"
+  },
+  {
+    "leagueId": "72",
+    "leagueName": "Brazil - Paulista U20"
+  },
+  {
+    "leagueId": "73",
+    "leagueName": "Brazil - Sergipano"
+  },
+  {
+    "leagueId": "74",
+    "leagueName": "Brazil - Paulista A3"
+  },
+  {
+    "leagueId": "75",
+    "leagueName": "Brazil - Brasileiro Women A3"
+  },
+  {
+    "leagueId": "76",
+    "leagueName": "Brazil - Brasileiro Women A2"
+  },
+  {
+    "leagueId": "77",
+    "leagueName": "Brazil - Pernambucano U20"
+  },
+  {
+    "leagueId": "78",
+    "leagueName": "Brazil - Mineiro 2"
+  },
+  {
+    "leagueId": "79",
+    "leagueName": "Brazil - Serie D"
+  },
+  {
+    "leagueId": "80",
+    "leagueName": "Brazil - Goiano 2"
+  },
+  {
+    "leagueId": "81",
+    "leagueName": "Brazil - Rondoniense"
+  },
+  {
+    "leagueId": "82",
+    "leagueName": "Brazil - Maranhense 1"
+  },
+  {
+    "leagueId": "83",
+    "leagueName": "Brazil - Copa Rio U20"
+  },
+  {
+    "leagueId": "84",
+    "leagueName": "Brazil - Paulista A4"
+  },
+  {
+    "leagueId": "85",
+    "leagueName": "Brazil - Cearense 2"
+  },
+  {
+    "leagueId": "86",
+    "leagueName": "Brazil - Gaucho 2"
+  },
+  {
+    "leagueId": "87",
+    "leagueName": "Brazil - Capixaba"
+  },
+  {
+    "leagueId": "88",
+    "leagueName": "Brazil - Catarinense U20"
+  },
+  {
+    "leagueId": "89",
+    "leagueName": "Brazil - Brasileiro U20"
+  },
+  {
+    "leagueId": "90",
+    "leagueName": "Brazil - Paulista A2"
+  },
+  {
+    "leagueId": "91",
+    "leagueName": "Brazil - Paraense"
+  },
+  {
+    "leagueId": "92",
+    "leagueName": "Brazil - Baiano U20"
+  },
+  {
+    "leagueId": "93",
+    "leagueName": "Brazil - Brasileiro Women"
+  },
+  {
+    "leagueId": "94",
+    "leagueName": "Brazil - Copa Do Nordeste"
+  },
+  {
+    "leagueId": "95",
+    "leagueName": "Brazil - Roraimense"
+  },
+  {
+    "leagueId": "96",
+    "leagueName": "Bolivia - Primera Division"
+  },
+  {
+    "leagueId": "97",
+    "leagueName": "Bulgaria - Cup"
+  },
+  {
+    "leagueId": "98",
+    "leagueName": "Bulgaria - First League"
+  },
+  {
+    "leagueId": "99",
+    "leagueName": "Bulgaria - Second League"
+  },
+  {
+    "leagueId": "100",
+    "leagueName": "Canada - Premier League"
+  },
+  {
+    "leagueId": "101",
+    "leagueName": "Chile - Segunda Division"
+  },
+  {
+    "leagueId": "102",
+    "leagueName": "Chile - Primera B"
+  },
+  {
+    "leagueId": "103",
+    "leagueName": "Chile - Primera Division"
+  },
+  {
+    "leagueId": "104",
+    "leagueName": "Chile - Tercera Division A"
+  },
+  {
+    "leagueId": "105",
+    "leagueName": "Chile - Primera Division Women"
+  },
+  {
+    "leagueId": "106",
+    "leagueName": "Chinese Taipei - Mulan Football League Women"
+  },
+  {
+    "leagueId": "107",
+    "leagueName": "China - Super League"
+  },
+  {
+    "leagueId": "108",
+    "leagueName": "China - League One"
+  },
+  {
+    "leagueId": "109",
+    "leagueName": "China - League Two"
+  },
+  {
+    "leagueId": "110",
+    "leagueName": "Colombia - Liga Women"
+  },
+  {
+    "leagueId": "111",
+    "leagueName": "Colombia - Primera A"
+  },
+  {
+    "leagueId": "112",
+    "leagueName": "Colombia - Primera B"
+  },
+  {
+    "leagueId": "113",
+    "leagueName": "Croatia - Prva NL"
+  },
+  {
+    "leagueId": "114",
+    "leagueName": "Croatia - 2. NL"
+  },
+  {
+    "leagueId": "115",
+    "leagueName": "Croatia - 3. NL"
+  },
+  {
+    "leagueId": "116",
+    "leagueName": "Croatia - U19 League"
+  },
+  {
+    "leagueId": "117",
+    "leagueName": "CONMEBOL - U20 Championship Women"
+  },
+  {
+    "leagueId": "118",
+    "leagueName": "CONCACAF - Champions Cup"
+  },
+  {
+    "leagueId": "119",
+    "leagueName": "CONMEBOL - Copa Libertadores"
+  },
+  {
+    "leagueId": "120",
+    "leagueName": "CONMEBOL - Copa Sudamericana"
+  },
+  {
+    "leagueId": "121",
+    "leagueName": "CONMEBOL - Copa America"
+  },
+  {
+    "leagueId": "122",
+    "leagueName": "Costa Rica - Primera Division"
+  },
+  {
+    "leagueId": "123",
+    "leagueName": "Costa Rica - Ascenso"
+  },
+  {
+    "leagueId": "124",
+    "leagueName": "Costa Rica - Primera Division Women"
+  },
+  {
+    "leagueId": "125",
+    "leagueName": "Croatia - HNL"
+  },
+  {
+    "leagueId": "126",
+    "leagueName": "Cyprus - Cup"
+  },
+  {
+    "leagueId": "127",
+    "leagueName": "Cyprus - 1st Division"
+  },
+  {
+    "leagueId": "128",
+    "leagueName": "Czech Republic - Czech Liga"
+  },
+  {
+    "leagueId": "129",
+    "leagueName": "Czech Republic - 4. Liga"
+  },
+  {
+    "leagueId": "130",
+    "leagueName": "Czech Republic - Women Cup"
+  },
+  {
+    "leagueId": "131",
+    "leagueName": "Czech Republic - FNL"
+  },
+  {
+    "leagueId": "132",
+    "leagueName": "Czech Republic - U19 League"
+  },
+  {
+    "leagueId": "133",
+    "leagueName": "Czech Republic - 3. Liga MSFL"
+  },
+  {
+    "leagueId": "134",
+    "leagueName": "Czech Republic - 3. Liga CFL"
+  },
+  {
+    "leagueId": "135",
+    "leagueName": "Dominican Republic - Liga Mayor"
+  },
+  {
+    "leagueId": "136",
+    "leagueName": "Denmark - Superliga"
+  },
+  {
+    "leagueId": "137",
+    "leagueName": "Denmark - Division 1"
+  },
+  {
+    "leagueId": "138",
+    "leagueName": "Denmark - U19"
+  },
+  {
+    "leagueId": "139",
+    "leagueName": "Denmark - Denmark Series"
+  },
+  {
+    "leagueId": "140",
+    "leagueName": "Denmark - Future Cup U21"
+  },
+  {
+    "leagueId": "141",
+    "leagueName": "Denmark - Elitedivisionen Women"
+  },
+  {
+    "leagueId": "142",
+    "leagueName": "Denmark - 3rd Division"
+  },
+  {
+    "leagueId": "143",
+    "leagueName": "Denmark - Cup"
+  },
+  {
+    "leagueId": "144",
+    "leagueName": "Denmark - 2nd Division"
+  },
+  {
+    "leagueId": "145",
+    "leagueName": "Ecuador - Serie B"
+  },
+  {
+    "leagueId": "146",
+    "leagueName": "Ecuador - Primera Women"
+  },
+  {
+    "leagueId": "147",
+    "leagueName": "Ecuador - Serie A"
+  },
+  {
+    "leagueId": "148",
+    "leagueName": "El Salvador - Primera Division"
+  },
+  {
+    "leagueId": "149",
+    "leagueName": "El Salvador - Reserve League U20"
+  },
+  {
+    "leagueId": "150",
+    "leagueName": "Egypt - Premier League"
+  },
+  {
+    "leagueId": "151",
+    "leagueName": "Egypt - 2nd Division A"
+  },
+  {
+    "leagueId": "152",
+    "leagueName": "England - Southern Football League Division 1"
+  },
+  {
+    "leagueId": "153",
+    "leagueName": "England - League 2"
+  },
+  {
+    "leagueId": "154",
+    "leagueName": "England - Premier League 2 U21"
+  },
+  {
+    "leagueId": "155",
+    "leagueName": "England - National League"
+  },
+  {
+    "leagueId": "156",
+    "leagueName": "England - Championship"
+  },
+  {
+    "leagueId": "157",
+    "leagueName": "England - Professional Development League U21"
+  },
+  {
+    "leagueId": "158",
+    "leagueName": "England - National League North"
+  },
+  {
+    "leagueId": "159",
+    "leagueName": "England - Northern Premier League Division 1"
+  },
+  {
+    "leagueId": "160",
+    "leagueName": "England - Women Super League"
+  },
+  {
+    "leagueId": "161",
+    "leagueName": "England - National League South"
+  },
+  {
+    "leagueId": "162",
+    "leagueName": "England - FA Cup"
+  },
+  {
+    "leagueId": "163",
+    "leagueName": "England - Northern Premier League"
+  },
+  {
+    "leagueId": "164",
+    "leagueName": "England - National League Women"
+  },
+  {
+    "leagueId": "165",
+    "leagueName": "England - League 1"
+  },
+  {
+    "leagueId": "166",
+    "leagueName": "England - Southern Premier League"
+  },
+  {
+    "leagueId": "167",
+    "leagueName": "England - Isthmian Premier League"
+  },
+  {
+    "leagueId": "168",
+    "leagueName": "England - Premier League Cup U21"
+  },
+  {
+    "leagueId": "169",
+    "leagueName": "Ethiopia - Premier League"
+  },
+  {
+    "leagueId": "170",
+    "leagueName": "Estonia - Meistriliiga Women"
+  },
+  {
+    "leagueId": "171",
+    "leagueName": "Estonia - Esiliiga B"
+  },
+  {
+    "leagueId": "172",
+    "leagueName": "Estonia - Esiliiga A"
+  },
+  {
+    "leagueId": "173",
+    "leagueName": "Estonia - Meistriliiga"
+  },
+  {
+    "leagueId": "174",
+    "leagueName": "Faroe Islands - Premier League"
+  },
+  {
+    "leagueId": "175",
+    "leagueName": "Finland - U20 League"
+  },
+  {
+    "leagueId": "176",
+    "leagueName": "Finland - Cup"
+  },
+  {
+    "leagueId": "177",
+    "leagueName": "Finland - Kolmonen"
+  },
+  {
+    "leagueId": "178",
+    "leagueName": "Finland - Ykkosliiga"
+  },
+  {
+    "leagueId": "179",
+    "leagueName": "Finland - Kakkonen Group A"
+  },
+  {
+    "leagueId": "180",
+    "leagueName": "Finland - Kakkonen Group B"
+  },
+  {
+    "leagueId": "181",
+    "leagueName": "Finland - Kakkonen Group C"
+  },
+  {
+    "leagueId": "182",
+    "leagueName": "Finland - Kansallinen Women"
+  },
+  {
+    "leagueId": "183",
+    "leagueName": "Finland - Ykkonen"
+  },
+  {
+    "leagueId": "184",
+    "leagueName": "Finland - Veikkausliiga"
+  },
+  {
+    "leagueId": "185",
+    "leagueName": "France - U19 League"
+  },
+  {
+    "leagueId": "186",
+    "leagueName": "France - Cup Women"
+  },
+  {
+    "leagueId": "187",
+    "leagueName": "France - National"
+  },
+  {
+    "leagueId": "188",
+    "leagueName": "France - National 2"
+  },
+  {
+    "leagueId": "189",
+    "leagueName": "France - Feminine Division 1"
+  },
+  {
+    "leagueId": "190",
+    "leagueName": "Gibraltar - Football League"
+  },
+  {
+    "leagueId": "191",
+    "leagueName": "Germany - Bundesliga U19 Sud/Sudwest"
+  },
+  {
+    "leagueId": "192",
+    "leagueName": "Georgia - Erovnuli Liga 2"
+  },
+  {
+    "leagueId": "193",
+    "leagueName": "Georgia - Erovnuli Liga"
+  },
+  {
+    "leagueId": "194",
+    "leagueName": "Germany - Bundesliga U19 West"
+  },
+  {
+    "leagueId": "195",
+    "leagueName": "Germany - Berlin Liga"
+  },
+  {
+    "leagueId": "196",
+    "leagueName": "Germany - Oberliga Westfalen"
+  },
+  {
+    "leagueId": "197",
+    "leagueName": "Germany - Bundesliga U19 Nord/Nordost"
+  },
+  {
+    "leagueId": "198",
+    "leagueName": "Germany - Oberliga Schleswig-Holstein"
+  },
+  {
+    "leagueId": "199",
+    "leagueName": "Germany - Bundesliga Women"
+  },
+  {
+    "leagueId": "200",
+    "leagueName": "Germany - Oberliga Nordost Nord"
+  },
+  {
+    "leagueId": "201",
+    "leagueName": "Germany - Oberliga Hessen"
+  },
+  {
+    "leagueId": "202",
+    "leagueName": "Germany - Oberliga Mitterlrhein"
+  },
+  {
+    "leagueId": "203",
+    "leagueName": "Germany - Oberliga Nordost Sud"
+  },
+  {
+    "leagueId": "204",
+    "leagueName": "Germany - Oberliga Bayern Nord"
+  },
+  {
+    "leagueId": "205",
+    "leagueName": "Germany - Regionalliga North"
+  },
+  {
+    "leagueId": "206",
+    "leagueName": "Germany - Oberliga Bremen"
+  },
+  {
+    "leagueId": "207",
+    "leagueName": "Germany - Oberliga Niederrhein"
+  },
+  {
+    "leagueId": "208",
+    "leagueName": "Germany - Bundesliga 3"
+  },
+  {
+    "leagueId": "209",
+    "leagueName": "Germany - State Leagues"
+  },
+  {
+    "leagueId": "210",
+    "leagueName": "Germany - Bundesliga 2"
+  },
+  {
+    "leagueId": "211",
+    "leagueName": "Germany - Oberliga Bayern Sud"
+  },
+  {
+    "leagueId": "212",
+    "leagueName": "Germany - Oberliga Niedersachsen"
+  },
+  {
+    "leagueId": "213",
+    "leagueName": "Germany - Regionalliga South West"
+  },
+  {
+    "leagueId": "214",
+    "leagueName": "Germany - Regionalliga West"
+  },
+  {
+    "leagueId": "215",
+    "leagueName": "Germany - Oberliga Baden-Wurttemberg"
+  },
+  {
+    "leagueId": "216",
+    "leagueName": "Germany - Landesliga"
+  },
+  {
+    "leagueId": "217",
+    "leagueName": "Germany - Regionalliga Bavaria"
+  },
+  {
+    "leagueId": "218",
+    "leagueName": "Germany - Regionalliga North East"
+  },
+  {
+    "leagueId": "219",
+    "leagueName": "Germany - Oberliga Rheinland-Pfalz/Saar"
+  },
+  {
+    "leagueId": "220",
+    "leagueName": "Germany - Oberliga Hamburg"
+  },
+  {
+    "leagueId": "221",
+    "leagueName": "Germany - Verbandsliga"
+  },
+  {
+    "leagueId": "222",
+    "leagueName": "Greece - Super League"
+  },
+  {
+    "leagueId": "223",
+    "leagueName": "Greece - Super League 2"
+  },
+  {
+    "leagueId": "224",
+    "leagueName": "Greece - Super League U19"
+  },
+  {
+    "leagueId": "225",
+    "leagueName": "Guatemala - Primera Division de Ascenso"
+  },
+  {
+    "leagueId": "226",
+    "leagueName": "Guatemala - Liga Nacional"
+  },
+  {
+    "leagueId": "227",
+    "leagueName": "Ghana - Premier League"
+  },
+  {
+    "leagueId": "228",
+    "leagueName": "Hong Kong - Premier League"
+  },
+  {
+    "leagueId": "229",
+    "leagueName": "Hungary - U19 League"
+  },
+  {
+    "leagueId": "230",
+    "leagueName": "Hungary - NB 1"
+  },
+  {
+    "leagueId": "231",
+    "leagueName": "Hungary - NB 2"
+  },
+  {
+    "leagueId": "232",
+    "leagueName": "Hungary - NB 1 Women"
+  },
+  {
+    "leagueId": "233",
+    "leagueName": "Honduras - Liga Nacional"
+  },
+  {
+    "leagueId": "234",
+    "leagueName": "Honduras - Reserve League"
+  },
+  {
+    "leagueId": "235",
+    "leagueName": "Iceland - 2. Deild"
+  },
+  {
+    "leagueId": "236",
+    "leagueName": "Iceland - 1. Deild"
+  },
+  {
+    "leagueId": "237",
+    "leagueName": "Iceland - Urvalsdeild Women"
+  },
+  {
+    "leagueId": "238",
+    "leagueName": "Iceland - Premier League"
+  },
+  {
+    "leagueId": "239",
+    "leagueName": "Iceland - League Cup Women B"
+  },
+  {
+    "leagueId": "240",
+    "leagueName": "Iceland - U19 League"
+  },
+  {
+    "leagueId": "241",
+    "leagueName": "India - I-League"
+  },
+  {
+    "leagueId": "242",
+    "leagueName": "India - Rajasthan League A Division"
+  },
+  {
+    "leagueId": "243",
+    "leagueName": "India - Super League"
+  },
+  {
+    "leagueId": "244",
+    "leagueName": "Iran - Pro League"
+  },
+  {
+    "leagueId": "245",
+    "leagueName": "Ivory Coast - Ligue 1"
+  },
+  {
+    "leagueId": "246",
+    "leagueName": "Ireland - Division 1"
+  },
+  {
+    "leagueId": "247",
+    "leagueName": "Ireland - Premier"
+  },
+  {
+    "leagueId": "248",
+    "leagueName": "Ireland - National League Women"
+  },
+  {
+    "leagueId": "249",
+    "leagueName": "Ireland - Munster Senior League"
+  },
+  {
+    "leagueId": "250",
+    "leagueName": "Ireland - Leinster Senior League"
+  },
+  {
+    "leagueId": "251",
+    "leagueName": "Indonesia - Liga 1"
+  },
+  {
+    "leagueId": "252",
+    "leagueName": "Iraq - Premier League"
+  },
+  {
+    "leagueId": "253",
+    "leagueName": "Israel - Premier League"
+  },
+  {
+    "leagueId": "254",
+    "leagueName": "Israel - Liga Alef"
+  },
+  {
+    "leagueId": "255",
+    "leagueName": "Israel - Liga Bet"
+  },
+  {
+    "leagueId": "256",
+    "leagueName": "Israel - U19 Elite Division"
+  },
+  {
+    "leagueId": "257",
+    "leagueName": "Israel - Ligat Leumit"
+  },
+  {
+    "leagueId": "258",
+    "leagueName": "Italy - Primavera 3 U19"
+  },
+  {
+    "leagueId": "259",
+    "leagueName": "Italy - Serie A Women"
+  },
+  {
+    "leagueId": "260",
+    "leagueName": "Italy - Serie B"
+  },
+  {
+    "leagueId": "261",
+    "leagueName": "Italy - Serie C Group A"
+  },
+  {
+    "leagueId": "262",
+    "leagueName": "Italy - Serie C Group B"
+  },
+  {
+    "leagueId": "263",
+    "leagueName": "Italy - Serie C Group C"
+  },
+  {
+    "leagueId": "264",
+    "leagueName": "Italy - Primavera U19"
+  },
+  {
+    "leagueId": "265",
+    "leagueName": "Italy - Primavera 2 U19"
+  },
+  {
+    "leagueId": "266",
+    "leagueName": "Jamaica - Premier League"
+  },
+  {
+    "leagueId": "267",
+    "leagueName": "Jordan - Pro League"
+  },
+  {
+    "leagueId": "268",
+    "leagueName": "Japan - Nadeshiko Division 1 Women"
+  },
+  {
+    "leagueId": "269",
+    "leagueName": "Japan - J2 League"
+  },
+  {
+    "leagueId": "270",
+    "leagueName": "Japan - Football League"
+  },
+  {
+    "leagueId": "271",
+    "leagueName": "Japan - J League"
+  },
+  {
+    "leagueId": "272",
+    "leagueName": "Japan - J3 League"
+  },
+  {
+    "leagueId": "273",
+    "leagueName": "Japan - Women Empowerment League"
+  },
+  {
+    "leagueId": "274",
+    "leagueName": "Kenya - Premier League"
+  },
+  {
+    "leagueId": "275",
+    "leagueName": "Kenya - Super League"
+  },
+  {
+    "leagueId": "276",
+    "leagueName": "Kazakhstan - Premier League"
+  },
+  {
+    "leagueId": "277",
+    "leagueName": "Kuwait - Premier League"
+  },
+  {
+    "leagueId": "278",
+    "leagueName": "Korea Republic - K League 1"
+  },
+  {
+    "leagueId": "279",
+    "leagueName": "Korea Republic - K League 2"
+  },
+  {
+    "leagueId": "280",
+    "leagueName": "Korea Republic - K3 League"
+  },
+  {
+    "leagueId": "281",
+    "leagueName": "Lebanon - Premier League"
+  },
+  {
+    "leagueId": "282",
+    "leagueName": "Latvia - Virsliga"
+  },
+  {
+    "leagueId": "283",
+    "leagueName": "Lithuania -  1 Lyga"
+  },
+  {
+    "leagueId": "284",
+    "leagueName": "Lithuania -  A Lyga"
+  },
+  {
+    "leagueId": "285",
+    "leagueName": "Montenegro - Prva Liga"
+  },
+  {
+    "leagueId": "286",
+    "leagueName": "Myanmar - Cup"
+  },
+  {
+    "leagueId": "287",
+    "leagueName": "Mali - Premiere Division"
+  },
+  {
+    "leagueId": "288",
+    "leagueName": "Macau - Primeira Divisao"
+  },
+  {
+    "leagueId": "289",
+    "leagueName": "Malta - Premier League"
+  },
+  {
+    "leagueId": "290",
+    "leagueName": "Mexico - Liga TDP"
+  },
+  {
+    "leagueId": "291",
+    "leagueName": "Mexico - Liga Premier"
+  },
+  {
+    "leagueId": "292",
+    "leagueName": "Mexico - U23 League"
+  },
+  {
+    "leagueId": "293",
+    "leagueName": "Mexico - Liga de Expansin MX"
+  },
+  {
+    "leagueId": "294",
+    "leagueName": "Mexico - Liga MX Women"
+  },
+  {
+    "leagueId": "295",
+    "leagueName": "Mexico - Liga Premier"
+  },
+  {
+    "leagueId": "296",
+    "leagueName": "Morocco - Cup"
+  },
+  {
+    "leagueId": "297",
+    "leagueName": "Morocco - Botola Pro"
+  },
+  {
+    "leagueId": "298",
+    "leagueName": "Morocco - Botola 2"
+  },
+  {
+    "leagueId": "299",
+    "leagueName": "Mexico - Primera Division"
+  },
+  {
+    "leagueId": "300",
+    "leagueName": "Netherlands - Eerste Divisie"
+  },
+  {
+    "leagueId": "301",
+    "leagueName": "North Macedonia - 1st League"
+  },
+  {
+    "leagueId": "302",
+    "leagueName": "Netherlands - Derde Divisie"
+  },
+  {
+    "leagueId": "303",
+    "leagueName": "Netherlands - Tweede Divisie"
+  },
+  {
+    "leagueId": "304",
+    "leagueName": "Northern Ireland - Cup"
+  },
+  {
+    "leagueId": "305",
+    "leagueName": "Northern Ireland - Premiership"
+  },
+  {
+    "leagueId": "306",
+    "leagueName": "Northern Ireland - Premiership Development League U20"
+  },
+  {
+    "leagueId": "307",
+    "leagueName": "Norway - Toppserien Women"
+  },
+  {
+    "leagueId": "308",
+    "leagueName": "Norway - U19 League"
+  },
+  {
+    "leagueId": "309",
+    "leagueName": "Norway - 1st Division"
+  },
+  {
+    "leagueId": "310",
+    "leagueName": "Norway - Eliteserien"
+  },
+  {
+    "leagueId": "311",
+    "leagueName": "Norway - 3rd Division Group 6"
+  },
+  {
+    "leagueId": "312",
+    "leagueName": "Norway - 3rd Division Group 2"
+  },
+  {
+    "leagueId": "313",
+    "leagueName": "Norway - 3rd Division Group 4"
+  },
+  {
+    "leagueId": "314",
+    "leagueName": "Norway - 2nd Division"
+  },
+  {
+    "leagueId": "315",
+    "leagueName": "Paraguay - Division Profesional"
+  },
+  {
+    "leagueId": "316",
+    "leagueName": "Panama - Primera Division"
+  },
+  {
+    "leagueId": "317",
+    "leagueName": "Peru - Liga 2"
+  },
+  {
+    "leagueId": "318",
+    "leagueName": "Peru - Liga 1"
+  },
+  {
+    "leagueId": "319",
+    "leagueName": "Poland - 2nd Liga"
+  },
+  {
+    "leagueId": "320",
+    "leagueName": "Poland - 4th Liga"
+  },
+  {
+    "leagueId": "321",
+    "leagueName": "Poland - Ekstraliga Women"
+  },
+  {
+    "leagueId": "322",
+    "leagueName": "Poland - U19 League"
+  },
+  {
+    "leagueId": "323",
+    "leagueName": "Poland - Cup"
+  },
+  {
+    "leagueId": "324",
+    "leagueName": "Poland - 1st Liga"
+  },
+  {
+    "leagueId": "325",
+    "leagueName": "Poland - Ekstraklasa"
+  },
+  {
+    "leagueId": "326",
+    "leagueName": "Poland - 3rd Liga Group 1"
+  },
+  {
+    "leagueId": "327",
+    "leagueName": "Poland - 3rd Liga Group 2"
+  },
+  {
+    "leagueId": "328",
+    "leagueName": "Poland - 3rd Liga Group 3"
+  },
+  {
+    "leagueId": "329",
+    "leagueName": "Poland - 3rd Liga Group 4"
+  },
+  {
+    "leagueId": "330",
+    "leagueName": "Portugal - U19 Championship"
+  },
+  {
+    "leagueId": "331",
+    "leagueName": "Portugal - 1st Division Women"
+  },
+  {
+    "leagueId": "332",
+    "leagueName": "Portugal - U23 Cup"
+  },
+  {
+    "leagueId": "333",
+    "leagueName": "Portugal - Liga 2"
+  },
+  {
+    "leagueId": "334",
+    "leagueName": "Portugal - Liga 3"
+  },
+  {
+    "leagueId": "335",
+    "leagueName": "Qatar - Stars League"
+  },
+  {
+    "leagueId": "336",
+    "leagueName": "Qatar/UAE - Super Cup"
+  },
+  {
+    "leagueId": "337",
+    "leagueName": "Romania - Liga 1"
+  },
+  {
+    "leagueId": "338",
+    "leagueName": "Romania - Liga 2"
+  },
+  {
+    "leagueId": "339",
+    "leagueName": "Russia - Cup"
+  },
+  {
+    "leagueId": "340",
+    "leagueName": "Russia - Premier League"
+  },
+  {
+    "leagueId": "341",
+    "leagueName": "Russia - First League"
+  },
+  {
+    "leagueId": "342",
+    "leagueName": "Saudi Arabia - U19 League"
+  },
+  {
+    "leagueId": "343",
+    "leagueName": "Saudi Arabia - Pro League"
+  },
+  {
+    "leagueId": "344",
+    "leagueName": "Saudi Arabia - Division 1"
+  },
+  {
+    "leagueId": "345",
+    "leagueName": "Scotland - Football League"
+  },
+  {
+    "leagueId": "346",
+    "leagueName": "Scotland - Premiership"
+  },
+  {
+    "leagueId": "347",
+    "leagueName": "Scotland - Championship"
+  },
+  {
+    "leagueId": "348",
+    "leagueName": "Scotland - League One"
+  },
+  {
+    "leagueId": "349",
+    "leagueName": "Scotland - League Two"
+  },
+  {
+    "leagueId": "350",
+    "leagueName": "Scotland - Premier League Women"
+  },
+  {
+    "leagueId": "351",
+    "leagueName": "Slovakia - Liga I Women"
+  },
+  {
+    "leagueId": "352",
+    "leagueName": "Slovakia - Super Liga"
+  },
+  {
+    "leagueId": "353",
+    "leagueName": "Slovakia - 2. Liga"
+  },
+  {
+    "leagueId": "354",
+    "leagueName": "Slovakia - Liga I"
+  },
+  {
+    "leagueId": "355",
+    "leagueName": "Slovenia - 2. SNL"
+  },
+  {
+    "leagueId": "356",
+    "leagueName": "Slovenia - Prva Liga"
+  },
+  {
+    "leagueId": "357",
+    "leagueName": "South Africa - PSL"
+  },
+  {
+    "leagueId": "358",
+    "leagueName": "South Africa - 1st Division"
+  },
+  {
+    "leagueId": "359",
+    "leagueName": "South Africa - Diski Challenge U23"
+  },
+  {
+    "leagueId": "360",
+    "leagueName": "Spain - Tercera Division"
+  },
+  {
+    "leagueId": "361",
+    "leagueName": "Spain - Primera RFEF Group 1"
+  },
+  {
+    "leagueId": "362",
+    "leagueName": "Spain - Segunda RFEF Group 2"
+  },
+  {
+    "leagueId": "363",
+    "leagueName": "Spain - Segunda RFEF Group 3"
+  },
+  {
+    "leagueId": "364",
+    "leagueName": "Spain - Segunda RFEF Group 4"
+  },
+  {
+    "leagueId": "365",
+    "leagueName": "Spain - Segunda RFEF Group 5"
+  },
+  {
+    "leagueId": "366",
+    "leagueName": "Spain - Primera RFEF Group 1"
+  },
+  {
+    "leagueId": "367",
+    "leagueName": "Spain - Primera RFEF Group 2"
+  },
+  {
+    "leagueId": "368",
+    "leagueName": "Spain - Segunda Division"
+  },
+  {
+    "leagueId": "369",
+    "leagueName": "Spain - Primera Division Women"
+  },
+  {
+    "leagueId": "370",
+    "leagueName": "Spain - Tercera Federacion Women"
+  },
+  {
+    "leagueId": "371",
+    "leagueName": "Spain - U19 League"
+  },
+  {
+    "leagueId": "372",
+    "leagueName": "Spain - Segunda Federacion Women"
+  },
+  {
+    "leagueId": "373",
+    "leagueName": "Serbia - Prva Liga"
+  },
+  {
+    "leagueId": "374",
+    "leagueName": "Serbia - U19 League"
+  },
+  {
+    "leagueId": "375",
+    "leagueName": "Serbia - Super Liga"
+  },
+  {
+    "leagueId": "376",
+    "leagueName": "Sweden - 2nd Div. Sodra Svealand"
+  },
+  {
+    "leagueId": "377",
+    "leagueName": "Sweden - Cup"
+  },
+  {
+    "leagueId": "378",
+    "leagueName": "Sweden - Elitettan Women"
+  },
+  {
+    "leagueId": "379",
+    "leagueName": "Sweden - 2nd Div. Vastra Gotaland"
+  },
+  {
+    "leagueId": "380",
+    "leagueName": "Sweden - Division 1 Norra"
+  },
+  {
+    "leagueId": "381",
+    "leagueName": "Sweden - Damallsvenskan"
+  },
+  {
+    "leagueId": "382",
+    "leagueName": "Sweden - Superettan"
+  },
+  {
+    "leagueId": "383",
+    "leagueName": "Sweden - 2nd Div. Norra Gotaland"
+  },
+  {
+    "leagueId": "384",
+    "leagueName": "Sweden - 2nd Div. Norrland"
+  },
+  {
+    "leagueId": "385",
+    "leagueName": "Sweden - 2nd Div. Sodra Gotaland"
+  },
+  {
+    "leagueId": "386",
+    "leagueName": "Sweden - Allsvenskan"
+  },
+  {
+    "leagueId": "387",
+    "leagueName": "Sweden - 2nd Div. Norra Svealand"
+  },
+  {
+    "leagueId": "388",
+    "leagueName": "Sweden - Division 1 Sodra"
+  },
+  {
+    "leagueId": "389",
+    "leagueName": "Switzerland - Challenge League"
+  },
+  {
+    "leagueId": "390",
+    "leagueName": "Switzerland - Promotion League"
+  },
+  {
+    "leagueId": "391",
+    "leagueName": "Switzerland - Super League"
+  },
+  {
+    "leagueId": "392",
+    "leagueName": "Thailand - League 1"
+  },
+  {
+    "leagueId": "393",
+    "leagueName": "Tunisia - League 2"
+  },
+  {
+    "leagueId": "394",
+    "leagueName": "Turkey - 2nd League"
+  },
+  {
+    "leagueId": "395",
+    "leagueName": "Turkey - 1st League"
+  },
+  {
+    "leagueId": "396",
+    "leagueName": "Turkey - Super Lig U19"
+  },
+  {
+    "leagueId": "397",
+    "leagueName": "Turkey - 1. Lig U19"
+  },
+  {
+    "leagueId": "398",
+    "leagueName": "Turkey - 3rd League Group 1"
+  },
+  {
+    "leagueId": "399",
+    "leagueName": "Turkey - 3rd League Group 2"
+  },
+  {
+    "leagueId": "400",
+    "leagueName": "Turkey - 3rd League Group 3"
+  },
+  {
+    "leagueId": "401",
+    "leagueName": "Turkey - 3rd League Group 4"
+  },
+  {
+    "leagueId": "402",
+    "leagueName": "Turkey - Super League Women"
+  },
+  {
+    "leagueId": "403",
+    "leagueName": "Tanzania - Premier League"
+  },
+  {
+    "leagueId": "404",
+    "leagueName": "Uganda - Cup"
+  },
+  {
+    "leagueId": "405",
+    "leagueName": "UAE - Division 1"
+  },
+  {
+    "leagueId": "406",
+    "leagueName": "UAE - Pro League"
+  },
+  {
+    "leagueId": "407",
+    "leagueName": "UEFA - EURO"
+  },
+  {
+    "leagueId": "408",
+    "leagueName": "UEFA - Europa Conference League"
+  },
+  {
+    "leagueId": "409",
+    "leagueName": "UEFA - Champions League"
+  },
+  {
+    "leagueId": "410",
+    "leagueName": "UEFA - Europa League"
+  },
+  {
+    "leagueId": "411",
+    "leagueName": "Ukraine - Premier League"
+  },
+  {
+    "leagueId": "412",
+    "leagueName": "Ukraine - Persha Liga"
+  },
+  {
+    "leagueId": "413",
+    "leagueName": "Uzbekistan - Super League"
+  },
+  {
+    "leagueId": "414",
+    "leagueName": "Uruguay - Cup"
+  },
+  {
+    "leagueId": "415",
+    "leagueName": "Uruguay - Primera Division"
+  },
+  {
+    "leagueId": "416",
+    "leagueName": "USA - MLS Next Pro League"
+  },
+  {
+    "leagueId": "417",
+    "leagueName": "USA - Major League Soccer"
+  },
+  {
+    "leagueId": "418",
+    "leagueName": "USA - National Womens Soccer League"
+  },
+  {
+    "leagueId": "419",
+    "leagueName": "USA - USL League One"
+  },
+  {
+    "leagueId": "420",
+    "leagueName": "USA - USL Championship"
+  },
+  {
+    "leagueId": "421",
+    "leagueName": "Venezuela - Segunda Division"
+  },
+  {
+    "leagueId": "422",
+    "leagueName": "Venezuela - Primera Division"
+  },
+  {
+    "leagueId": "423",
+    "leagueName": "Vietnam - Womens National League"
+  },
+  {
+    "leagueId": "424",
+    "leagueName": "Vietnam - V League"
+  },
+  {
+    "leagueId": "425",
+    "leagueName": "Vietnam - V League 2"
+  }
+]

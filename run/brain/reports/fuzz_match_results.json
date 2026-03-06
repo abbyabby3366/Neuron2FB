@@ -1,0 +1,172 @@
+{
+  "matches": [
+    {
+      "key": "tunisia professional ligue 1 as gabes js omrane",
+      "targetLeague": "Tunisia Professional Ligue 1",
+      "targetHome": "AS Gabes",
+      "targetAway": "JS Omrane",
+      "refLeague": "Tunisia - League 1",
+      "refHome": "AS Gabes",
+      "refAway": "JS El Omrane",
+      "count": 112
+    },
+    {
+      "key": "tunisia professional ligue 1 as soliman es zarzis",
+      "targetLeague": "Tunisia Professional Ligue 1",
+      "targetHome": "AS Soliman",
+      "targetAway": "ES Zarzis",
+      "refLeague": "Tunisia - League 1",
+      "refHome": "AS Soliman",
+      "refAway": "ES Zarzis",
+      "count": 40
+    },
+    {
+      "key": "turkiye 2nd lig 1928 bucaspor erbaaspor",
+      "targetLeague": "Turkiye 2nd Lig",
+      "targetHome": "1928 Bucaspor",
+      "targetAway": "Erbaaspor",
+      "refLeague": "Turkey - 2nd League",
+      "refHome": "Bucaspor 1928",
+      "refAway": "Erbaaspor",
+      "count": 480
+    },
+    {
+      "key": "turkiye 2nd lig beykoz anadolu spor iskenderunspor",
+      "targetLeague": "Turkiye 2nd Lig",
+      "targetHome": "Beykoz Anadolu Spor",
+      "targetAway": "Iskenderunspor",
+      "refLeague": "Turkey - 2nd League",
+      "refHome": "Beykoz Anadolu",
+      "refAway": "Iskenderunspor",
+      "count": 416
+    }
+  ],
+  "unmatchedTarget": [
+    {
+      "key": "china football super league chengdu rongcheng shenzhen peng city",
+      "leagueName": "China Football Super League",
+      "homeName": "Chengdu Rongcheng",
+      "awayName": "Shenzhen Peng City",
+      "count": 12
+    },
+    {
+      "key": "india super league mohun bagan sg odisha fc",
+      "leagueName": "India Super League",
+      "homeName": "Mohun Bagan SG",
+      "awayName": "Odisha FC",
+      "count": 12
+    },
+    {
+      "key": "india football league aizawl fc rajasthan united",
+      "leagueName": "India Football League",
+      "homeName": "Aizawl FC",
+      "awayName": "Rajasthan United",
+      "count": 16
+    },
+    {
+      "key": "turkiye 1st lig sariyer sk umraniyespor",
+      "leagueName": "Turkiye 1st Lig",
+      "homeName": "Sariyer SK",
+      "awayName": "Umraniyespor",
+      "count": 16
+    },
+    {
+      "key": "romania liga 3 acs kids tampa brasov asc olimpic zarnesti",
+      "leagueName": "Romania Liga 3",
+      "homeName": "ACS Kids Tampa Brasov",
+      "awayName": "ASC Olimpic Zarnesti",
+      "count": 16
+    },
+    {
+      "key": "romania liga 3 cf inter ilfov acso filiasi",
+      "leagueName": "Romania Liga 3",
+      "homeName": "CF Inter Ilfov",
+      "awayName": "ACSO Filiasi",
+      "count": 16
+    },
+    {
+      "key": "romania liga 3 acs urban titu flacara moreni",
+      "leagueName": "Romania Liga 3",
+      "homeName": "ACS Urban Titu",
+      "awayName": "Flacara Moreni",
+      "count": 16
+    },
+    {
+      "key": "romania liga 3 fc inter sibiu unirea bascov",
+      "leagueName": "Romania Liga 3",
+      "homeName": "FC Inter Sibiu",
+      "awayName": "Unirea Bascov",
+      "count": 16
+    },
+    {
+      "key": "romania liga 3 cs blejoi cso plopeni",
+      "leagueName": "Romania Liga 3",
+      "homeName": "CS Blejoi",
+      "awayName": "CSO Plopeni",
+      "count": 16
+    },
+    {
+      "key": "romania liga 3 ghiroda si giarmata vii viitorul arad",
+      "leagueName": "Romania Liga 3",
+      "homeName": "Ghiroda si Giarmata Vii",
+      "awayName": "Viitorul Arad",
+      "count": 16
+    },
+    {
+      "key": "romania liga 3 fcsb 2 cs gloria baneasa",
+      "leagueName": "Romania Liga 3",
+      "homeName": "FCSB 2",
+      "awayName": "CS Gloria Baneasa",
+      "count": 16
+    },
+    {
+      "key": "romania liga 3 scm ramnicu valcea csm targu jiu",
+      "leagueName": "Romania Liga 3",
+      "homeName": "SCM Ramnicu Valcea",
+      "awayName": "CSM Targu Jiu",
+      "count": 16
+    },
+    {
+      "key": "romania liga 3 afc odorheiu secuiesc acs fc soimii gura humorului",
+      "leagueName": "Romania Liga 3",
+      "homeName": "AFC Odorheiu Secuiesc",
+      "awayName": "ACS FC Soimii Gura Humorului",
+      "count": 16
+    }
+  ],
+  "unmatchedReference": [
+    {
+      "key": "england - premier league 2 u21 blackburn rovers crystal palace",
+      "leagueName": "England - Premier League 2 U21",
+      "homeName": "Blackburn Rovers",
+      "awayName": "Crystal Palace",
+      "count": 26
+    },
+    {
+      "key": "singapore - premier league tanjong pagar united albirex niigata singapore",
+      "leagueName": "Singapore - Premier League",
+      "homeName": "Tanjong Pagar United",
+      "awayName": "Albirex Niigata Singapore",
+      "count": 42
+    },
+    {
+      "key": "poland - 3rd liga kts-k luzino flota swinoujscie",
+      "leagueName": "Poland - 3rd Liga",
+      "homeName": "KTS-K Luzino",
+      "awayName": "Flota Swinoujscie",
+      "count": 18
+    },
+    {
+      "key": "hungary - u19 league budapest honved debreceni vsc",
+      "leagueName": "Hungary - U19 League",
+      "homeName": "Budapest Honved",
+      "awayName": "Debreceni VSC",
+      "count": 12
+    }
+  ],
+  "metadata": {
+    "targetAcc": "sbo0",
+    "referenceAcc": "ps38380",
+    "timestamp": "2026-03-06T13:04:53.682Z"
+  }
+}

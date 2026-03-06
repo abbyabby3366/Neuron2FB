@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Top 20 Match-up Occurrences</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <canvas id="myChart"></canvas>
+    <script>
+      const ctx = document.getElementById("myChart").getContext("2d");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: [
+            "South Hobart FC vs Clarence Zebras",
+            "Sydney United 58 vs Sydney FC (Youth)",
+            "Olympic FC Brisbane vs Brisbane Roar (Youth)",
+            "Peninsula Power vs Brisbane City",
+            "Ipswich Knights vs North Star FC",
+            "SK Unicov vs MFK Karvina B",
+            "USC Paloma vs TSV Buchholz 08",
+            "Iwaki FC vs Blaublitz Akita",
+            "United SC vs Kalighat Milan Sangha",
+            "Kerala Blasters vs Punjab FC",
+            "CD Atletico Paso (n) vs CD Tenerife B",
+            "Botafogo RJ U20 vs Sampaio Correa FE U20",
+            "Trans Narva U21 vs JK Nomme Kalju U21",
+            "KF Gostivari (n) vs GFK Tikvesh 1930",
+            "Atletico Ottawa vs Cavalry FC",
+            "San Antonio FC vs FC Tulsa",
+            "AD Sarchi (n) vs Inter San Carlos",
+            "FC Juarez (w) vs Santos Laguna (w)",
+            "Queensland Lions U23 vs Gold Coast United U23",
+            "Wynnum Wolves FC vs Redlands United",
+          ],
+          datasets: [
+            {
+              label: "Top 20 Match-up Occurrences",
+              data: [
+                5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4,
+              ],
+              fill: false,
+              borderColor: "rgb(75, 192, 192)",
+              backgroundColor: "rgba(75, 192, 192, 0.5)",
+              tension: 0.1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "Number of Occurrences",
+              },
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Bet Number (Sorted)",
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

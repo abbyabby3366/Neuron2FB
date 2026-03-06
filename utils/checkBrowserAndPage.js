@@ -1,0 +1,126 @@
+const fsSync = require("fs");
+const { isMemoryLimitReached } = require("./isMemoryLimitReached");
+const { queueSetup } = require("./setupQueue");
+const { cleanupBrowser } = require("./cleanupBrowser");
+
+const checkBrowserAndPage = async (
+  bookie,
+  isSetupReady,
+  browsers,
+  pages,
+  lastStartTime,
+  [...args],
+) => {
+  // Check every 5 seconds if it's time to restart the browser or if the page is closed
+  setInterval(async () => {
+    const currentTime = new Date();
+    for (const accNo of args) {
+      const acc = `${bookie}${accNo}`;
+      let params = JSON.parse(
+        fsSync.readFileSync(`TargetBookie/${acc}.json`, "utf-8"),
+      );
+
+      if (
+        isSetupReady[acc] &&
+        currentTime - lastStartTime[accNo] >
+          params.targetBrowserRestartIntervalInMins * 60 * 1000
+      ) {
+        console.log(
+          `${bookie} ${accNo} browser restart interval of ${params.targetBrowserRestartIntervalInMins} mins reached, restarting browser`,
+        );
+        await cleanupBrowser(browsers[acc], acc);
+        isSetupReady[acc] = false;
+        console.log(
+          `${bookie} ${accNo} browser closed, waiting 3 seconds before resetting up`,
+        );
+        setTimeout(() => {
+          queueSetup(acc);
+          lastStartTime[accNo] = new Date(); // Reset the start time for this account
+        }, 3000);
+      } else if (
+        isSetupReady[acc] === true &&
+        (!pages[acc] || pages[acc].isClosed())
+      ) {
+        console.log(
+          `${bookie} ${accNo} page detected to be closed, marking as not ready`,
+        );
+        await cleanupBrowser(browsers[acc], acc);
+        isSetupReady[acc] = false;
+        console.log(
+          `${bookie} ${accNo} page closed, waiting 5 seconds before resetting up`,
+        );
+        setTimeout(() => {
+          isSetupReady[acc] = "ongoing";
+          queueSetup(acc);
+          lastStartTime[accNo] = new Date(); // Reset the start time for this account
+        }, 5000);
+      } else if (
+        isSetupReady[acc] === true &&
+        (await isMemoryLimitReached(pages[acc], 0.9))
+      ) {
+        console.log(
+          `${bookie} ${accNo} - Memory limit exceeded, restarting...`,
+        );
+        await cleanupBrowser(browsers[acc], acc);
+        isSetupReady[acc] = false;
+        console.log(
+          `${bookie} ${accNo} page closed, waiting 5 seconds before resetting up`,
+        );
+        setTimeout(() => {
+          queueSetup(acc);
+          lastStartTime[accNo] = new Date(); // Reset the start time for this account
+        }, 5000);
+      } else if (isSetupReady[acc] === true && acc.startsWith("hga")) {
+        const mainElement = await pages[acc].$("#main");
+        if (!mainElement) {
+          console.log(
+            `${bookie} ${accNo} - div#main element not found, restarting...`,
+          );
+          await cleanupBrowser(browsers[acc], acc);
+          isSetupReady[acc] = false;
+          console.log(
+            `${bookie} ${accNo} page closed, waiting 5 seconds before resetting up`,
+          );
+          setTimeout(() => {
+            queueSetup(acc);
+            lastStartTime[accNo] = new Date(); // Reset the start time for this account
+          }, 5000);
+        }
+      } else if (isSetupReady[acc] === true && acc.startsWith("ibc")) {
+        const mainAreaElement = await pages[acc].$("#mainArea");
+        if (!mainAreaElement) {
+          console.log(
+            `${bookie} ${accNo} - div#mainArea element not found, restarting...`,
+          );
+          await cleanupBrowser(browsers[acc], acc);
+          isSetupReady[acc] = false;
+          console.log(
+            `${bookie} ${accNo} page closed, waiting 5 seconds before resetting up`,
+          );
+          setTimeout(() => {
+            queueSetup(acc);
+            lastStartTime[accNo] = new Date(); // Reset the start time for this account
+          }, 5000);
+        }
+      } else if (isSetupReady[acc] === true && acc.startsWith("ps")) {
+        const mainAreaElement = await pages[acc].$("#wrapper");
+        if (!mainAreaElement) {
+          console.log(
+            `${bookie} ${accNo} - div#wrapper element not found, restarting...`,
+          );
+          await cleanupBrowser(browsers[acc], acc);
+          isSetupReady[acc] = false;
+          console.log(
+            `${bookie} ${accNo} page closed, waiting 5 seconds before resetting up`,
+          );
+          setTimeout(() => {
+            queueSetup(acc);
+            lastStartTime[accNo] = new Date(); // Reset the start time for this account
+          }, 5000);
+        }
+      }
+    }
+  }, 5000);
+};
+
+module.exports = { checkBrowserAndPage };
