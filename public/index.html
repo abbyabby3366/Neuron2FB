@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuron2FB | Configuration Dashboard</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        <header class="top-nav">
+            <div class="logo">
+                <span class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <h1>Neuron2FB</h1>
+            </div>
+            <nav class="tabs-container">
+                <ul id="fb-tabs">
+                    <!-- 2fb*.json tabs will be populated here -->
+                </ul>
+            </nav>
+            <div class="top-actions">
+                <button id="new-2fb-btn" class="btn btn-primary btn-sm">+ New 2FB</button>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <main class="main-content">
+                <div id="welcome-screen" class="empty-state">
+                    <div class="icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 19C22 20.1 21.1 21 20 21H4C2.9 21 2 20.1 2 19V5C2 3.9 2.9 3 4 3H10L12 5H20C21.1 5 22 5.9 22 7V19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h2>Configuration Manager</h2>
+                    <p>Select a 2FB config from the top tabs or an account from the sidebar.</p>
+                </div>
+
+                <div id="fb-view" class="fb-dashboard hidden">
+                    <div class="fb-header">
+                        <div class="title-row">
+                            <h2 id="current-fb-name">2fb0.json</h2>
+                            <div id="fb-title-controls" class="title-controls"></div>
+                            <div class="actions">
+                                <button id="delete-fb-btn" class="btn btn-danger btn-xs">Delete</button>
+                            </div>
+                        </div>
+                        <div class="fb-params-grid" id="fb-meta-params">
+                            <!-- 2fb basic params like run, cooldown, etc -->
+                        </div>
+                    </div>
+                    
+                    <div class="groups-container">
+                        <section class="account-group accordion active">
+                            <header class="accordion-header">
+                                <div class="header-left">
+                                    <span class="chevron"></span>
+                                    <h3>Target Account Group</h3>
+                                    <span class="badge" id="target-count">0</span>
+                                </div>
+                            </header>
+                            <div class="accordion-content">
+                                <div class="account-cards" id="target-account-cards">
+                                    <!-- Cards populated here -->
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="account-group accordion active">
+                            <header class="accordion-header">
+                                <div class="header-left">
+                                    <span class="chevron"></span>
+                                    <h3>Reference Account Group</h3>
+                                    <span class="badge" id="reference-count">0</span>
+                                </div>
+                            </header>
+                            <div class="accordion-content">
+                                <div class="account-cards" id="reference-account-cards">
+                                    <!-- Cards populated here -->
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <div id="editor-screen" class="editor-container hidden">
+                    <!-- Existing JSON editor for individual files -->
+                    <header class="editor-header">
+                        <div class="file-info">
+                            <span class="file-icon">📄</span>
+                            <h2 id="current-filename">config.json</h2>
+                        </div>
+                        <div class="editor-actions">
+                            <button id="delete-btn" class="btn btn-danger">Delete</button>
+                            <button id="save-btn" class="btn btn-success">Save Changes</button>
+                        </div>
+                    </header>
+                    <div class="editor-wrapper">
+                        <textarea id="json-editor" spellcheck="false"></textarea>
+                        <div id="error-overlay" class="error-overlay hidden">
+                            <span class="error-msg">Invalid JSON</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="new-config-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Create New Configuration</h3>
+            <div class="form-group">
+                <label for="new-filename">Filename</label>
+                <input type="text" id="new-filename" placeholder="example.json">
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-modal-btn" class="btn btn-secondary">Cancel</button>
+                <button id="create-config-btn" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-confirm-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 class="text-danger">Confirm Deletion</h3>
+            <p>Type <strong id="delete-filename-target"></strong> to delete permanently.</p>
+            <div class="form-group" style="margin-top: 12px">
+                <input type="text" id="delete-confirm-input" placeholder="Filename...">
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-delete-btn" class="btn btn-secondary">Cancel</button>
+                <button id="confirm-delete-btn" class="btn btn-danger" disabled>Confirm Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="fb-settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="settings-modal-title">Settings</h3>
+            <div id="settings-form" class="settings-form">
+                <!-- Dynamically populated fields -->
+            </div>
+                <button id="cancel-settings-btn" class="btn btn-secondary">Close</button>
+        </div>
+    </div>
+
+    <script type="module" src="index.mjs"></script>
+</body>
+</html>
