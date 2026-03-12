@@ -98,17 +98,25 @@
                 <div id="editor-screen" class="editor-container hidden">
                     <!-- Existing JSON editor for individual files -->
                     <header class="editor-header">
-                        <div class="file-info">
-                            <span class="file-icon">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
-                                    <polyline points="13 2 13 9 20 9"></polyline>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <button id="back-from-editor-btn" class="btn btn-secondary" style="padding: 6px 12px; display: flex; align-items: center; gap: 6px;" title="Go back to previous view">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M19 12H5"></path>
+                                    <polyline points="12 19 5 12 12 5"></polyline>
                                 </svg>
-                            </span>
-                            <h2 id="current-filename">config.json</h2>
+                                Back
+                            </button>
+                            <div class="file-info">
+                                <span class="file-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                        <polyline points="13 2 13 9 20 9"></polyline>
+                                    </svg>
+                                </span>
+                                <h2 id="current-filename">config.json</h2>
+                            </div>
                         </div>
                         <div class="editor-actions">
-                            <button id="delete-btn" class="btn btn-danger">Delete</button>
                             <button id="save-btn" class="btn btn-success">Save Changes</button>
                         </div>
                     </header>
@@ -165,6 +173,29 @@
         </div>
     </div>
 
-    <script type="module" src="index.mjs"></script>
+    <script>
+        // Simple on-screen debugger
+        window.addEventListener('error', function(e) {
+            let debugLog = document.getElementById('debug-log-overlay');
+            if (!debugLog) {
+                debugLog = document.createElement('div');
+                debugLog.id = 'debug-log-overlay';
+                debugLog.style.cssText = 'position:fixed;bottom:0;left:0;width:100%;height:30%;background:rgba(0,0,0,0.9);color:#ff5555;z-index:9999;overflow-y:auto;padding:10px;font-family:monospace;font-size:12px;border-top:2px solid red;';
+                document.body.appendChild(debugLog);
+            }
+            debugLog.innerHTML += `<div>[ERROR] ${e.message} at ${e.filename}:${e.lineno}:${e.colno}</div>`;
+        });
+        window.addEventListener('unhandledrejection', function(e) {
+            let debugLog = document.getElementById('debug-log-overlay');
+            if (!debugLog) {
+                debugLog = document.createElement('div');
+                debugLog.id = 'debug-log-overlay';
+                debugLog.style.cssText = 'position:fixed;bottom:0;left:0;width:100%;height:30%;background:rgba(0,0,0,0.9);color:#ff5555;z-index:9999;overflow-y:auto;padding:10px;font-family:monospace;font-size:12px;border-top:2px solid red;';
+                document.body.appendChild(debugLog);
+            }
+            debugLog.innerHTML += `<div>[PROMISE REJECTION] ${e.reason}</div>`;
+        });
+    </script>
+    <script type="module" src="./js/main.js"></script>
 </body>
 </html>

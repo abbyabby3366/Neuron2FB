@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon express.js",
-    "start": "node express.js"
+    "start": "node express.js",
+    "dashboard": "nodemon dashboard_server.js"
   },
   "keywords": [],
   "author": "",
@@ -33,5 +34,10 @@
     "puppeteer": "^22.8.0",
     "tesseract.js": "^5.1.0",
     "ws": "^8.18.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "TargetBookie/*"
+    ]
   }
 }

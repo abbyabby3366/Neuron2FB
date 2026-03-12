@@ -249,7 +249,7 @@ body.dark-theme {
     align-items: center;
     gap: 12px;
     transition: background 0.2s;
-    height: 32px; /* Fixed height for consistency */
+    height: 48px; /* Balanced height for more fields */
 }
 
 .acc-card:hover {
@@ -579,11 +579,14 @@ input[type="checkbox"].fb-input {
     border: 1px solid var(--border-color);
     background: var(--card-bg);
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
 }
 
 #json-editor {
+    flex: 1;
     width: 100%;
-    height: 100%;
     background: transparent;
     color: var(--text-primary);
     border: none;
@@ -858,4 +861,142 @@ input[type="checkbox"].fb-input {
     color: var(--text-secondary);
     font-weight: 600;
     margin-left: 8px;
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.menu-btn:hover {
+    background: var(--hover-bg);
+    color: var(--accent-color);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: #1a1d27;
+    min-width: 180px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    z-index: 1000;
+    padding: 6px 0;
+    margin-top: 4px;
+    animation: fadeIn 0.15s ease-out;
+}
+
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+.menu-item {
+    color: var(--text-primary);
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.8rem;
+    transition: background 0.2s;
+}
+
+.menu-item:hover {
+    background: var(--accent-color);
+    color: white;
+}
+
+.menu-item.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.menu-item.disabled:hover {
+    background: transparent;
+    color: var(--text-primary);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 6px 0;
+}
+
+/* Modal and Settings Improvements */
+.settings-form select {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    padding: 4px 8px;
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+}
+
+.settings-form select:focus {
+    border-color: var(--accent-color);
+}
+
+.checkbox-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkbox-field input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Better responsive fields in account card */
+.acc-summary .field {
+    flex: 0 0 auto;
+    min-width: 120px;
+}
+
+/* Quick Input styling for account summary */
+.quick-input {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 4px 8px;
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    width: 100%;
+    transition: all 0.2s;
+}
+
+.quick-input:hover {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.quick-input:focus {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: var(--accent-color);
+    outline: none;
 }
