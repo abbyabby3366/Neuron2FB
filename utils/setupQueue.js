@@ -13,7 +13,7 @@ const processSetupQueue = async () => {
   try {
     let getData;
     console.log(`Setting up ${acc} now from queue`);
-    const { getData2FB } = require("../run/run2FBs");
+    const { getData2FB } = require("../run/run2FB");
     getData = getData2FB;
     // if (acc.startsWith("sbo")) {
     //   const { getDataSBO } = require("../run/runSBOs");
