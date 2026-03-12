@@ -12,14 +12,14 @@
 <body class="dark-theme">
     <div class="app-container">
         <header class="top-nav">
-            <div class="logo">
+            <a href="/" class="logo">
                 <span class="logo-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
                 <h1>Neuron2FB</h1>
-            </div>
+            </a>
             <nav class="tabs-container">
                 <ul id="fb-tabs">
                     <!-- 2fb*.json tabs will be populated here -->
@@ -42,8 +42,7 @@
                     <p>Select a 2FB config from the top tabs or an account from the sidebar.</p>
                 </div>
 
-                <div id="fb-view" class="fb-dashboard hidden">
-                    <div class="fb-header">
+                    <div id="fb-view" class="fb-dashboard hidden">
                         <div class="title-row">
                             <h2 id="current-fb-name">2fb0.json</h2>
                             <div id="fb-title-controls" class="title-controls"></div>
@@ -54,18 +53,21 @@
                         <div class="fb-params-grid" id="fb-meta-params">
                             <!-- 2fb basic params like run, cooldown, etc -->
                         </div>
-                    </div>
                     
                     <div class="groups-container">
                         <section class="account-group accordion active">
                             <header class="accordion-header">
                                 <div class="header-left">
-                                    <span class="chevron"></span>
                                     <h3>Target Account Group</h3>
                                     <span class="badge" id="target-count">0</span>
                                 </div>
-                            </header>
-                            <div class="accordion-content">
+                                <button class="add-acc-btn">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                </button>
+                            </header><div class="accordion-content">
                                 <div class="account-cards" id="target-account-cards">
                                     <!-- Cards populated here -->
                                 </div>
@@ -75,12 +77,16 @@
                         <section class="account-group accordion active">
                             <header class="accordion-header">
                                 <div class="header-left">
-                                    <span class="chevron"></span>
                                     <h3>Reference Account Group</h3>
                                     <span class="badge" id="reference-count">0</span>
                                 </div>
-                            </header>
-                            <div class="accordion-content">
+                                <button class="add-acc-btn">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                </button>
+                            </header><div class="accordion-content">
                                 <div class="account-cards" id="reference-account-cards">
                                     <!-- Cards populated here -->
                                 </div>
@@ -93,7 +99,12 @@
                     <!-- Existing JSON editor for individual files -->
                     <header class="editor-header">
                         <div class="file-info">
-                            <span class="file-icon">📄</span>
+                            <span class="file-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                    <polyline points="13 2 13 9 20 9"></polyline>
+                                </svg>
+                            </span>
                             <h2 id="current-filename">config.json</h2>
                         </div>
                         <div class="editor-actions">
@@ -147,7 +158,10 @@
             <div id="settings-form" class="settings-form">
                 <!-- Dynamically populated fields -->
             </div>
+            <div class="modal-footer">
                 <button id="cancel-settings-btn" class="btn btn-secondary">Close</button>
+                <button id="save-settings-btn" class="btn btn-success">Save Changes</button>
+            </div>
         </div>
     </div>
 

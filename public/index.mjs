@@ -35,6 +35,15 @@ const elements = {
     settingsModalTitle: document.getElementById('settings-modal-title'),
 };
 
+// Safety check: ensure all essential elements exist
+const missingElements = Object.entries(elements)
+    .filter(([key, el]) => !el && !['otherConfigList', 'saveSettingsBtn'].includes(key))
+    .map(([key]) => key);
+
+if (missingElements.length > 0) {
+    console.warn('Missing essential DOM elements:', missingElements);
+}
+
 let allConfigs = [];
 let current2fb = null;
 let currentFile = null;
@@ -93,7 +102,9 @@ async function load2fb(filename) {
 
 async function loadLinkedAccounts(fbConfig) {
     const targets = fbConfig.targetAccsGroup || [];
+    const unusedTargets = fbConfig.unusedTargetAccsGroup || [];
     const refs = fbConfig.referenceAccsGroup || [];
+    const unusedRefs = fbConfig.unusedReferenceAccsGroup || [];
     
     elements.targetCount.textContent = targets.length;
     elements.referenceCount.textContent = refs.length;
@@ -102,16 +113,21 @@ async function loadLinkedAccounts(fbConfig) {
     elements.targetAccountCards.innerHTML = '<p class="loading">Loading accounts...</p>';
     elements.referenceAccountCards.innerHTML = '<p class="loading">Loading accounts...</p>';
 
-    const loadGroup = async (group, container, groupType) => {
+    const loadGroup = async (group, unusedGroup, container, groupType) => {
         container.innerHTML = '';
-        const promises = group.map(async (accId) => {
+        const allAccs = [
+            ...group.map(id => ({ id, isUsed: true })),
+            ...unusedGroup.map(id => ({ id, isUsed: false }))
+        ];
+
+        const promises = allAccs.map(async ({ id: accId, isUsed }) => {
             try {
                 const filename = accId.endsWith('.json') ? accId : `${accId}.json`;
                 const res = await fetch(`/api/configs/${filename}`);
                 if (res.ok) {
                     const data = await res.json();
                     linkedConfigs[filename] = data;
-                    renderAccountCard(accId, data, container);
+                    renderAccountCard(accId, data, container, isUsed, groupType);
                 } else {
                     renderErrorCard(accId, container);
                 }
@@ -127,7 +143,12 @@ async function loadLinkedAccounts(fbConfig) {
         if (header && !header.querySelector('.add-acc-btn')) {
             const addBtn = document.createElement('button');
             addBtn.className = 'add-acc-btn';
-            addBtn.innerHTML = '+';
+            addBtn.innerHTML = `
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            `;
             addBtn.onclick = (e) => {
                 e.stopPropagation();
                 addAccountToGroup(groupType);
@@ -137,8 +158,8 @@ async function loadLinkedAccounts(fbConfig) {
     };
 
     await Promise.all([
-        loadGroup(targets, elements.targetAccountCards, 'targetAccsGroup'),
-        loadGroup(refs, elements.referenceAccountCards, 'referenceAccsGroup')
+        loadGroup(targets, unusedTargets, elements.targetAccountCards, 'targetAccsGroup'),
+        loadGroup(refs, unusedRefs, elements.referenceAccountCards, 'referenceAccsGroup')
     ]);
 }
 
@@ -224,8 +245,11 @@ function renderFbMeta(config) {
                 const span = document.createElement('span');
                 span.className = 'compact-control';
                 span.innerHTML = `
-                    <input type="checkbox" class="fb-input" data-key="${key}" ${config[key] ? 'checked' : ''} id="compact-${key}">
-                    <label for="compact-${key}">${key}</label>
+                    <label class="switch-sm">
+                        <input type="checkbox" class="fb-input" data-key="${key}" ${config[key] ? 'checked' : ''} id="compact-${key}">
+                        <span class="slider round"></span>
+                    </label>
+                    <label for="compact-${key}" class="toggle-label">${key}</label>
                 `;
                 elements.fbTitleControls.appendChild(span);
             }
@@ -233,7 +257,12 @@ function renderFbMeta(config) {
 
         const settingsBtn = document.createElement('button');
         settingsBtn.className = 'settings-icon-btn';
-        settingsBtn.innerHTML = '⚙️';
+        settingsBtn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+        `;
         settingsBtn.title = 'Settings';
         settingsBtn.onclick = () => openSettingsModal(config);
         elements.fbTitleControls.appendChild(settingsBtn);
@@ -286,6 +315,7 @@ function openSettingsModal(config) {
     }
 
     elements.fbSettingsModal.classList.remove('hidden');
+    elements.saveSettingsBtn.style.display = 'none'; // Hide save button initially
 }
 
 function renderSettingsField(key, value, container, parentKey = null) {
@@ -304,7 +334,7 @@ function renderSettingsField(key, value, container, parentKey = null) {
     container.appendChild(field);
 }
 
-async function saveSettings() {
+async function saveSettingsFromModal() {
     if (!current2fb) return;
     const fbRes = await fetch(`/api/configs/${current2fb}`);
     const fbConfig = await fbRes.json();
@@ -312,7 +342,8 @@ async function saveSettings() {
     elements.settingsForm.querySelectorAll('input').forEach(input => {
         const key = input.dataset.key;
         const parent = input.dataset.parent;
-        const value = input.type === 'checkbox' ? input.checked : 
+        const isBool = input.type === 'checkbox';
+        const value = isBool ? input.checked : 
                      input.type === 'number' ? Number(input.value) : input.value;
         
         if (parent) {
@@ -330,33 +361,35 @@ async function saveSettings() {
             body: JSON.stringify(fbConfig, null, 2)
         });
         if (res.ok) {
-            showToast('Settings saved automatically');
-            // We don't necessarily want to refresh load2fb here because it would close the modal or reset its state
-            // But we should update the meta params in the background
-            const fbConfigLocal = await (await fetch(`/api/configs/${current2fb}`)).json();
-            renderFbMeta(fbConfigLocal);
+            showToast('Settings saved');
+            elements.fbSettingsModal.classList.add('hidden');
+            load2fb(current2fb); // Refresh view after manual save
         }
     } catch (e) {
         showToast('Save failed', 'error');
     }
 }
 
-let settingsSaveTimeout = null;
-function debouncedSaveSettings() {
-    if (settingsSaveTimeout) clearTimeout(settingsSaveTimeout);
-    settingsSaveTimeout = setTimeout(saveSettings, 500);
-}
-
-function renderAccountCard(accId, data, container) {
+function renderAccountCard(accId, data, container, isUsed, groupType) {
     const card = document.createElement('div');
-    card.className = 'acc-card';
+    card.className = `acc-card ${isUsed ? '' : 'is-unused'}`;
+    
+    // Logo detection
+    const lowerId = accId.toLowerCase();
+    let logoSrc = '';
+    if (lowerId.startsWith('sbo')) logoSrc = 'sbo-logo.png';
+    else if (lowerId.startsWith('ps')) logoSrc = 'ps-logo.png';
+
     card.innerHTML = `
+        <label class="switch">
+            <input type="checkbox" class="acc-toggle" data-acc="${accId}" data-group="${groupType}" ${isUsed ? 'checked' : ''}>
+            <span class="slider"></span>
+        </label>
+        <div class="acc-card-logo">
+            ${logoSrc ? `<img src="${logoSrc}" alt="${accId.slice(0, 3)}">` : ''}
+        </div>
         <div class="acc-card-header">
             <span class="acc-id">${accId}</span>
-            <label class="switch">
-                <input type="checkbox" class="acc-toggle" data-acc="${accId}" ${data.autoBet ? 'checked' : ''}>
-                <span class="slider"></span>
-            </label>
         </div>
         <div class="acc-summary">
             <div class="field">
@@ -364,11 +397,18 @@ function renderAccountCard(accId, data, container) {
                 <span class="param-value">${data.mode || 'N/A'}</span>
             </div>
             <div class="field">
-                <span class="param-label">Capital</span>
+                <span class="param-label">Cap</span>
                 <span class="param-value">${data.stakeInput?.capital || 'N/A'}</span>
             </div>
         </div>
-        <button class="edit-acc-btn" data-acc="${accId}" title="Edit JSON">✎</button>
+        <div class="acc-actions">
+            <button class="edit-acc-btn" data-acc="${accId}" title="Edit JSON">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+            </button>
+        </div>
     `;
     
     card.querySelector('.edit-acc-btn').addEventListener('click', (e) => {
@@ -435,31 +475,38 @@ async function saveAll() {
             fbConfig[key] = value;
         });
 
+        // 2. Save account toggles (Used/Unused move)
+        const groups = {
+            targetAccsGroup: [],
+            unusedTargetAccsGroup: [],
+            referenceAccsGroup: [],
+            unusedReferenceAccsGroup: []
+        };
+
+        document.querySelectorAll('.acc-toggle').forEach(toggle => {
+            const accId = toggle.dataset.acc;
+            const groupType = toggle.dataset.group;
+            const isUsed = toggle.checked;
+            
+            if (groupType === 'targetAccsGroup') {
+                if (isUsed) groups.targetAccsGroup.push(accId);
+                else groups.unusedTargetAccsGroup.push(accId);
+            } else if (groupType === 'referenceAccsGroup') {
+                if (isUsed) groups.referenceAccsGroup.push(accId);
+                else groups.unusedReferenceAccsGroup.push(accId);
+            }
+        });
+
+        Object.assign(fbConfig, groups);
+
         const saveFbRes = await fetch(`/api/configs/${current2fb}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(fbConfig, null, 2)
         });
 
-        // 2. Save account toggles
-        const accPromises = Array.from(document.querySelectorAll('.acc-toggle')).map(async (toggle) => {
-            const accId = toggle.dataset.acc;
-            const filename = accId.endsWith('.json') ? accId : `${accId}.json`;
-            const config = linkedConfigs[filename];
-            if (config) {
-                config.autoBet = toggle.checked;
-                return fetch(`/api/configs/${filename}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(config, null, 2)
-                });
-            }
-        });
-
-        await Promise.all(accPromises);
-        
         if (saveFbRes.ok) showToast('All changes saved automatically');
-        else showToast('Partial save failure', 'error');
+        else showToast('Save failure', 'error');
 
     } catch (e) {
         console.error('Save failed:', e);
@@ -484,8 +531,13 @@ elements.cancelSettingsBtn.addEventListener('click', () => {
     elements.fbSettingsModal.classList.add('hidden');
     load2fb(current2fb); // Final refresh to ensure UI is in sync
 });
-// Auto-save settings on change
-elements.settingsForm.addEventListener('change', debouncedSaveSettings);
+
+elements.saveSettingsBtn.addEventListener('click', saveSettingsFromModal);
+
+// Show save button only when edited
+elements.settingsForm.addEventListener('input', () => {
+    elements.saveSettingsBtn.style.display = 'inline-flex';
+});
 
 elements.createConfigBtn.addEventListener('click', async () => {
     const filename = elements.newFilenameInput.value.trim();
@@ -536,7 +588,13 @@ elements.cancelDeleteBtn.addEventListener('click', () => {
 
 // Auto-save on change
 elements.fbView.addEventListener('change', (e) => {
-    if (e.target.classList.contains('fb-input') || e.target.classList.contains('acc-toggle')) {
+    const target = e.target;
+    if (target.classList.contains('fb-input') || target.classList.contains('acc-toggle')) {
+        // Immediate UI feedback for account toggles
+        if (target.classList.contains('acc-toggle')) {
+            const card = target.closest('.acc-card');
+            if (card) card.classList.toggle('is-unused', !target.checked);
+        }
         debouncedSaveAll();
     }
 });
