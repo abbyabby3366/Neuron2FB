@@ -7,12 +7,11 @@ async function startNgrokTunnel() {
     // Connect to the local server
     const url = await ngrok.connect({
       proto: "http",
-      addr: 3000, // Your local server port
-      authtoken: "", // Optional: add your ngrok authtoken if you have one
+      addr: 3291, // Your local dashboard server port
     });
 
     // Append the specific API endpoint
-    const fullWebhookUrl = `${url}/api/save-params/`;
+    const fullWebhookUrl = `${url}/api/configs/save-params`;
 
     console.log("Ngrok tunnel created:", fullWebhookUrl);
 

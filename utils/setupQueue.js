@@ -13,25 +13,27 @@ const processSetupQueue = async () => {
   try {
     let getData;
     console.log(`Setting up ${acc} now from queue`);
-    if (acc.startsWith("sbo")) {
-      const { getDataSBO } = require("../run/runSBOs");
-      getData = getDataSBO;
-    } else if (acc.startsWith("ibc")) {
-      const { getDataIBC } = require("../run/runIBCs");
-      getData = getDataIBC;
-    } else if (acc.startsWith("hga")) {
-      const { getDataHGA } = require("../run/runHGAs");
-      getData = getDataHGA;
-    } else if (acc.startsWith("isn")) {
-      const { getDataISN } = require("../run/runISNs");
-      getData = getDataISN;
-    } else if (acc.startsWith("ps")) {
-      const { getDataPS3838 } = require("../run/runPS3838s");
-      getData = getDataPS3838;
-    } else if (acc.startsWith("obet")) {
-      const { getDataObet } = require("../run/runObets");
-      getData = getDataObet;
-    }
+    const { getData2FB } = require("../run/run2FBs");
+    getData = getData2FB;
+    // if (acc.startsWith("sbo")) {
+    //   const { getDataSBO } = require("../run/runSBOs");
+    //   getData = getDataSBO;
+    // } else if (acc.startsWith("ibc")) {
+    //   const { getDataIBC } = require("../run/runIBCs");
+    //   getData = getDataIBC;
+    // } else if (acc.startsWith("hga")) {
+    //   const { getDataHGA } = require("../run/runHGAs");
+    //   getData = getDataHGA;
+    // } else if (acc.startsWith("isn")) {
+    //   const { getDataISN } = require("../run/runISNs");
+    //   getData = getDataISN;
+    // } else if (acc.startsWith("ps")) {
+    //   const { getDataPS3838 } = require("../run/runPS3838s");
+    //   getData = getDataPS3838;
+    // } else if (acc.startsWith("obet")) {
+    //   const { getDataObet } = require("../run/runObets");
+    //   getData = getDataObet;
+    // }
 
     const { browsers, pages, isSetupReady } = getData();
     setupBookie(acc, browsers, pages, isSetupReady); //can add await here, if dont want to run in parallel

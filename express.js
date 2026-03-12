@@ -10,7 +10,9 @@ const { readData } = require("./mongodb/db");
 const path = require("path");
 // const { _, browsers, pages, isReady } = require('./run/runSBO.js');
 const { runSBOs, browsers, pages, isSetupReady } = require("./run/runSBOs.js");
+
 const { startNgrokTunnel } = require("./utils/ngrok");
+
 
 app.use(cors());
 app.use(express.json());
@@ -172,7 +174,7 @@ app.get("/api/toggle/:account", (req, res) => {
       `./TargetBookie/${acc}.json`,
       JSON.stringify(autobet_params),
     );
-    console.log(`${acc} auto bet toggled: ` + autobet_params.autoBet);
+    console.log(`[TOGGLE] ${acc} autoBet set to ${autobet_params.autoBet}`);
     res.send(autobet_params.autoBet);
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -195,6 +197,7 @@ app.post("/api/save-cooldown/:account", (req, res) => {
       `./TargetBookie/${acc}.json`,
       JSON.stringify(autobet_params),
     );
+    console.log(`[COOLDOWN] Updated ${acc} cooldown to ${cooldownTimeInSeconds}s`);
     res.json({
       success: true,
       message: `Cooldown time = ${Number(cooldownTimeInSeconds)} updated for ${acc}`,
@@ -243,43 +246,7 @@ app.post("/bet", async (req, res) => {
   res.status(200).send(true);
 });
 
-// save params to local file
-app.post("/api/save-params/", (req, res) => {
-  let params = req.body;
-  console.log("Received POST request for params:", params);
 
-  try {
-    fs.writeFileSync(
-      `./TargetBookie/sbo0.json`,
-      JSON.stringify(params.SBO_param, null, 2),
-    );
-    fs.writeFileSync(
-      `./TargetBookie/ps38380.json`,
-      JSON.stringify(params.PS3838_params, null, 2),
-    );
-
-    let mainParams = {
-      instance_id: params.instance_id,
-      webhook_ip: params.webhook_ip,
-      run: params.run,
-    };
-    fs.writeFileSync(`./mainParams.json`, JSON.stringify(mainParams, null, 2));
-
-    console.log(
-      "Parameters updated successfully for sbo0 and ps38380 and main params",
-    );
-
-    res.json({
-      success: true,
-      message: `Parameters updated successfully for sbo0 and ps38380`,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-});
 
 app.get("/", (req, res) => {
   res.send("Hello xiren");
