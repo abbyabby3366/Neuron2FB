@@ -10,4 +10,4 @@ index.js
 TargetBookie/*.json
 
 mongodb/credentials.json
-*/fuzz_match_results.json
+**/fuzz_match_results.json
