@@ -66,20 +66,21 @@ export function renderAccountCard(accId, data, container, isUsed, groupType) {
             <span class="acc-id">${accId}</span>
         </div>
         <div class="acc-summary">
-            <div class="field">
-                <input type="text" class="quick-input website-input" placeholder="Website" value="${data.user?.website || ''}" title="${data.user?.website || ''}">
-            </div>
-            <div class="field">
-                <input type="text" class="quick-input username-input" placeholder="Username" value="${data.user?.username || ''}">
-            </div>
-            <div class="field">
-                <input type="password" class="quick-input password-input" placeholder="Password" value="${data.user?.password || ''}">
-            </div>
-            <div class="field">
-                <label class="compact-control">
+            <div class="field" style="margin-right: 8px;">
+                <label class="switch switch-sm" title="AutoBet">
                     <input type="checkbox" class="autobet-toggle" data-acc="${accId}" ${data.autoBet ? 'checked' : ''}>
-                    <span class="param-label">AutoBet</span>
+                    <span class="slider round"></span>
                 </label>
+                <span class="param-label" style="margin-left: 4px; cursor: pointer;" onclick="this.previousElementSibling.click()">AutoBet</span>
+            </div>
+            <div class="field">
+                <input type="text" class="quick-input website-input" placeholder="Website" value="${data.user?.website || ''}" title="${data.user?.website || ''}" autocomplete="off" data-lpignore="true">
+            </div>
+            <div class="field">
+                <input type="text" class="quick-input username-input" placeholder="Username" value="${data.user?.username || ''}" autocomplete="off" data-lpignore="true">
+            </div>
+            <div class="field">
+                <input type="password" class="quick-input password-input" placeholder="Password" value="${data.user?.password || ''}" autocomplete="new-password" data-lpignore="true">
             </div>
         </div>
         <div class="acc-actions">
@@ -98,6 +99,8 @@ export function renderAccountCard(accId, data, container, isUsed, groupType) {
                     <a href="#" class="menu-item view-odds-opt disabled">View all odds</a>
                     <hr>
                     <a href="#" class="menu-item edit-json-opt">Edit JSON</a>
+                    <hr>
+                    <a href="#" class="menu-item delete-json-opt" style="color: #ff4d4d;">Delete JSON</a>
                 </div>
             </div>
         </div>
@@ -190,6 +193,25 @@ export function renderAccountCard(accId, data, container, isUsed, groupType) {
         });
         dropdown.classList.remove('active');
     };
+
+    if (card.querySelector('.delete-json-opt')) {
+        card.querySelector('.delete-json-opt').onclick = (e) => {
+            e.preventDefault();
+            const filename = accId.endsWith('.json') ? accId : `${accId}.json`;
+            
+            // Setup modal
+            elements.deleteAccFilenameTarget.textContent = filename;
+            elements.deleteAccConfirmInput.value = '';
+            elements.confirmDeleteAccBtn.disabled = true;
+            
+            window.dispatchEvent(new CustomEvent('requestDeleteAccount', { 
+                detail: { filename, accId, groupType, card } 
+            }));
+            
+            elements.deleteAccConfirmModal.classList.remove('hidden');
+            dropdown.classList.remove('active');
+        };
+    }
 
     container.appendChild(card);
     return card;

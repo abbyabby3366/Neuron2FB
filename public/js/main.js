@@ -2,7 +2,7 @@ import { elements, showToast } from "./ui.js";
 import { state, fetchAllConfigs, load2fb } from "./api.js";
 import { renderNav, renderFbMeta } from "./render.js";
 import { loadLinkedAccounts, renderAccountCard } from "./accountManager.js";
-import { saveSettingsFromModalSelection } from "./modals.js";
+import { saveSettingsFromModalSelection, openLeagueFilterModal } from "./modals.js";
 
 // --- Initialization ---
 
@@ -25,14 +25,19 @@ function setupEventListeners(load2fb) {
     const content = elements.jsonEditor.value;
     try {
       const json = JSON.parse(content);
-      const res = await fetch(`/api/configs/${state.currentFile}`, {
+      const url = state.currentFile === 'leagueFilter.json' 
+        ? '/api/league-filter' 
+        : `/api/configs/${state.currentFile}`;
+        
+      const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(json),
+        body: JSON.stringify(json, null, 2),
       });
       if (res.ok) showToast("Saved!");
+      else throw new Error("Server error");
     } catch (e) {
-      showToast("Invalid JSON", "error");
+      showToast(e.message === "Server error" ? "Save failed" : "Invalid JSON", "error");
     }
   });
 
@@ -49,6 +54,10 @@ function setupEventListeners(load2fb) {
   elements.new2fbBtn.addEventListener("click", () => {
     elements.newFilenameInput.value = "2fb1.json";
     elements.newConfigModal.classList.remove("hidden");
+  });
+
+  elements.leagueFilterBtn.addEventListener("click", () => {
+    openLeagueFilterModal();
   });
 
   elements.cancelModalBtn.addEventListener("click", () =>
@@ -117,13 +126,143 @@ function setupEventListeners(load2fb) {
     elements.deleteConfirmModal.classList.add("hidden");
   });
 
-  // Accordion
+  // Account Delete Confirmation Logic
+  let currentFileToDelete = null;
+
+  window.addEventListener('requestDeleteAccount', (e) => {
+      currentFileToDelete = e.detail;
+  });
+
+  elements.deleteAccConfirmInput.addEventListener('input', (e) => {
+      if (currentFileToDelete) {
+          elements.confirmDeleteAccBtn.disabled = e.target.value !== currentFileToDelete.filename;
+      }
+  });
+
+  elements.confirmDeleteAccBtn.addEventListener('click', async () => {
+      if (!currentFileToDelete) return;
+      const { filename, accId, groupType } = currentFileToDelete;
+      
+      try {
+          const res = await fetch(`/api/configs/${filename}`, { method: 'DELETE' });
+          if (res.ok) {
+              elements.deleteAccConfirmModal.classList.add('hidden');
+              showToast(`${filename} deleted`);
+              
+              const fbRes = await fetch(`/api/configs/${state.current2fb}`);
+              const fbConfig = await fbRes.json();
+              
+              if (groupType === 'targetAccsGroup') {
+                  fbConfig.targetAccsGroup = (fbConfig.targetAccsGroup || []).filter(id => id !== accId);
+                  fbConfig.unusedTargetAccsGroup = (fbConfig.unusedTargetAccsGroup || []).filter(id => id !== accId);
+              } else {
+                  fbConfig.referenceAccsGroup = (fbConfig.referenceAccsGroup || []).filter(id => id !== accId);
+                  fbConfig.unusedReferenceAccsGroup = (fbConfig.unusedReferenceAccsGroup || []).filter(id => id !== accId);
+              }
+              
+              await fetch(`/api/configs/${state.current2fb}`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(fbConfig, null, 2)
+              });
+              
+              load2fb(state.current2fb);
+          }
+      } catch (err) {
+          showToast('Delete failed', 'error');
+      }
+      currentFileToDelete = null;
+  });
+
+  elements.cancelDeleteAccBtn.addEventListener('click', () => {
+      elements.deleteAccConfirmModal.classList.add('hidden');
+      currentFileToDelete = null;
+  });
+
+  // Accordion and Add Account
   document.addEventListener("click", (e) => {
     const header = e.target.closest(".accordion-header");
-    if (header) {
+    if (header && !e.target.closest(".add-acc-btn")) {
       header.parentElement.classList.toggle("active");
     }
+
+    const addAccBtn = e.target.closest(".add-acc-btn");
+    if (addAccBtn) {
+      e.preventDefault();
+      handleAddAccount(addAccBtn.dataset.group, load2fb);
+    }
   });
+
+  async function handleAddAccount(groupType, load2fb) {
+    if (!state.current2fb) return;
+    
+    // Determine prefix
+    const isTarget = groupType === 'targetAccsGroup';
+    const prefix = isTarget ? 'sbo' : 'ps3838';
+    
+    // Find next number
+    let maxNum = -1;
+    state.allConfigs.forEach(f => {
+      // Exclude "default" or "sample" etc. Usually they are named prefix0, prefix1...
+      if (f.startsWith(prefix) && f.endsWith('.json') && !f.includes('default') && !f.includes('sample')) {
+        const numStr = f.replace(prefix, '').replace('.json', '');
+        const num = parseInt(numStr, 10);
+        if (!isNaN(num) && num > maxNum) maxNum = num;
+      }
+    });
+    
+    // If no numbered files found, start at 0, else maxNum + 1
+    const nextNum = maxNum >= 0 ? maxNum + 1 : 0;
+    const nextFileName = `${prefix}${nextNum}.json`;
+    
+    try {
+      // Fetch default template
+      const defaultRes = await fetch(`/api/configs/${prefix}default.json`);
+      if (!defaultRes.ok) throw new Error(`Could not load ${prefix}default.json`);
+      const defaultData = await defaultRes.json();
+      
+      // Save new file
+      const createRes = await fetch(`/api/configs/${nextFileName}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(defaultData, null, 2),
+      });
+      if (!createRes.ok) throw new Error(`Could not create ${nextFileName}`);
+      
+      // Add to current 2fb config
+      const fbRes = await fetch(`/api/configs/${state.current2fb}`);
+      const fbConfig = await fbRes.json();
+      
+      if (isTarget) {
+        if (!fbConfig.unusedTargetAccsGroup) fbConfig.unusedTargetAccsGroup = [];
+        if (!fbConfig.unusedTargetAccsGroup.includes(nextFileName) && !(fbConfig.targetAccsGroup || []).includes(nextFileName)) {
+          fbConfig.unusedTargetAccsGroup.push(nextFileName);
+        }
+      } else {
+        if (!fbConfig.unusedReferenceAccsGroup) fbConfig.unusedReferenceAccsGroup = [];
+        if (!fbConfig.unusedReferenceAccsGroup.includes(nextFileName) && !(fbConfig.referenceAccsGroup || []).includes(nextFileName)) {
+          fbConfig.unusedReferenceAccsGroup.push(nextFileName);
+        }
+      }
+      
+      await fetch(`/api/configs/${state.current2fb}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fbConfig, null, 2),
+      });
+      
+      showToast(`${nextFileName} created successfully`);
+      
+      // Refresh configs list and open editor
+      await fetchAllConfigs(() => renderNav(load2fb), load2fb);
+      
+      // Switch view to editor
+      window.dispatchEvent(new CustomEvent("loadSingleFile", { detail: nextFileName }));
+      
+    } catch (err) {
+      showToast(err.message, "error");
+    }
+  }
 
   // Auto-save logic (debounced)
   let saveTimeout = null;
@@ -137,7 +276,9 @@ function setupEventListeners(load2fb) {
       document.querySelectorAll(".fb-input").forEach((input) => {
         const key = input.dataset.key;
         const value =
-          input.type === "checkbox" ? input.checked : Number(input.value);
+          input.type === "checkbox" ? input.checked : 
+          input.type === "text" ? input.value : 
+          Number(input.value);
         fbConfig[key] = value;
       });
 
@@ -192,7 +333,12 @@ function setupEventListeners(load2fb) {
     const filename = e.detail;
     state.currentFile = filename;
     state.current2fb = null;
-    const res = await fetch(`/api/configs/${filename}`);
+    
+    const url = filename === 'leagueFilter.json' 
+      ? '/api/league-filter' 
+      : `/api/configs/${filename}`;
+      
+    const res = await fetch(url);
     const data = await res.json();
 
     elements.welcomeScreen.classList.add("hidden");

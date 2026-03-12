@@ -26,6 +26,7 @@
                 </ul>
             </nav>
             <div class="top-actions">
+                <button id="league-filter-btn" class="btn btn-secondary btn-sm" style="margin-right: 8px;">League Filter</button>
                 <button id="new-2fb-btn" class="btn btn-primary btn-sm">+ New 2FB</button>
             </div>
         </header>
@@ -61,15 +62,17 @@
                                     <h3>Target Account Group</h3>
                                     <span class="badge" id="target-count">0</span>
                                 </div>
-                                <button class="add-acc-btn">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <button class="chevron-btn" aria-label="Toggle">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
                                     </svg>
                                 </button>
                             </header><div class="accordion-content">
                                 <div class="account-cards" id="target-account-cards">
                                     <!-- Cards populated here -->
+                                </div>
+                                <div class="add-acc-container">
+                                    <button class="btn btn-secondary btn-sm add-acc-btn" data-group="targetAccsGroup">+ Add Target Account</button>
                                 </div>
                             </div>
                         </section>
@@ -80,15 +83,17 @@
                                     <h3>Reference Account Group</h3>
                                     <span class="badge" id="reference-count">0</span>
                                 </div>
-                                <button class="add-acc-btn">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <button class="chevron-btn" aria-label="Toggle">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
                                     </svg>
                                 </button>
                             </header><div class="accordion-content">
                                 <div class="account-cards" id="reference-account-cards">
                                     <!-- Cards populated here -->
+                                </div>
+                                <div class="add-acc-container">
+                                    <button class="btn btn-secondary btn-sm add-acc-btn" data-group="referenceAccsGroup">+ Add Reference Account</button>
                                 </div>
                             </div>
                         </section>
@@ -156,6 +161,20 @@
             <div class="modal-footer">
                 <button id="cancel-delete-btn" class="btn btn-secondary">Cancel</button>
                 <button id="confirm-delete-btn" class="btn btn-danger" disabled>Confirm Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-acc-confirm-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 class="text-danger">Confirm Deletion</h3>
+            <p>Type <strong id="delete-acc-filename-target"></strong> to delete permanently.</p>
+            <div class="form-group" style="margin-top: 12px">
+                <input type="text" id="delete-acc-confirm-input" placeholder="Filename...">
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-delete-acc-btn" class="btn btn-secondary">Cancel</button>
+                <button id="confirm-delete-acc-btn" class="btn btn-danger" disabled>Confirm Delete</button>
             </div>
         </div>
     </div>

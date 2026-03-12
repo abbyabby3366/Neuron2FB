@@ -16,6 +16,7 @@ export const elements = {
     saveBtn: document.getElementById('save-btn'),
     backFromEditorBtn: document.getElementById('back-from-editor-btn'),
     deleteFbBtn: document.getElementById('delete-fb-btn'),
+    leagueFilterBtn: document.getElementById('league-filter-btn'),
     new2fbBtn: document.getElementById('new-2fb-btn'),
     newConfigModal: document.getElementById('new-config-modal'),
     cancelModalBtn: document.getElementById('cancel-modal-btn'),
@@ -27,6 +28,12 @@ export const elements = {
     confirmDeleteBtn: document.getElementById('confirm-delete-btn'),
     cancelDeleteBtn: document.getElementById('cancel-delete-btn'),
     deleteFilenameTarget: document.getElementById('delete-filename-target'),
+    // Delete Account Confirmation
+    deleteAccConfirmModal: document.getElementById('delete-acc-confirm-modal'),
+    deleteAccConfirmInput: document.getElementById('delete-acc-confirm-input'),
+    confirmDeleteAccBtn: document.getElementById('confirm-delete-acc-btn'),
+    cancelDeleteAccBtn: document.getElementById('cancel-delete-acc-btn'),
+    deleteAccFilenameTarget: document.getElementById('delete-acc-filename-target'),
     // Settings Modal
     fbSettingsModal: document.getElementById('fb-settings-modal'),
     settingsForm: document.getElementById('settings-form'),

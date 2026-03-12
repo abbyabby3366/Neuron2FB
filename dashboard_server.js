@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const configRoutes = require('./routes/configRoutes');
+const leagueFilterRoutes = require('./routes/leagueFilterRoutes');
 const cors = require('cors');
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.static('public'));
 
 // Configuration API
 app.use('/api/configs', configRoutes);
+app.use('/api/league-filter', leagueFilterRoutes);
 
 // Serve Dashboard
 app.get('/', (req, res) => {
