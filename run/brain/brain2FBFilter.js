@@ -89,6 +89,36 @@ function checkRepeatBets(entry, successBetList, maxNumber) {
   );
 }
 
+function isMatchMinuteDisallowed(startedAt, disallowedMatchMinutes) {
+  if (
+    !startedAt ||
+    !disallowedMatchMinutes ||
+    disallowedMatchMinutes.trim() === ""
+  )
+    return false;
+
+  // Extract all occurrences of a number followed by a single quote
+  const minuteMatches = startedAt.match(/(\d+)'/g);
+  if (!minuteMatches || minuteMatches.length === 0) return false;
+
+  // Take the first match as the base match minute
+  const minute = parseInt(minuteMatches[0].replace("'", ""));
+
+  // Parse disallowedMatchMinutes: "0-10, 45, 85-90"
+  const rules = disallowedMatchMinutes.split(",").map((s) => s.trim());
+
+  for (const rule of rules) {
+    if (rule.includes("-")) {
+      const [start, end] = rule.split("-").map((s) => parseInt(s.trim()));
+      if (minute >= start && minute <= end) return true;
+    } else {
+      if (parseInt(rule) === minute) return true;
+    }
+  }
+
+  return false;
+}
+
 /**
  * Robust filtering for any account data (Target or Reference).
  * @param {Array} data - The array of betting entries.
@@ -128,6 +158,10 @@ function filterData(
     leagueFilter = leagueFilter.isn;
   } else if (acc.startsWith("obet")) {
     leagueFilter = leagueFilter.obet;
+  } else if (acc.startsWith("2fb")) {
+    leagueFilter = leagueFilter["2fb"] || { whitelist: [], blacklist: [] };
+  } else {
+    leagueFilter = { whitelist: [], blacklist: [] };
   }
 
   // Filter tempFailBetList
@@ -247,6 +281,16 @@ function filterData(
 
       // Account specific time periods (SBO)
       if (acc.startsWith("sbo")) {
+        // Match Minute Filter
+        if (
+          isMatchMinuteDisallowed(
+            entry.startedAt,
+            brainParams.disallowedMatchMinutes,
+          )
+        ) {
+          return false;
+        }
+
         if (
           Array.isArray(brainParams.timePeriodOfBetPlaced) &&
           brainParams.timePeriodOfBetPlaced.length > 0
@@ -273,19 +317,29 @@ function filterData(
         )
           return false;
       }
-      if (brainParams.allowOverMarketParamsRegex && entry.marketId === 19) {
+      if (
+        (brainParams.allowOUMarketParamsRegex ||
+          brainParams.allowOverMarketParamsRegex) &&
+        entry.marketId === 19
+      ) {
         if (
-          !new RegExp(brainParams.allowOverMarketParamsRegex).test(
-            entry.marketParam,
-          )
+          !new RegExp(
+            brainParams.allowOUMarketParamsRegex ||
+              brainParams.allowOverMarketParamsRegex,
+          ).test(entry.marketParam)
         )
           return false;
       }
-      if (brainParams.allowUnderMarketParamsRegex && entry.marketId === 20) {
+      if (
+        (brainParams.allowOUMarketParamsRegex ||
+          brainParams.allowUnderMarketParamsRegex) &&
+        entry.marketId === 20
+      ) {
         if (
-          !new RegExp(brainParams.allowUnderMarketParamsRegex).test(
-            entry.marketParam,
-          )
+          !new RegExp(
+            brainParams.allowOUMarketParamsRegex ||
+              brainParams.allowUnderMarketParamsRegex,
+          ).test(entry.marketParam)
         )
           return false;
       }

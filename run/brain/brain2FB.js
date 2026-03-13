@@ -249,6 +249,12 @@ const brain2FB = async (targetAcc, referenceAcc, fb2ConfigId) => {
 
       pendingBetList = _.orderBy(pendingBetList, ["overvalue"], ["desc"]);
 
+      if (brainParams.consoleLogPendingBetList) {
+        console.log(
+          `${targetAcc} vs ${referenceAcc} -------------- PENDING BET LIST ${pendingBetList.length} -----------`,
+        );
+      }
+
       // Export Fuzz Match Analysis
       await exportFuzzMatchAnalysis(
         data_target,

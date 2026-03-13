@@ -10,7 +10,13 @@
       "FRANCE LIGUE 1",
       "NETHERLANDS EREDIVISIE"
     ],
-    "blacklist": ["vietnam"]
+    "blacklist": [
+      "vietnam"
+    ]
+  },
+  "2fb": {
+    "whitelist": [],
+    "blacklist": []
   },
   "sbo": {
     "whitelist": [],
@@ -30,6 +36,8 @@
   },
   "obet": {
     "whitelist": [],
-    "blacklist": ["special"]
+    "blacklist": [
+      "special"
+    ]
   }
 }

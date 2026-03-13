@@ -188,6 +188,40 @@ const brainv2 = async (refAcc, acc) => {
 
         // Filter by allowed time periods in startedAt
         if (acc.startsWith("sbo")) {
+          // Helper to check Match Minute
+          const isMatchMinuteDisallowed = (startedAt, disallowedMatchMinutes) => {
+            if (
+              !startedAt ||
+              !disallowedMatchMinutes ||
+              disallowedMatchMinutes.trim() === ""
+            )
+              return false;
+            const minuteMatches = startedAt.match(/(\d+)'/g);
+            if (!minuteMatches || minuteMatches.length === 0) return false;
+            const minute = parseInt(minuteMatches[0].replace("'", ""));
+            const rules = disallowedMatchMinutes.split(",").map((s) => s.trim());
+            for (const rule of rules) {
+              if (rule.includes("-")) {
+                const [start, end] = rule.split("-").map((s) =>
+                  parseInt(s.trim()),
+                );
+                if (minute >= start && minute <= end) return true;
+              } else {
+                if (parseInt(rule) === minute) return true;
+              }
+            }
+            return false;
+          };
+
+          if (
+            isMatchMinuteDisallowed(
+              entry.startedAt,
+              brainParams.disallowedMatchMinutes,
+            )
+          ) {
+            return false;
+          }
+
           if (
             Array.isArray(brainParams.timePeriodOfBetPlaced) &&
             brainParams.timePeriodOfBetPlaced.length > 0

@@ -2,32 +2,104 @@ import { elements, showToast } from './ui.js';
 import { state, load2fb } from './api.js';
 
 export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
-    elements.settingsModalTitle.textContent = `Settings: ${state.current2fb}`;
-    elements.settingsForm.innerHTML = '';
-    
-    const hiddenParams = ['successBetListKey'];
-    
-    hiddenParams.forEach(key => {
-        if (config[key] !== undefined) {
-            renderSettingsField(key, config[key], elements.settingsForm);
-        }
-    });
-
+    // Prepare a flat structure for the specialized modal
+    const flatConfig = { ...config };
     if (config.brainParams) {
-        const brainHeader = document.createElement('h4');
-        brainHeader.textContent = 'Brain Parameters';
-        brainHeader.style.margin = '10px 0 5px';
-        brainHeader.style.fontSize = '0.8rem';
-        elements.settingsForm.appendChild(brainHeader);
-        
-        Object.keys(config.brainParams).forEach(key => {
-            renderSettingsField(key, config.brainParams[key], elements.settingsForm, 'brainParams');
-        });
+        Object.assign(flatConfig, config.brainParams);
     }
 
-    elements.fbSettingsModal.classList.remove('hidden');
-    elements.saveSettingsBtn.style.display = 'inline-flex';
-    elements.saveSettingsBtn.onclick = () => saveSettingsFromModalSelection(renderFbMeta, loadLinkedAccounts);
+    const sections = [
+        {
+            title: 'General Configuration',
+            fields: ['run', 'autobet', 'cooldownTimeInSeconds', 'msBetweenSBB2FB', 'successBetListKey'],
+            columns: 2
+        },
+        {
+            title: 'EV & Odds (Brain)',
+            fields: ['maxEV', 'minEV', 'maxOdds', 'minOdds'],
+            columns: 2
+        },
+        {
+            title: 'Market Allowances (Brain)',
+            fields: [
+                'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 
+                'allowFirstHalf', 'allowRegularTime',
+                'allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'disallowedMatchMinutes'
+            ],
+            fullWidthFields: ['allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'disallowedMatchMinutes'],
+            columns: 2
+        },
+        {
+            title: 'Repetition & Limits (Brain)',
+            fields: [
+                'maxNumberOfRepeatBets', 'maxNumberOfRepeatedEvents', 'maxNumberOfRepeatedEventsAH', 
+                'maxNumberOfRepeatedEventsOU', 'maxNumberOfRepeatedEvents1X2', 'maxNumberOfRepeatedEvents1stHalf',
+                'sameGameDelayInSeconds'
+            ],
+            columns: 2
+        },
+        {
+            title: 'Logic & Filtering (Brain)',
+            fields: [
+                'matchLeagueBoolean', 'whitelistLeague', 'blacklistLeague', 
+                'consoleLogPendingBetList', 'fuzzMatchMinScore', 'dataStaleTimeInSeconds'
+            ],
+            columns: 2
+        },
+        {
+            title: 'Failure Timings (Brain)',
+            fields: [
+                'timeBetweenTicketFail', 'timeBetweenOddsFail', 'timeBetweenEVFail', 
+                'timeBetweenRefMaxStakeFail', 'timeBetweenTargetMaxStakeFail'
+            ],
+            columns: 2
+        }
+    ];
+
+    renderSpecializedModal(`Settings: ${state.current2fb}`, flatConfig, async (updatedFlat) => {
+        // Unflatten the config
+        const newConfig = { ...updatedFlat };
+        const brainKeys = [
+            'maxEV', 'minEV', 'maxOdds', 'minOdds',
+            'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 'allowFirstHalf', 'allowRegularTime',
+            'allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'disallowedMatchMinutes',
+            'maxNumberOfRepeatBets', 'maxNumberOfRepeatedEvents', 'maxNumberOfRepeatedEventsAH', 
+            'maxNumberOfRepeatedEventsOU', 'maxNumberOfRepeatedEvents1X2', 'maxNumberOfRepeatedEvents1stHalf',
+            'sameGameDelayInSeconds', 'matchLeagueBoolean', 'whitelistLeague', 'blacklistLeague', 
+            'consoleLogPendingBetList', 'fuzzMatchMinScore', 'dataStaleTimeInSeconds',
+            'timeBetweenTicketFail', 'timeBetweenOddsFail', 'timeBetweenEVFail', 
+            'timeBetweenRefMaxStakeFail', 'timeBetweenTargetMaxStakeFail'
+        ];
+
+        newConfig.brainParams = {};
+        brainKeys.forEach(k => {
+            if (updatedFlat[k] !== undefined) {
+                newConfig.brainParams[k] = updatedFlat[k];
+                delete newConfig[k];
+            }
+        });
+
+        // Save using the existing save logic structure
+        try {
+            const res = await fetch(`/api/configs/${state.current2fb}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newConfig, null, 2)
+            });
+            if (res.ok) {
+                showToast('Settings saved');
+                if (renderFbMeta && loadLinkedAccounts) {
+                    const { loadLinkedAccounts: lla } = await import('./accountManager.js');
+                    const { renderFbMeta: rfm } = await import('./render.js');
+                    load2fb(state.current2fb, elements, rfm, (cfg) => lla(cfg, (id, data, container, isUsed, type) => {
+                        import('./accountManager.js').then(m => m.renderAccountCard(id, data, container, isUsed, type));
+                    }));
+                }
+            }
+        } catch (e) {
+            showToast('Save failed', 'error');
+        }
+    }, { sections, modalClass: 'modal-lg' });
 }
 
 export function renderSettingsField(key, value, container, parentKey = null) {
@@ -103,9 +175,10 @@ export function openBrainParamsModal(accId, data, onSave) {
             fields: [
                 'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 
                 'allowFirstHalf', 'allowRegularTime',
-                'allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'timePeriodOfBetPlaced'
+                'allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'timePeriodOfBetPlaced',
+                'disallowedMatchMinutes'
             ],
-            fullWidthFields: ['allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'timePeriodOfBetPlaced'],
+            fullWidthFields: ['allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'timePeriodOfBetPlaced', 'disallowedMatchMinutes'],
             columns: 2
         },
         {
@@ -121,7 +194,7 @@ export function openBrainParamsModal(accId, data, onSave) {
             fields: [
                 'maxNumberOfRepeatBets', 'maxNumberOfRepeatedEvents', 'maxNumberOfRepeatedEventsAH', 
                 'maxNumberOfRepeatedEventsOU', 'maxNumberOfRepeatedEvents1X2', 'maxNumberOfRepeatedEvents1stHalf',
-                'sameGameDelay'
+                'sameGameDelay', 'sameGameDelayInSeconds'
             ],
             columns: 2
         },
@@ -147,10 +220,10 @@ export function openBrainParamsModal(accId, data, onSave) {
                 ![
                     'maxEV', 'minEV', 'maxOdds', 'minOdds', 'maxEVCap',
                     'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 'allowFirstHalf', 'allowRegularTime', 
-                    'allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'timePeriodOfBetPlaced',
+                    'allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'timePeriodOfBetPlaced', 'disallowedMatchMinutes',
                     'maxNumberOfRepeatBets', 'maxNumberOfRepeatedEvents', 'maxNumberOfRepeatedEventsAH', 
                     'maxNumberOfRepeatedEventsOU', 'maxNumberOfRepeatedEvents1X2', 'maxNumberOfRepeatedEvents1stHalf',
-                    'sameGameDelay', 'matchLeagueBoolean', 'whitelistLeague', 'blacklistLeague', 
+                    'sameGameDelay', 'sameGameDelayInSeconds', 'matchLeagueBoolean', 'whitelistLeague', 'blacklistLeague', 
                     'consoleLogPendingBetList', 'fuzzMatchMinScore', 'dataStaleTimeInSeconds',
                     'timeBetweenTicketFail', 'timeBetweenOddsFail', 'timeBetweenEVFail', 
                     'timeBetweenRefMaxStakeFail', 'timeBetweenTargetMaxStakeFail',
