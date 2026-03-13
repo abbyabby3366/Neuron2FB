@@ -1,7 +1,7 @@
 import { elements, showToast } from './ui.js';
 import { state, load2fb } from './api.js';
 
-export function openSettingsModal(config) {
+export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
     elements.settingsModalTitle.textContent = `Settings: ${state.current2fb}`;
     elements.settingsForm.innerHTML = '';
     
@@ -26,7 +26,8 @@ export function openSettingsModal(config) {
     }
 
     elements.fbSettingsModal.classList.remove('hidden');
-    elements.saveSettingsBtn.style.display = 'none'; 
+    elements.saveSettingsBtn.style.display = 'inline-flex';
+    elements.saveSettingsBtn.onclick = () => saveSettingsFromModalSelection(renderFbMeta, loadLinkedAccounts);
 }
 
 export function renderSettingsField(key, value, container, parentKey = null) {
@@ -74,7 +75,13 @@ export async function saveSettingsFromModalSelection(renderFbMeta, loadLinkedAcc
         if (res.ok) {
             showToast('Settings saved');
             elements.fbSettingsModal.classList.add('hidden');
-            load2fb(state.current2fb, elements, renderFbMeta, loadLinkedAccounts);
+            if (renderFbMeta && loadLinkedAccounts) {
+                const { loadLinkedAccounts: lla } = await import('./accountManager.js');
+                const { renderFbMeta: rfm } = await import('./render.js');
+                load2fb(state.current2fb, elements, rfm, (cfg) => lla(cfg, (id, data, container, isUsed, type) => {
+                    import('./accountManager.js').then(m => m.renderAccountCard(id, data, container, isUsed, type));
+                }));
+            }
         }
     } catch (e) {
         showToast('Save failed', 'error');

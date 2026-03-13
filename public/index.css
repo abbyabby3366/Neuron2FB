@@ -1462,3 +1462,16 @@ hr {
   border-color: var(--accent-color);
   outline: none;
 }
+
+/* Custom Overrides */
+#save-settings-btn { display: inline-flex !important; }
+
+/* Hide Spinners for Numeric Inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}

@@ -55,7 +55,12 @@ export function renderFbMeta(config) {
             </svg>
         `;
         settingsBtn.title = 'Settings';
-        settingsBtn.onclick = () => openSettingsModal(config);
+        settingsBtn.onclick = () => {
+            const { loadLinkedAccounts } = document.querySelector('script[type="module"][src*="main.js"]') ? 
+                { loadLinkedAccounts: (cfg) => import('./accountManager.js').then(m => m.loadLinkedAccounts(cfg, m.renderAccountCard)) } : 
+                { loadLinkedAccounts: null };
+            openSettingsModal(config, renderFbMeta, loadLinkedAccounts?.loadLinkedAccounts);
+        };
         elements.fbTitleControls.appendChild(settingsBtn);
         
         elements.fbMetaParams.classList.add('hidden');
@@ -94,7 +99,12 @@ export function renderFbMeta(config) {
             </svg>
         `;
         settingsBtn.title = 'Settings';
-        settingsBtn.onclick = () => openSettingsModal(config);
+        settingsBtn.onclick = () => {
+            const { loadLinkedAccounts } = document.querySelector('script[type="module"][src*="main.js"]') ? 
+                { loadLinkedAccounts: (cfg) => import('./accountManager.js').then(m => m.loadLinkedAccounts(cfg, m.renderAccountCard)) } : 
+                { loadLinkedAccounts: null };
+            openSettingsModal(config, renderFbMeta, loadLinkedAccounts?.loadLinkedAccounts);
+        };
         elements.fbTitleControls.appendChild(settingsBtn);
     }
 }

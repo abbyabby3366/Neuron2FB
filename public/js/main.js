@@ -69,11 +69,7 @@ function setupEventListeners(load2fb) {
     load2fb(state.current2fb);
   });
 
-  elements.saveSettingsBtn.addEventListener("click", () =>
-    saveSettingsFromModalSelection(renderFbMeta, (cfg) =>
-      loadLinkedAccounts(cfg, renderAccountCard),
-    ),
-  );
+
 
   elements.createConfigBtn.addEventListener("click", async () => {
     const filename = elements.newFilenameInput.value.trim();
