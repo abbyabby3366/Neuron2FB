@@ -229,15 +229,17 @@ function setupEventListeners(load2fb) {
       const fbRes = await fetch(`/api/configs/${state.current2fb}`);
       const fbConfig = await fbRes.json();
       
+      const accId = nextFileName.replace('.json', '');
+
       if (isTarget) {
         if (!fbConfig.unusedTargetAccsGroup) fbConfig.unusedTargetAccsGroup = [];
-        if (!fbConfig.unusedTargetAccsGroup.includes(nextFileName) && !(fbConfig.targetAccsGroup || []).includes(nextFileName)) {
-          fbConfig.unusedTargetAccsGroup.push(nextFileName);
+        if (!fbConfig.unusedTargetAccsGroup.includes(accId) && !(fbConfig.targetAccsGroup || []).includes(accId)) {
+          fbConfig.unusedTargetAccsGroup.push(accId);
         }
       } else {
         if (!fbConfig.unusedReferenceAccsGroup) fbConfig.unusedReferenceAccsGroup = [];
-        if (!fbConfig.unusedReferenceAccsGroup.includes(nextFileName) && !(fbConfig.referenceAccsGroup || []).includes(nextFileName)) {
-          fbConfig.unusedReferenceAccsGroup.push(nextFileName);
+        if (!fbConfig.unusedReferenceAccsGroup.includes(accId) && !(fbConfig.referenceAccsGroup || []).includes(accId)) {
+          fbConfig.unusedReferenceAccsGroup.push(accId);
         }
       }
       

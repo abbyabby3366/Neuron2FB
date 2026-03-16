@@ -6,24 +6,33 @@ const path = require('path');
 const { getObjectDiff } = require('../public/logDiff');
 
 const targetBookiePath = path.resolve(__dirname, '../TargetBookie');
+const defaultsPath = path.resolve(__dirname, '../public/bookie-defaults');
 
 
-// Helper to check if file exists and is in TargetBookie
+// Helper to check if file exists and return path
 const getFilePath = (filename) => {
-    const filePath = path.join(targetBookiePath, filename);
-    if (!filePath.startsWith(targetBookiePath)) {
-        throw new Error('Access denied');
+    // If it's a default file, check in the defaults folder
+    if (filename.toLowerCase().includes('default.json')) {
+        return path.join(defaultsPath, filename);
     }
-    return filePath;
+    return path.join(targetBookiePath, filename);
 };
 
 // List all config files
 router.get('/', (req, res) => {
-    fs.readdir(targetBookiePath, (err, files) => {
-        if (err) return res.status(500).json({ error: err.message });
-        const jsonFiles = files.filter(f => f.endsWith('.json') && !f.toLowerCase().includes('data'));
-        res.json(jsonFiles);
-    });
+    try {
+        const targetFiles = fs.readdirSync(targetBookiePath);
+        const defaultFiles = fs.existsSync(defaultsPath) ? fs.readdirSync(defaultsPath) : [];
+        
+        const allFiles = [...targetFiles, ...defaultFiles];
+        const jsonFiles = allFiles.filter(f => f.endsWith('.json') && !f.toLowerCase().includes('data'));
+        
+        // Remove duplicates if any (though filenames should be unique across both)
+        const uniqueFiles = [...new Set(jsonFiles)];
+        res.json(uniqueFiles);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 // Read a config file
