@@ -44,6 +44,8 @@
     "allowOUMarketParamsRegex": "",
     "timePeriodOfBetPlaced": ["1H", "2H", "HT", "LIVE"],
     "sameGameDelayInSeconds": 15,
+    "sameGameAHDelay": 60,
+    "sameGameOUDelay": 60,
     "fuzzMatchMinScore": 75,
     "timeBetweenTicketFail": 20,
     "timeBetweenOddsFail": 20,

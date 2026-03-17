@@ -203,18 +203,35 @@ function filterData(
   );
 
   // Get games with recent bets
-  const filteredWaitingListBets = waitingBetList.filter(
-    (bet) =>
-      currentTime - new Date(bet.betEnteredTime) <
-      brainParams.sameGameDelayInSeconds * 1000,
-  );
+  const filteredWaitingListBets = waitingBetList.filter((bet) => {
+    const timeDiff = currentTime - new Date(bet.betEnteredTime);
+    const isGlobalMatch = timeDiff < brainParams.sameGameDelayInSeconds * 1000;
+    
+    const isAHMatch = MARKET_IDS.ASIAN_HANDICAP.includes(bet.marketId) && 
+                      brainParams.sameGameAHDelay && 
+                      timeDiff < brainParams.sameGameAHDelay * 1000;
+                      
+    const isOUMatch = MARKET_IDS.OVER_UNDER.includes(bet.marketId) && 
+                      brainParams.sameGameOUDelay && 
+                      timeDiff < brainParams.sameGameOUDelay * 1000;
+
+    return isGlobalMatch || isAHMatch || isOUMatch;
+  });
 
   const filteredRecentSuccessBetList = (globalSuccessBetList || []).filter(
     (bet) => {
-      return (
-        currentTime - new Date(bet.betPlacedTime) <
-        brainParams.sameGameDelayInSeconds * 1000
-      );
+      const timeDiff = currentTime - new Date(bet.betPlacedTime);
+      const isGlobalMatch = timeDiff < brainParams.sameGameDelayInSeconds * 1000;
+      
+      const isAHMatch = MARKET_IDS.ASIAN_HANDICAP.includes(bet.marketId) && 
+                        brainParams.sameGameAHDelay && 
+                        timeDiff < brainParams.sameGameAHDelay * 1000;
+                        
+      const isOUMatch = MARKET_IDS.OVER_UNDER.includes(bet.marketId) && 
+                        brainParams.sameGameOUDelay && 
+                        timeDiff < brainParams.sameGameOUDelay * 1000;
+
+      return isGlobalMatch || isAHMatch || isOUMatch;
     },
   );
 
@@ -426,17 +443,55 @@ function filterData(
 
       // Waiting list check
       if (
-        filteredWaitingListBets.some(
-          (bet) =>
-            bet.homeName === entry.homeName && bet.awayName === entry.awayName,
-        )
+        filteredWaitingListBets.some((bet) => {
+          const isSameGame = bet.homeName === entry.homeName && bet.awayName === entry.awayName;
+          if (!isSameGame) return false;
+
+          const timeDiff = currentTime - new Date(bet.betEnteredTime);
+          
+          // Global Block
+          if (timeDiff < brainParams.sameGameDelayInSeconds * 1000) return true;
+
+          // AH Specific Block
+          if (MARKET_IDS.ASIAN_HANDICAP.includes(entry.marketId) && 
+              MARKET_IDS.ASIAN_HANDICAP.includes(bet.marketId) &&
+              brainParams.sameGameAHDelay && 
+              timeDiff < brainParams.sameGameAHDelay * 1000) return true;
+
+          // OU Specific Block
+          if (MARKET_IDS.OVER_UNDER.includes(entry.marketId) && 
+              MARKET_IDS.OVER_UNDER.includes(bet.marketId) &&
+              brainParams.sameGameOUDelay && 
+              timeDiff < brainParams.sameGameOUDelay * 1000) return true;
+
+          return false;
+        })
       )
         return false;
       if (
-        filteredRecentSuccessBetList.some(
-          (bet) =>
-            bet.homeName === entry.homeName && bet.awayName === entry.awayName,
-        )
+        filteredRecentSuccessBetList.some((bet) => {
+          const isSameGame = bet.homeName === entry.homeName && bet.awayName === entry.awayName;
+          if (!isSameGame) return false;
+
+          const timeDiff = currentTime - new Date(bet.betPlacedTime);
+          
+          // Global Block
+          if (timeDiff < brainParams.sameGameDelayInSeconds * 1000) return true;
+
+          // AH Specific Block
+          if (MARKET_IDS.ASIAN_HANDICAP.includes(entry.marketId) && 
+              MARKET_IDS.ASIAN_HANDICAP.includes(bet.marketId) &&
+              brainParams.sameGameAHDelay && 
+              timeDiff < brainParams.sameGameAHDelay * 1000) return true;
+
+          // OU Specific Block
+          if (MARKET_IDS.OVER_UNDER.includes(entry.marketId) && 
+              MARKET_IDS.OVER_UNDER.includes(bet.marketId) &&
+              brainParams.sameGameOUDelay && 
+              timeDiff < brainParams.sameGameOUDelay * 1000) return true;
+
+          return false;
+        })
       )
         return false;
 

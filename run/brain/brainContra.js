@@ -8,6 +8,13 @@ const {
 const _ = require("lodash");
 const { fuzzMatch } = require("../../utils/fuzzMatch");
 
+// Market and Period ID constants
+const MARKET_IDS = {
+  ASIAN_HANDICAP: [17, 18],
+  OVER_UNDER: [19, 20],
+  MATCH_RESULT: [11, 12, 13],
+};
+
 // all need to convert to MY odds first
 const brainContra = async (refAcc, acc) => {
   let pendingBetList = [];
@@ -111,15 +118,34 @@ const brainContra = async (refAcc, acc) => {
       );
 
       // Get games with recent bets from waiting and success (within 30 seconds)
-      const waitingListBets = waitingBetList.filter(
-        (bet) =>
-          currentTime - new Date(bet.betEnteredTime) <
-          brainParams.sameGameDelayInSeconds * 1000, // 30 seconds in milliseconds
-      );
+      const waitingListBets = waitingBetList.filter((bet) => {
+        const timeDiff = currentTime - new Date(bet.betEnteredTime);
+        const isGlobalMatch = timeDiff < brainParams.sameGameDelayInSeconds * 1000;
+        
+        const isAHMatch = MARKET_IDS.ASIAN_HANDICAP.includes(bet.marketId) && 
+                          brainParams.sameGameAHDelay && 
+                          timeDiff < brainParams.sameGameAHDelay * 1000;
+                          
+        const isOUMatch = MARKET_IDS.OVER_UNDER.includes(bet.marketId) && 
+                          brainParams.sameGameOUDelay && 
+                          timeDiff < brainParams.sameGameOUDelay * 1000;
+
+        return isGlobalMatch || isAHMatch || isOUMatch;
+      });
 
       const recentSuccessBetList = successBetList.filter((bet) => {
-        currentTime - new Date(bet.betPlacedTime) <
-          brainParams.sameGameDelayInSeconds * 1000; // 30 seconds in milliseconds
+        const timeDiff = currentTime - new Date(bet.betPlacedTime);
+        const isGlobalMatch = timeDiff < brainParams.sameGameDelayInSeconds * 1000;
+        
+        const isAHMatch = MARKET_IDS.ASIAN_HANDICAP.includes(bet.marketId) && 
+                          brainParams.sameGameAHDelay && 
+                          timeDiff < brainParams.sameGameAHDelay * 1000;
+                          
+        const isOUMatch = MARKET_IDS.OVER_UNDER.includes(bet.marketId) && 
+                          brainParams.sameGameOUDelay && 
+                          timeDiff < brainParams.sameGameOUDelay * 1000;
+
+        return isGlobalMatch || isAHMatch || isOUMatch;
       });
 
       // console.log('data_target before filter', data_target.length)
@@ -226,16 +252,54 @@ const brainContra = async (refAcc, acc) => {
           entry.awayName.includes("Which team");
 
         // Check if there's a recent bet for this game
-        const isWaitingListBet = waitingListBets.some(
-          (bet) =>
-            bet.homeName === entry.homeName && bet.awayName === entry.awayName,
-        );
+        const isWaitingListBet = waitingListBets.some((bet) => {
+          const isSameGame = bet.homeName === entry.homeName && bet.awayName === entry.awayName;
+          if (!isSameGame) return false;
 
-        // Check if there's a recent bet for this game
-        const isRecentSuccessBet = recentSuccessBetList.some(
-          (bet) =>
-            bet.homeName === entry.homeName && bet.awayName === entry.awayName,
-        );
+          const timeDiff = currentTime - new Date(bet.betEnteredTime);
+          
+          // Global Block
+          if (timeDiff < brainParams.sameGameDelayInSeconds * 1000) return true;
+
+          // AH Specific Block
+          if (MARKET_IDS.ASIAN_HANDICAP.includes(entry.marketId) && 
+              MARKET_IDS.ASIAN_HANDICAP.includes(bet.marketId) &&
+              brainParams.sameGameAHDelay && 
+              timeDiff < brainParams.sameGameAHDelay * 1000) return true;
+
+          // OU Specific Block
+          if (MARKET_IDS.OVER_UNDER.includes(entry.marketId) && 
+              MARKET_IDS.OVER_UNDER.includes(bet.marketId) &&
+              brainParams.sameGameOUDelay && 
+              timeDiff < brainParams.sameGameOUDelay * 1000) return true;
+
+          return false;
+        });
+
+        // Check if there's a recent success bet for this game
+        const isRecentSuccessBet = recentSuccessBetList.some((bet) => {
+          const isSameGame = bet.homeName === entry.homeName && bet.awayName === entry.awayName;
+          if (!isSameGame) return false;
+
+          const timeDiff = currentTime - new Date(bet.betPlacedTime);
+          
+          // Global Block
+          if (timeDiff < brainParams.sameGameDelayInSeconds * 1000) return true;
+
+          // AH Specific Block
+          if (MARKET_IDS.ASIAN_HANDICAP.includes(entry.marketId) && 
+              MARKET_IDS.ASIAN_HANDICAP.includes(bet.marketId) &&
+              brainParams.sameGameAHDelay && 
+              timeDiff < brainParams.sameGameAHDelay * 1000) return true;
+
+          // OU Specific Block
+          if (MARKET_IDS.OVER_UNDER.includes(entry.marketId) && 
+              MARKET_IDS.OVER_UNDER.includes(bet.marketId) &&
+              brainParams.sameGameOUDelay && 
+              timeDiff < brainParams.sameGameOUDelay * 1000) return true;
+
+          return false;
+        });
 
         return !(
           isStaleData ||
