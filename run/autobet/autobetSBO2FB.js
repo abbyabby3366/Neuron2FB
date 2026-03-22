@@ -322,7 +322,6 @@ async function autoBetSbo(page, betEvent, referenceAcc, successBetListKey, fb2Co
     // start cooldown
     let cooldownTimeInSeconds = params.cooldownTimeInSeconds;
     startCooldown(cooldownTimeInSeconds, acc);
-    console.log("isCoolingDownObj autobetSbo", isCoolingDownObj);
 
     // Start config-level cooldown (only on success)
     if (fb2ConfigId !== undefined) {
@@ -339,6 +338,7 @@ async function autoBetSbo(page, betEvent, referenceAcc, successBetListKey, fb2Co
         console.log(`2fb${fb2ConfigId} config cooldown started: ${configCooldownSeconds}s`);
       }
     }
+    console.log(`${acc} - Cooldown status:`, isCoolingDownObj, "| configCooldown:", configCooldownObj);
 
     // Write the successful bet event to Google Sheet
     try {
