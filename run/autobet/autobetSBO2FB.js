@@ -34,8 +34,8 @@ const {
 const { addTicketEventToQueue } = require("../../utils/addTicketEventToQueue");
 const { writeToGoogleSheet } = require("../../mongodb/writeSheet");
 
-async function autoBetSbo(page, betEvent, referenceAcc, successBetListKey) {
-  const { isAutoBettingObj } = require("../../utils/SBB2FB");
+async function autoBetSbo(page, betEvent, referenceAcc, successBetListKey, fb2ConfigId) {
+  const { isAutoBettingObj, configCooldownObj } = require("../../utils/SBB2FB");
   setProceedSBB(false);
   // console.log('proceedSBB should be set to false', getProceedSBB())
   const acc = betEvent.acc;
@@ -323,6 +323,22 @@ async function autoBetSbo(page, betEvent, referenceAcc, successBetListKey) {
     let cooldownTimeInSeconds = params.cooldownTimeInSeconds;
     startCooldown(cooldownTimeInSeconds, acc);
     console.log("isCoolingDownObj autobetSbo", isCoolingDownObj);
+
+    // Start config-level cooldown (only on success)
+    if (fb2ConfigId !== undefined) {
+      const fb2Config = JSON.parse(
+        fsSync.readFileSync(`./TargetBookie/2fb${fb2ConfigId}.json`, "utf-8"),
+      );
+      const configCooldownSeconds = fb2Config.cooldownTimeInSeconds || 0;
+      if (configCooldownSeconds > 0) {
+        configCooldownObj[fb2ConfigId] = true;
+        setTimeout(() => {
+          configCooldownObj[fb2ConfigId] = false;
+          console.log(`2fb${fb2ConfigId} config cooldown ended`);
+        }, configCooldownSeconds * 1000);
+        console.log(`2fb${fb2ConfigId} config cooldown started: ${configCooldownSeconds}s`);
+      }
+    }
 
     // Write the successful bet event to Google Sheet
     try {

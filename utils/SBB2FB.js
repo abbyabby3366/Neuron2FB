@@ -111,7 +111,7 @@ const SBB2FB = async (
       // Bet on Target account
       const sbKey = fb2Config.successBetListKey;
       if (targetAcc.startsWith("sbo"))
-        autoBetSbo(pages[targetAcc], targetSide, refAcc, sbKey);
+        autoBetSbo(pages[targetAcc], targetSide, refAcc, sbKey, fb2ConfigId);
       if (targetAcc.startsWith("hga"))
         autoBetHGA(pages[targetAcc], targetSide, refAcc, sbKey);
       if (targetAcc.startsWith("ibc"))
@@ -142,19 +142,6 @@ const SBB2FB = async (
         await new Promise((resolve) => setTimeout(resolve, 200));
       }
       console.log(`SBB2FB Autobetting ${targetAcc} vs ${refAcc} done.`);
-
-      // Start config-level cooldown
-      const cooldownSeconds = fb2Config.cooldownTimeInSeconds || 0;
-      if (cooldownSeconds > 0) {
-        configCooldownObj[fb2ConfigId] = true;
-        setTimeout(() => {
-          configCooldownObj[fb2ConfigId] = false;
-          console.log(`2fb${fb2ConfigId} config cooldown ended`);
-        }, cooldownSeconds * 1000);
-        console.log(
-          `2fb${fb2ConfigId} config cooldown started: ${cooldownSeconds}s`,
-        );
-      }
 
       return { status: true, message: "SBB2FB best bet placed" };
     }
