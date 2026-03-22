@@ -22,14 +22,8 @@ const getFilePath = (filename) => {
 router.get('/', (req, res) => {
     try {
         const targetFiles = fs.readdirSync(targetBookiePath);
-        const defaultFiles = fs.existsSync(defaultsPath) ? fs.readdirSync(defaultsPath) : [];
-        
-        const allFiles = [...targetFiles, ...defaultFiles];
-        const jsonFiles = allFiles.filter(f => f.endsWith('.json') && !f.toLowerCase().includes('data'));
-        
-        // Remove duplicates if any (though filenames should be unique across both)
-        const uniqueFiles = [...new Set(jsonFiles)];
-        res.json(uniqueFiles);
+        const jsonFiles = targetFiles.filter(f => f.endsWith('.json') && !f.toLowerCase().includes('data'));
+        res.json(jsonFiles);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
