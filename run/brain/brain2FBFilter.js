@@ -335,28 +335,24 @@ function filterData(
           return false;
       }
       if (
-        (brainParams.allowOUMarketParamsRegex ||
-          brainParams.allowOverMarketParamsRegex) &&
+        brainParams.allowOverMarketParamsRegex &&
         entry.marketId === 19
       ) {
         if (
-          !new RegExp(
-            brainParams.allowOUMarketParamsRegex ||
-              brainParams.allowOverMarketParamsRegex,
-          ).test(entry.marketParam)
+          !new RegExp(brainParams.allowOverMarketParamsRegex).test(
+            entry.marketParam,
+          )
         )
           return false;
       }
       if (
-        (brainParams.allowOUMarketParamsRegex ||
-          brainParams.allowUnderMarketParamsRegex) &&
+        brainParams.allowUnderMarketParamsRegex &&
         entry.marketId === 20
       ) {
         if (
-          !new RegExp(
-            brainParams.allowOUMarketParamsRegex ||
-              brainParams.allowUnderMarketParamsRegex,
-          ).test(entry.marketParam)
+          !new RegExp(brainParams.allowUnderMarketParamsRegex).test(
+            entry.marketParam,
+          )
         )
           return false;
       }

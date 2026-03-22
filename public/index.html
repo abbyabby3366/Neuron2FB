@@ -20,6 +20,17 @@
                 </span>
                 <h1>Neuron2FB</h1>
             </a>
+            <div class="process-controls">
+                <button id="start-btn" class="proc-btn proc-start" title="Start (node express.js)">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    Start
+                </button>
+                <button id="stop-btn" class="proc-btn proc-stop" title="Stop process" disabled>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"></rect></svg>
+                    Stop
+                </button>
+                <span id="process-status" class="proc-status proc-status-stopped">Stopped</span>
+            </div>
             <nav class="tabs-container">
                 <ul id="fb-tabs">
                     <!-- 2fb*.json tabs will be populated here -->

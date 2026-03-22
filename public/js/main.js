@@ -354,4 +354,71 @@ function setupEventListeners(load2fb) {
   });
 }
 
-window.addEventListener("load", init);
+// --- Process Controls ---
+function setupProcessControls() {
+  const startBtn = document.getElementById("start-btn");
+  const stopBtn = document.getElementById("stop-btn");
+  const statusEl = document.getElementById("process-status");
+
+  function updateUI(running) {
+    startBtn.disabled = running;
+    stopBtn.disabled = !running;
+    statusEl.textContent = running ? "Running" : "Stopped";
+    statusEl.className = `proc-status ${running ? "proc-status-running" : "proc-status-stopped"}`;
+  }
+
+  async function checkStatus() {
+    try {
+      const res = await fetch("/api/process/status");
+      const { running } = await res.json();
+      updateUI(running);
+    } catch {
+      updateUI(false);
+    }
+  }
+
+  startBtn.addEventListener("click", async () => {
+    startBtn.disabled = true;
+    try {
+      const res = await fetch("/api/process/start", { method: "POST" });
+      if (res.ok) {
+        showToast("Process started");
+        updateUI(true);
+      } else {
+        const data = await res.json();
+        showToast(data.error || "Start failed", "error");
+        checkStatus();
+      }
+    } catch (err) {
+      showToast("Start failed", "error");
+      checkStatus();
+    }
+  });
+
+  stopBtn.addEventListener("click", async () => {
+    stopBtn.disabled = true;
+    try {
+      const res = await fetch("/api/process/stop", { method: "POST" });
+      if (res.ok) {
+        showToast("Process stopped");
+        updateUI(false);
+      } else {
+        const data = await res.json();
+        showToast(data.error || "Stop failed", "error");
+        checkStatus();
+      }
+    } catch (err) {
+      showToast("Stop failed", "error");
+      checkStatus();
+    }
+  });
+
+  // Initial check + poll every 3s
+  checkStatus();
+  setInterval(checkStatus, 3000);
+}
+
+window.addEventListener("load", () => {
+  setupProcessControls();
+  init().catch(err => console.error("Init error:", err));
+});

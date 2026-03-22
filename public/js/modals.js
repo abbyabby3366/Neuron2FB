@@ -24,9 +24,9 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
             fields: [
                 'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 
                 'allowFirstHalf', 'allowRegularTime',
-                'allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'disallowedMatchMinutes'
+                'allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'disallowedMatchMinutes'
             ],
-            fullWidthFields: ['allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'disallowedMatchMinutes'],
+            fullWidthFields: ['allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'disallowedMatchMinutes'],
             columns: 2
         },
         {
@@ -62,7 +62,7 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
         const brainKeys = [
             'maxEV', 'minEV', 'maxOdds', 'minOdds',
             'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 'allowFirstHalf', 'allowRegularTime',
-            'allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'disallowedMatchMinutes',
+            'allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'disallowedMatchMinutes',
             'maxNumberOfRepeatBets', 'maxNumberOfRepeatedEvents', 'maxNumberOfRepeatedEventsAH', 
             'maxNumberOfRepeatedEventsOU', 'maxNumberOfRepeatedEvents1X2', 'maxNumberOfRepeatedEvents1stHalf',
             'sameGameDelayInSeconds', 'matchLeagueBoolean', 'whitelistLeague', 'blacklistLeague', 
@@ -175,10 +175,10 @@ export function openBrainParamsModal(accId, data, onSave) {
             fields: [
                 'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 
                 'allowFirstHalf', 'allowRegularTime',
-                'allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'timePeriodOfBetPlaced',
+                'allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'timePeriodOfBetPlaced',
                 'disallowedMatchMinutes'
             ],
-            fullWidthFields: ['allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'timePeriodOfBetPlaced', 'disallowedMatchMinutes'],
+            fullWidthFields: ['allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'timePeriodOfBetPlaced', 'disallowedMatchMinutes'],
             columns: 2
         },
         {
@@ -220,7 +220,7 @@ export function openBrainParamsModal(accId, data, onSave) {
                 ![
                     'maxEV', 'minEV', 'maxOdds', 'minOdds', 'maxEVCap',
                     'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 'allowFirstHalf', 'allowRegularTime', 
-                    'allowAHMarketParamsRegex', 'allowOUMarketParamsRegex', 'timePeriodOfBetPlaced', 'disallowedMatchMinutes',
+                    'allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'timePeriodOfBetPlaced', 'disallowedMatchMinutes',
                     'maxNumberOfRepeatBets', 'maxNumberOfRepeatedEvents', 'maxNumberOfRepeatedEventsAH', 
                     'maxNumberOfRepeatedEventsOU', 'maxNumberOfRepeatedEvents1X2', 'maxNumberOfRepeatedEvents1stHalf',
                     'sameGameDelay', 'sameGameDelayInSeconds', 'matchLeagueBoolean', 'whitelistLeague', 'blacklistLeague', 
