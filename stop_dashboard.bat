@@ -1,4 +1,4 @@
 @echo off
 cd /d "%~dp0"
-node dashboard_server.js
+pm2 stop dashboard
 pause
