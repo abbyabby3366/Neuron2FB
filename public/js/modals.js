@@ -57,8 +57,17 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
     ];
 
     renderSpecializedModal(`Settings: ${state.current2fb}`, flatConfig, async (updatedFlat) => {
-        // Unflatten the config
-        const newConfig = { ...updatedFlat };
+        // Start from original config to preserve keys not in the form (targetAccsGroup, referenceAccsGroup, etc.)
+        const newConfig = { ...config };
+        
+        // Apply top-level form field updates
+        const topLevelFields = ['run', 'autobet', 'cooldownTimeInSeconds', 'msBetweenSBB2FB', 'successBetListKey'];
+        topLevelFields.forEach(k => {
+            if (updatedFlat[k] !== undefined) {
+                newConfig[k] = updatedFlat[k];
+            }
+        });
+
         const brainKeys = [
             'maxEV', 'minEV', 'maxOdds', 'minOdds',
             'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 'allowFirstHalf', 'allowRegularTime',
@@ -75,7 +84,6 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
         brainKeys.forEach(k => {
             if (updatedFlat[k] !== undefined) {
                 newConfig.brainParams[k] = updatedFlat[k];
-                delete newConfig[k];
             }
         });
 
