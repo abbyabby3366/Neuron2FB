@@ -1481,6 +1481,59 @@ hr {
   outline: none;
 }
 
+/* Field Info Tooltip */
+.field-info-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 6px;
+}
+
+.field-info-btn {
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.field-info-btn:hover {
+  opacity: 1;
+}
+
+.field-info-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  min-width: 280px;
+  max-width: 360px;
+  background: #1a1d27;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 0.7rem;
+  color: #aaa;
+  line-height: 1.5;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  white-space: normal;
+  pointer-events: none;
+}
+
+.field-info-tooltip strong { color: #ccc; }
+.field-info-tooltip code { color: #6c9; font-size: 0.68rem; }
+.field-info-tooltip em { color: #ffb86c; }
+
+.field-info-wrap:hover .field-info-tooltip,
+.field-info-wrap:focus-within .field-info-tooltip {
+  display: block;
+}
+
 /* Custom Overrides */
 #save-settings-btn { display: inline-flex !important; }
 
@@ -1575,4 +1628,183 @@ input[type='number'] {
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
+}
+
+/* ===== Success Bet List ===== */
+.sbl-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.sbl-mode-toggle {
+  display: flex;
+  gap: 4px;
+}
+
+.sbl-mode-btn {
+  padding: 5px 14px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sbl-mode-btn.active {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.sbl-mode-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.sbl-period-filter {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.sbl-period-btn {
+  padding: 4px 10px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.sbl-period-btn.active {
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.sbl-period-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+.sbl-stats {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  padding: 4px 0;
+  flex-shrink: 0;
+}
+
+.sbl-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.sbl-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.sbl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.sbl-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.sbl-table th {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.65rem;
+}
+
+.sbl-table td {
+  padding: 5px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+}
+
+.sbl-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.sbl-table .sbl-time {
+  color: var(--text-secondary);
+  font-size: 0.68rem;
+  min-width: 130px;
+}
+
+.sbl-table .sbl-league {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sbl-table .sbl-odds {
+  font-weight: 700;
+  font-family:  JetBrains Mono, monospace;
+  color: var(--accent-color);
+}
+
+.sbl-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 0 4px;
+  flex-shrink: 0;
+}
+
+.sbl-page-btn {
+  padding: 4px 12px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: 3px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.sbl-page-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.sbl-page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.sbl-page-info {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
 }

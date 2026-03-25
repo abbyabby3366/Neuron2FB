@@ -1,6 +1,6 @@
 import { state, saveAccountConfig, fetchAccountConfig } from './api.js';
 import { elements, showToast } from './ui.js';
-import { openBrainParamsModal, openStakeInputModal, openBrowserDetailsModal, openScheduleModal } from './modals.js';
+import { openBrainParamsModal, openStakeInputModal, openBrowserDetailsModal, openScheduleModal, openSuccessBetListModal } from './modals.js';
 
 export async function loadLinkedAccounts(fbConfig, renderAccountCard) {
     const targets = fbConfig.targetAccsGroup || [];
@@ -102,6 +102,7 @@ export function renderAccountCard(accId, data, container, isUsed, groupType) {
                     <a href="#" class="menu-item brain-params-opt">Brain Params</a>
                     <a href="#" class="menu-item stake-input-opt">Stake Input</a>
                     <a href="#" class="menu-item browser-details-opt">Browser Details</a>
+                    <a href="#" class="menu-item success-bets-opt">Success Bet List</a>
                     <a href="#" class="menu-item schedule-opt">Schedule</a>
                     <a href="#" class="menu-item view-odds-opt disabled">View all odds</a>
                     <hr>
@@ -206,6 +207,12 @@ export function renderAccountCard(accId, data, container, isUsed, groupType) {
     card.querySelector('.browser-details-opt').onclick = (e) => {
         e.preventDefault();
         openBrowserDetailsModal(accId, data, saveAndNotify);
+        dropdown.classList.remove('active');
+    };
+
+    card.querySelector('.success-bets-opt').onclick = (e) => {
+        e.preventDefault();
+        openSuccessBetListModal(accId);
         dropdown.classList.remove('active');
     };
 

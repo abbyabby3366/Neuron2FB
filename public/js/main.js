@@ -66,6 +66,10 @@ function setupEventListeners(load2fb) {
 
   elements.cancelSettingsBtn.addEventListener("click", () => {
     elements.fbSettingsModal.classList.add("hidden");
+    // Reset modal-lg and save button for success bet list / league filter modals
+    const mc = elements.fbSettingsModal.querySelector('.modal-content');
+    if (mc) mc.classList.remove('modal-lg');
+    elements.saveSettingsBtn.style.display = '';
     load2fb(state.current2fb);
   });
 

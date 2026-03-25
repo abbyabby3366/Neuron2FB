@@ -11,7 +11,7 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
     const sections = [
         {
             title: 'General Configuration',
-            fields: ['run', 'autobet', 'cooldownTimeInSeconds', 'msBetweenSBB2FB', 'successBetListKey', 'openingHours'],
+            fields: ['run', 'autobet', 'cooldownTimeInSeconds', 'msBetweenSBB2FB', 'delayBetweenSetupInSeconds', 'successBetListKey', 'openingHours'],
             fullWidthFields: ['openingHours'],
             columns: 2
         },
@@ -63,7 +63,7 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
         const newConfig = { ...config };
         
         // Apply top-level form field updates
-        const topLevelFields = ['run', 'autobet', 'cooldownTimeInSeconds', 'msBetweenSBB2FB', 'successBetListKey', 'openingHours'];
+        const topLevelFields = ['run', 'autobet', 'cooldownTimeInSeconds', 'msBetweenSBB2FB', 'delayBetweenSetupInSeconds', 'successBetListKey', 'openingHours'];
         topLevelFields.forEach(k => {
             if (updatedFlat[k] !== undefined) {
                 newConfig[k] = updatedFlat[k];
@@ -395,24 +395,18 @@ function renderFieldContent(key, value, customRender) {
     } else if (Array.isArray(value)) {
         const isOddsRanges = key === 'oddsRanges';
         const isOpeningHours = key === 'openingHours';
+        const tipContent = isOddsRanges
+            ? `<strong>Format:</strong> Array of [min, max] pairs. Odds pass if within <em>any</em> range.<br><strong>Malay:</strong> <code>[[-1,-0.4],[0.35,1]]</code> — negative &amp; positive<br><strong>EU (all):</strong> <code>[[1.01,400]]</code> — single wide range`
+            : isOpeningHours
+            ? `<strong>Format:</strong> Array of <code>"HHmm-HHmm"</code> time windows (24h).<br><strong>Example:</strong> <code>["0000-0500","0800-1400","1600-0000"]</code><br><strong>Overnight:</strong> <code>["2200-0600"]</code> — crosses midnight<br><strong>Empty []</strong> = always open.`
+            : '';
         fieldDiv.innerHTML = `
-            <label title="${key}">${key}</label>
+            <label title="${key}">${key}${tipContent ? `<span class="field-info-wrap"><button type="button" class="field-info-btn" tabindex="-1">ⓘ</button><span class="field-info-tooltip">${tipContent}</span></span>` : ''}</label>
             <input type="text" 
                    data-key="${key}" 
                    data-key-json="true"
                    value='${JSON.stringify(value)}'
                    placeholder='${isOpeningHours ? 'e.g. ["0900-1200","1400-2300"]' : 'e.g. [[-1,-0.4],[0.35,1]]'}'>
-            ${isOddsRanges ? `<div class="field-tip" style="font-size: 0.7rem; color: #888; margin-top: 4px; line-height: 1.4;">
-                <strong style="color:#aaa;">Format:</strong> Array of [min, max] pairs. Odds pass if within <em>any</em> range.<br>
-                <strong style="color:#aaa;">Malay:</strong> <code style="color:#6c9;">[-1,-0.4],[0.35,1]</code> — negative &amp; positive Malay ranges<br>
-                <strong style="color:#aaa;">EU (all):</strong> <code style="color:#6c9;">[[1.01,400]]</code> — single wide range
-            </div>` : ''}
-            ${isOpeningHours ? `<div class="field-tip" style="font-size: 0.7rem; color: #888; margin-top: 4px; line-height: 1.4;">
-                <strong style="color:#aaa;">Format:</strong> Array of <code style="color:#6c9;">"HHmm-HHmm"</code> time windows (24h).<br>
-                <strong style="color:#aaa;">Example:</strong> <code style="color:#6c9;">["0000-0500","0800-1400","1600-0000"]</code><br>
-                <strong style="color:#aaa;">Overnight:</strong> <code style="color:#6c9;">["2200-0600"]</code> — crosses midnight<br>
-                <strong style="color:#aaa;">Empty []</strong> = always open. Intersects with account-level hours.
-            </div>` : ''}
         `;
     } else {
         const isBool = typeof value === 'boolean';
@@ -604,4 +598,181 @@ export async function openLeagueFilterModal() {
     } catch (err) {
         showToast('Failed to load league filter', 'error');
     }
+}
+
+export async function openSuccessBetListModal(accId) {
+    const modalContent = elements.fbSettingsModal.querySelector('.modal-content');
+    modalContent.className = 'modal-content modal-lg';
+
+    elements.settingsModalTitle.textContent = `Success Bet List: ${accId}`;
+    elements.settingsForm.innerHTML = '<p class="loading">Loading bets...</p>';
+    elements.saveSettingsBtn.style.display = 'none';
+    elements.fbSettingsModal.classList.remove('hidden');
+
+    // Get the successBetListKey from the current 2fb config
+    let successBetListKey = null;
+    try {
+        const res = await fetch(`/api/configs/${state.current2fb}`);
+        const fbConfig = await res.json();
+        successBetListKey = fbConfig.successBetListKey || null;
+    } catch (e) { /* ignore */ }
+
+    let currentMode = 'acc'; // 'acc' or 'all'
+    let currentPeriod = 'today';
+    let currentPage = 1;
+    const limit = 50;
+
+    async function fetchAndRender() {
+        elements.settingsForm.innerHTML = '<p class="loading">Loading bets...</p>';
+
+        const params = new URLSearchParams({ page: currentPage, limit, period: currentPeriod });
+        if (currentMode === 'acc') {
+            params.set('acc', accId);
+        } else if (successBetListKey) {
+            params.set('key', successBetListKey);
+        }
+
+        try {
+            const res = await fetch(`/api/success-bets?${params}`);
+            const result = await res.json();
+            renderContent(result);
+        } catch (e) {
+            elements.settingsForm.innerHTML = '<p style="color:#ef4444;padding:20px;">Failed to load success bet list</p>';
+        }
+    }
+
+    function renderContent(result) {
+        const { data, pagination } = result;
+        elements.settingsForm.innerHTML = '';
+
+        // --- Controls bar ---
+        const controls = document.createElement('div');
+        controls.className = 'sbl-controls';
+
+        // Mode toggle
+        const modeToggle = document.createElement('div');
+        modeToggle.className = 'sbl-mode-toggle';
+        modeToggle.innerHTML = `
+            <button class="sbl-mode-btn ${currentMode === 'acc' ? 'active' : ''}" data-mode="acc">This Account</button>
+            <button class="sbl-mode-btn ${currentMode === 'all' ? 'active' : ''}" data-mode="all">All (${successBetListKey || 'key'})</button>
+        `;
+        controls.appendChild(modeToggle);
+
+        // Period filter
+        const periodFilter = document.createElement('div');
+        periodFilter.className = 'sbl-period-filter';
+        const periods = [
+            { value: 'today', label: 'Today' },
+            { value: 'yesterday', label: 'Yesterday' },
+            { value: '7d', label: 'Last 7 Days' },
+            { value: 'week', label: 'Last Week' },
+            { value: 'month', label: 'Last Month' }
+        ];
+        periods.forEach(p => {
+            const btn = document.createElement('button');
+            btn.className = `sbl-period-btn ${currentPeriod === p.value ? 'active' : ''}`;
+            btn.textContent = p.label;
+            btn.dataset.period = p.value;
+            periodFilter.appendChild(btn);
+        });
+        controls.appendChild(periodFilter);
+
+        elements.settingsForm.appendChild(controls);
+
+        // --- Stats bar ---
+        const stats = document.createElement('div');
+        stats.className = 'sbl-stats';
+        stats.textContent = `${pagination.total} bet${pagination.total !== 1 ? 's' : ''} found`;
+        elements.settingsForm.appendChild(stats);
+
+        // --- Table ---
+        if (data.length === 0) {
+            const empty = document.createElement('div');
+            empty.className = 'sbl-empty';
+            empty.innerHTML = `
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.3;margin-bottom:12px;">
+                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+                <p>No bets found for this period</p>
+            `;
+            elements.settingsForm.appendChild(empty);
+        } else {
+            const tableWrap = document.createElement('div');
+            tableWrap.className = 'sbl-table-wrap';
+
+            const table = document.createElement('table');
+            table.className = 'sbl-table';
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Acc</th>
+                        <th>Home</th>
+                        <th>Away</th>
+                        <th>League</th>
+                        <th>Market</th>
+                        <th>Param</th>
+                        <th>Odds</th>
+                        <th>Period</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${data.map(bet => `
+                        <tr>
+                            <td class="sbl-time">${bet.timeScraped || '-'}</td>
+                            <td>${bet.acc || '-'}</td>
+                            <td>${bet.homeName || '-'}</td>
+                            <td>${bet.awayName || '-'}</td>
+                            <td class="sbl-league">${bet.leagueName || '-'}</td>
+                            <td>${bet.marketIdDescription || '-'}</td>
+                            <td>${bet.marketParam ?? '-'}</td>
+                            <td class="sbl-odds">${bet.odds ?? '-'}</td>
+                            <td>${bet.periodIdDescription || '-'}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            `;
+            tableWrap.appendChild(table);
+            elements.settingsForm.appendChild(tableWrap);
+        }
+
+        // --- Pagination ---
+        if (pagination.totalPages > 1) {
+            const paginationDiv = document.createElement('div');
+            paginationDiv.className = 'sbl-pagination';
+            paginationDiv.innerHTML = `
+                <button class="sbl-page-btn" data-page="prev" ${currentPage <= 1 ? 'disabled' : ''}>← Prev</button>
+                <span class="sbl-page-info">Page ${pagination.page} of ${pagination.totalPages}</span>
+                <button class="sbl-page-btn" data-page="next" ${currentPage >= pagination.totalPages ? 'disabled' : ''}>Next →</button>
+            `;
+            elements.settingsForm.appendChild(paginationDiv);
+        }
+
+        // --- Event listeners ---
+        elements.settingsForm.querySelectorAll('.sbl-mode-btn').forEach(btn => {
+            btn.onclick = () => {
+                currentMode = btn.dataset.mode;
+                currentPage = 1;
+                fetchAndRender();
+            };
+        });
+
+        elements.settingsForm.querySelectorAll('.sbl-period-btn').forEach(btn => {
+            btn.onclick = () => {
+                currentPeriod = btn.dataset.period;
+                currentPage = 1;
+                fetchAndRender();
+            };
+        });
+
+        elements.settingsForm.querySelectorAll('.sbl-page-btn').forEach(btn => {
+            btn.onclick = () => {
+                if (btn.dataset.page === 'prev' && currentPage > 1) currentPage--;
+                else if (btn.dataset.page === 'next' && currentPage < pagination.totalPages) currentPage++;
+                fetchAndRender();
+            };
+        });
+    }
+
+    await fetchAndRender();
 }

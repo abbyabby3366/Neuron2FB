@@ -3,6 +3,7 @@ const path = require("path");
 const { spawn } = require("child_process");
 const configRoutes = require("./routes/configRoutes");
 const leagueFilterRoutes = require("./routes/leagueFilterRoutes");
+const successBetRoutes = require("./routes/successBetRoutes");
 const cors = require("cors");
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.static("public"));
 // Configuration API
 app.use("/api/configs", configRoutes);
 app.use("/api/league-filter", leagueFilterRoutes);
+app.use("/api/success-bets", successBetRoutes);
 
 // Proxy focus requests to the main express server
 app.post("/api/focus/:account", async (req, res) => {
