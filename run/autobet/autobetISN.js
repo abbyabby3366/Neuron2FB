@@ -28,6 +28,7 @@ const {
 } = require("../../utils/oddsConverter");
 const { addTicketEventToQueue } = require("../../utils/addTicketEventToQueue");
 const { writeToGoogleSheet } = require("../../mongodb/writeSheet");
+const { isOddsInRange, formatOddsRangeForLog } = require("../../utils/isOddsInRange");
 
 let isAutoBettingObj = {};
 
@@ -124,19 +125,13 @@ async function autoBetISN(page, betEvent, referenceAcc, successBetListKey) {
     let brain_params = params.brainParams;
 
     //check if ticketed odds is within range
-    if (
-      ticketDataTarget.tickettedOddsEU < brain_params.minOdds ||
-      ticketDataTarget.tickettedOddsEU > brain_params.maxOdds
-    ) {
+    if (!isOddsInRange(ticketDataTarget.tickettedOddsEU, brain_params)) {
       let betFailedTime = new Date();
       betEvent.betFailedTime = betFailedTime;
       betEvent.betFailedReason = "oddsNotInRange";
       await writeData("tempFailBetList", betEvent);
       throw new Error(
-        `${acc} - Current odds is not within range. Min: ` +
-          brain_params.minOdds +
-          " Max: " +
-          brain_params.maxOdds +
+        `${acc} - Current odds is not within range. ${formatOddsRangeForLog(brain_params)}` +
           " Current: " +
           ticketDataTarget.tickettedOddsEU,
       );

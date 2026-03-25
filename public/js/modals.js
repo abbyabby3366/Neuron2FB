@@ -16,7 +16,7 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
         },
         {
             title: 'EV & Odds (Brain)',
-            fields: ['maxEV', 'minEV', 'maxOdds', 'minOdds'],
+            fields: ['maxEV', 'minEV', 'oddsRanges'],
             columns: 2
         },
         {
@@ -69,7 +69,7 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
         });
 
         const brainKeys = [
-            'maxEV', 'minEV', 'maxOdds', 'minOdds',
+            'maxEV', 'minEV', 'oddsRanges',
             'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 'allowFirstHalf', 'allowRegularTime',
             'allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'disallowedMatchMinutes',
             'maxNumberOfRepeatBets', 'maxNumberOfRepeatedEvents', 'maxNumberOfRepeatedEventsAH', 
@@ -86,6 +86,15 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
                 newConfig.brainParams[k] = updatedFlat[k];
             }
         });
+
+        // Preserve any remaining brainParams keys not in the form
+        if (config.brainParams) {
+            Object.keys(config.brainParams).forEach(k => {
+                if (newConfig.brainParams[k] === undefined) {
+                    newConfig.brainParams[k] = config.brainParams[k];
+                }
+            });
+        }
 
         // Save using the existing save logic structure
         try {
@@ -175,7 +184,7 @@ export function openBrainParamsModal(accId, data, onSave) {
     const sections = [
         {
             title: 'EV & Odds Parameters',
-            fields: ['maxEV', 'minEV', 'maxOdds', 'minOdds', 'maxEVCap'],
+            fields: ['maxEV', 'minEV', 'oddsRanges', 'maxEVCap'],
             columns: 2
         },
         {
@@ -226,7 +235,7 @@ export function openBrainParamsModal(accId, data, onSave) {
             title: 'Other Parameters',
             fields: Object.keys(config).filter(k => 
                 ![
-                    'maxEV', 'minEV', 'maxOdds', 'minOdds', 'maxEVCap',
+                    'maxEV', 'minEV', 'oddsRanges', 'maxEVCap',
                     'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 'allowFirstHalf', 'allowRegularTime', 
                     'allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'timePeriodOfBetPlaced', 'disallowedMatchMinutes',
                     'maxNumberOfRepeatBets', 'maxNumberOfRepeatedEvents', 'maxNumberOfRepeatedEventsAH', 
@@ -342,8 +351,15 @@ function renderSpecializedModal(title, config, onSave, options = {}) {
         const updated = {};
         elements.settingsForm.querySelectorAll('input, select').forEach(input => {
             const key = input.dataset.key;
+            const isJson = input.dataset.keyJson === 'true';
             if (input.tagName === 'SELECT') {
                 updated[key] = input.value;
+            } else if (isJson) {
+                try {
+                    updated[key] = JSON.parse(input.value);
+                } catch (e) {
+                    updated[key] = input.value;
+                }
             } else {
                 updated[key] = input.type === 'checkbox' ? input.checked : 
                               input.type === 'number' ? Number(input.value) : input.value;
@@ -362,6 +378,21 @@ function renderFieldContent(key, value, customRender) {
     
     if (customRender && customRender[key]) {
         fieldDiv.innerHTML = customRender[key](key, value);
+    } else if (Array.isArray(value)) {
+        const isOddsRanges = key === 'oddsRanges';
+        fieldDiv.innerHTML = `
+            <label title="${key}">${key}</label>
+            <input type="text" 
+                   data-key="${key}" 
+                   data-key-json="true"
+                   value='${JSON.stringify(value)}'
+                   placeholder='e.g. [[-1,-0.4],[0.35,1]]'>
+            ${isOddsRanges ? `<div class="field-tip" style="font-size: 0.7rem; color: #888; margin-top: 4px; line-height: 1.4;">
+                <strong style="color:#aaa;">Format:</strong> Array of [min, max] pairs. Odds pass if within <em>any</em> range.<br>
+                <strong style="color:#aaa;">Malay:</strong> <code style="color:#6c9;">[[-1,-0.4],[0.35,1]]</code> — negative & positive Malay ranges<br>
+                <strong style="color:#aaa;">EU (all):</strong> <code style="color:#6c9;">[[1.01,400]]</code> — single wide range
+            </div>` : ''}
+        `;
     } else {
         const isBool = typeof value === 'boolean';
         fieldDiv.innerHTML = `

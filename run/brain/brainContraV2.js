@@ -7,6 +7,7 @@ const {
 } = require("../../mongodb/db");
 const _ = require("lodash");
 const { fuzzMatch } = require("../../utils/fuzzMatch");
+const { isOddsInRange } = require("../../utils/isOddsInRange");
 
 // all need to convert to EU odds first
 const brainContraV2 = async (refAcc, acc) => {
@@ -215,9 +216,7 @@ const brainContraV2 = async (refAcc, acc) => {
           brainParams.maxNumberOfRepeatBets,
         );
 
-        const isOutOfOddsRange =
-          parseFloat(entry.odds) < brainParams.minOdds ||
-          parseFloat(entry.odds) > brainParams.maxOdds;
+        const isOutOfOddsRange = !isOddsInRange(entry.odds, brainParams);
 
         const isUnwantedEntry =
           entry.leagueName.includes("e-Football") ||

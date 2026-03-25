@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { isOddsInRange } = require("../../utils/isOddsInRange");
 
 // Market and Period ID constants
 const MARKET_IDS = {
@@ -284,11 +285,7 @@ function filterData(
         return false;
 
       // Odds Range
-      if (
-        parseFloat(entry.odds) < brainParams.minOdds ||
-        parseFloat(entry.odds) > brainParams.maxOdds
-      )
-        return false;
+      if (!isOddsInRange(entry.odds, brainParams)) return false;
 
       // Vig Check (Support both generic and ref-specific names)
       const minV = brainParams.minVig || brainParams.minRefVig;
