@@ -27,6 +27,15 @@ const checkBrowserAndPage = async (
         continue;
       }
 
+      // Recovery: re-setup account when back within opening hours
+      if (isSetupReady[acc] === false && isAccWithinOpeningHours(acc, fb2ConfigId)) {
+        console.log(`[HOURS] ${acc} back within opening hours, queueing setup`);
+        isSetupReady[acc] = "ongoing";
+        queueSetup(acc);
+        lastStartTime[acc] = new Date();
+        continue;
+      }
+
       let params = JSON.parse(
         fsSync.readFileSync(`TargetBookie/${acc}.json`, "utf-8"),
       );
