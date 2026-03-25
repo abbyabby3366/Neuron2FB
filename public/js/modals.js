@@ -11,12 +11,14 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
     const sections = [
         {
             title: 'General Configuration',
-            fields: ['run', 'autobet', 'cooldownTimeInSeconds', 'msBetweenSBB2FB', 'successBetListKey'],
+            fields: ['run', 'autobet', 'cooldownTimeInSeconds', 'msBetweenSBB2FB', 'successBetListKey', 'openingHours'],
+            fullWidthFields: ['openingHours'],
             columns: 2
         },
         {
             title: 'EV & Odds (Brain)',
             fields: ['maxEV', 'minEV', 'oddsRanges'],
+            fullWidthFields: ['oddsRanges'],
             columns: 2
         },
         {
@@ -61,7 +63,7 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
         const newConfig = { ...config };
         
         // Apply top-level form field updates
-        const topLevelFields = ['run', 'autobet', 'cooldownTimeInSeconds', 'msBetweenSBB2FB', 'successBetListKey'];
+        const topLevelFields = ['run', 'autobet', 'cooldownTimeInSeconds', 'msBetweenSBB2FB', 'successBetListKey', 'openingHours'];
         topLevelFields.forEach(k => {
             if (updatedFlat[k] !== undefined) {
                 newConfig[k] = updatedFlat[k];
@@ -185,6 +187,7 @@ export function openBrainParamsModal(accId, data, onSave) {
         {
             title: 'EV & Odds Parameters',
             fields: ['maxEV', 'minEV', 'oddsRanges', 'maxEVCap'],
+            fullWidthFields: ['oddsRanges'],
             columns: 2
         },
         {
@@ -297,6 +300,17 @@ export function openBrowserDetailsModal(accId, data, onSave) {
     });
 }
 
+export function openScheduleModal(accId, data, onSave) {
+    const config = {
+        openingHours: data.openingHours || []
+    };
+    
+    renderSpecializedModal(`Schedule: ${accId}`, config, (updatedFields) => {
+        data.openingHours = updatedFields.openingHours;
+        onSave(data);
+    });
+}
+
 function renderSpecializedModal(title, config, onSave, options = {}) {
     elements.settingsModalTitle.textContent = title;
     elements.settingsForm.innerHTML = '';
@@ -380,17 +394,24 @@ function renderFieldContent(key, value, customRender) {
         fieldDiv.innerHTML = customRender[key](key, value);
     } else if (Array.isArray(value)) {
         const isOddsRanges = key === 'oddsRanges';
+        const isOpeningHours = key === 'openingHours';
         fieldDiv.innerHTML = `
             <label title="${key}">${key}</label>
             <input type="text" 
                    data-key="${key}" 
                    data-key-json="true"
                    value='${JSON.stringify(value)}'
-                   placeholder='e.g. [[-1,-0.4],[0.35,1]]'>
+                   placeholder='${isOpeningHours ? 'e.g. ["0900-1200","1400-2300"]' : 'e.g. [[-1,-0.4],[0.35,1]]'}'>
             ${isOddsRanges ? `<div class="field-tip" style="font-size: 0.7rem; color: #888; margin-top: 4px; line-height: 1.4;">
                 <strong style="color:#aaa;">Format:</strong> Array of [min, max] pairs. Odds pass if within <em>any</em> range.<br>
-                <strong style="color:#aaa;">Malay:</strong> <code style="color:#6c9;">[[-1,-0.4],[0.35,1]]</code> — negative & positive Malay ranges<br>
+                <strong style="color:#aaa;">Malay:</strong> <code style="color:#6c9;">[-1,-0.4],[0.35,1]</code> — negative &amp; positive Malay ranges<br>
                 <strong style="color:#aaa;">EU (all):</strong> <code style="color:#6c9;">[[1.01,400]]</code> — single wide range
+            </div>` : ''}
+            ${isOpeningHours ? `<div class="field-tip" style="font-size: 0.7rem; color: #888; margin-top: 4px; line-height: 1.4;">
+                <strong style="color:#aaa;">Format:</strong> Array of <code style="color:#6c9;">"HHmm-HHmm"</code> time windows (24h).<br>
+                <strong style="color:#aaa;">Example:</strong> <code style="color:#6c9;">["0000-0500","0800-1400","1600-0000"]</code><br>
+                <strong style="color:#aaa;">Overnight:</strong> <code style="color:#6c9;">["2200-0600"]</code> — crosses midnight<br>
+                <strong style="color:#aaa;">Empty []</strong> = always open. Intersects with account-level hours.
             </div>` : ''}
         `;
     } else {

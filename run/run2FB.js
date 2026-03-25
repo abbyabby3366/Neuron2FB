@@ -4,6 +4,7 @@ const { clearPendingBetList } = require("../utils/clearPendingBetList");
 const { setupBookie } = require("../utils/setupBookie");
 const { createTicketEventQueue } = require("../utils/createTicketEventQueue");
 const { SBB2FB } = require("../utils/SBB2FB");
+const { isAccWithinOpeningHours } = require("../utils/openingHours");
 
 let browsers = {};
 let pages = {};
@@ -17,10 +18,15 @@ let ticketEventQueueObet = createTicketEventQueue();
 let ticketEventQueueHGA = createTicketEventQueue();
 
 // Set up accounts one by one
-const setup2FB = async (accounts, delaySeconds = 0) => {
+const setup2FB = async (accounts, delaySeconds = 0, fb2ConfigId = "") => {
   for (let i = 0; i < accounts.length; i++) {
     const acc = accounts[i];
     if (!isSetupReady[acc]) {
+      // Check opening hours before setup
+      if (!isAccWithinOpeningHours(acc, fb2ConfigId)) {
+        console.log(`[HOURS] ${acc} outside opening hours, skipping setup`);
+        continue;
+      }
       // Delay between accounts (skip delay for the first one)
       if (i > 0 && delaySeconds > 0) {
         console.log(`Waiting ${delaySeconds}s before setting up ${acc}...`);
@@ -56,12 +62,12 @@ const run2FB = async (args) => {
 
     // Setup accounts in two separate queues (target and reference) in background
     const setupDelay = config.delayBetweenSetupInSeconds || 0;
-    setup2FB(targetAccsGroup, setupDelay);
-    setup2FB(referenceAccsGroup, setupDelay);
+    setup2FB(targetAccsGroup, setupDelay, fb2ConfigId);
+    setup2FB(referenceAccsGroup, setupDelay, fb2ConfigId);
     checkBrowserAndPage("", isSetupReady, browsers, pages, lastStartTime, [
       ...targetAccsGroup,
       ...referenceAccsGroup,
-    ]);
+    ], fb2ConfigId);
 
     // Main Loop
     while (true) {
@@ -83,6 +89,10 @@ const run2FB = async (args) => {
         for (const targetAcc of readyTargets) {
           try {
             if (isSetupReady[targetAcc]) {
+              // Skip if outside opening hours
+              if (!isAccWithinOpeningHours(targetAcc, fb2ConfigId)) {
+                continue;
+              }
               // Run SBB2FB
               await SBB2FB(
                 targetAcc,

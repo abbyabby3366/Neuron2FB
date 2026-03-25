@@ -2,6 +2,7 @@ const fsSync = require("fs");
 const { isMemoryLimitReached } = require("./isMemoryLimitReached");
 const { queueSetup } = require("./setupQueue");
 const { cleanupBrowser } = require("./cleanupBrowser");
+const { isAccWithinOpeningHours } = require("./openingHours");
 
 const checkBrowserAndPage = async (
   bookie,
@@ -10,12 +11,22 @@ const checkBrowserAndPage = async (
   pages,
   lastStartTime,
   [...args],
+  fb2ConfigId = "",
 ) => {
   // Check every 5 seconds if it's time to restart the browser or if the page is closed
   setInterval(async () => {
     const currentTime = new Date();
     for (const accNo of args) {
       const acc = `${bookie}${accNo}`;
+
+      // Opening hours check — close browser if outside hours
+      if (isSetupReady[acc] === true && !isAccWithinOpeningHours(acc, fb2ConfigId)) {
+        console.log(`[HOURS] ${acc} outside opening hours, closing browser`);
+        await cleanupBrowser(browsers[acc], acc);
+        isSetupReady[acc] = false;
+        continue;
+      }
+
       let params = JSON.parse(
         fsSync.readFileSync(`TargetBookie/${acc}.json`, "utf-8"),
       );
