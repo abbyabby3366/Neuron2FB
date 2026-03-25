@@ -1507,9 +1507,7 @@ hr {
 
 .field-info-tooltip {
   display: none;
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 0;
+  position: fixed;
   min-width: 280px;
   max-width: 360px;
   background: #1a1d27;
@@ -1520,17 +1518,15 @@ hr {
   color: #aaa;
   line-height: 1.5;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  z-index: 100;
+  z-index: 10000;
   white-space: normal;
-  pointer-events: none;
 }
 
 .field-info-tooltip strong { color: #ccc; }
 .field-info-tooltip code { color: #6c9; font-size: 0.68rem; }
 .field-info-tooltip em { color: #ffb86c; }
 
-.field-info-wrap:hover .field-info-tooltip,
-.field-info-wrap:focus-within .field-info-tooltip {
+.field-info-wrap.active .field-info-tooltip {
   display: block;
 }
 

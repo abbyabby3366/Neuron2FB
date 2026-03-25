@@ -103,7 +103,7 @@ export function renderAccountCard(accId, data, container, isUsed, groupType) {
                     <a href="#" class="menu-item stake-input-opt">Stake Input</a>
                     <a href="#" class="menu-item browser-details-opt">Browser Details</a>
                     <a href="#" class="menu-item success-bets-opt">Success Bet List</a>
-                    <a href="#" class="menu-item schedule-opt">Schedule</a>
+                    <a href="#" class="menu-item schedule-opt">Opening Hours</a>
                     <a href="#" class="menu-item view-odds-opt disabled">View all odds</a>
                     <hr>
                     <a href="#" class="menu-item edit-json-opt">Edit JSON</a>

@@ -305,9 +305,23 @@ export function openScheduleModal(accId, data, onSave) {
         openingHours: data.openingHours || []
     };
     
-    renderSpecializedModal(`Schedule: ${accId}`, config, (updatedFields) => {
+    renderSpecializedModal(`Opening Hours: ${accId}`, config, (updatedFields) => {
         data.openingHours = updatedFields.openingHours;
         onSave(data);
+    }, {
+        customRender: {
+            openingHours: (key, value) => {
+                return `
+                    <label title="${key}">${key}<span class="field-info-wrap"><button type="button" class="field-info-btn" tabindex="-1">ⓘ</button><span class="field-info-tooltip"><strong>Format:</strong> Array of <code>"HHmm-HHmm"</code> time windows (24h).<br><strong>Example:</strong> <code>["0000-0500","0800-1400","1600-0000"]</code><br><strong>Overnight:</strong> <code>["2200-0600"]</code> — crosses midnight<br><strong>Empty []</strong> = always open. Intersected with 2fb-level hours.</span></span></label>
+                    <input type="text" 
+                           data-key="${key}" 
+                           data-key-json="true"
+                           value='${JSON.stringify(value)}'
+                           placeholder='e.g. ["0900-1200","1400-2300"]'
+                           style="width: 100% !important; text-align: left;">
+                `;
+            }
+        }
     });
 }
 
@@ -384,6 +398,32 @@ function renderSpecializedModal(title, config, onSave, options = {}) {
     };
 
     elements.fbSettingsModal.classList.remove('hidden');
+
+    // Wire up tooltip click toggles
+    elements.settingsForm.querySelectorAll('.field-info-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const wrap = btn.closest('.field-info-wrap');
+            // Close other tooltips
+            elements.settingsForm.querySelectorAll('.field-info-wrap.active').forEach(w => {
+                if (w !== wrap) w.classList.remove('active');
+            });
+            wrap.classList.toggle('active');
+            // Position tooltip with fixed coords
+            if (wrap.classList.contains('active')) {
+                const tooltip = wrap.querySelector('.field-info-tooltip');
+                const rect = btn.getBoundingClientRect();
+                tooltip.style.left = rect.left + 'px';
+                tooltip.style.top = (rect.bottom + 6) + 'px';
+            }
+        });
+    });
+    // Close tooltips when clicking outside
+    elements.settingsForm.addEventListener('click', (e) => {
+        if (!e.target.closest('.field-info-wrap')) {
+            elements.settingsForm.querySelectorAll('.field-info-wrap.active').forEach(w => w.classList.remove('active'));
+        }
+    });
 }
 
 function renderFieldContent(key, value, customRender) {
