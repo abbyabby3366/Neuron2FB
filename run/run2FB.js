@@ -17,9 +17,15 @@ let ticketEventQueueObet = createTicketEventQueue();
 let ticketEventQueueHGA = createTicketEventQueue();
 
 // Set up accounts one by one
-const setup2FB = async (accounts) => {
-  for (const acc of accounts) {
+const setup2FB = async (accounts, delaySeconds = 0) => {
+  for (let i = 0; i < accounts.length; i++) {
+    const acc = accounts[i];
     if (!isSetupReady[acc]) {
+      // Delay between accounts (skip delay for the first one)
+      if (i > 0 && delaySeconds > 0) {
+        console.log(`Waiting ${delaySeconds}s before setting up ${acc}...`);
+        await new Promise((resolve) => setTimeout(resolve, delaySeconds * 1000));
+      }
       isSetupReady[acc] = "ongoing";
       await setupBookie(acc, browsers, pages, isSetupReady);
       lastStartTime[acc] = new Date();
@@ -49,8 +55,9 @@ const run2FB = async (args) => {
     clearPendingBetList();
 
     // Setup accounts in two separate queues (target and reference) in background
-    setup2FB(targetAccsGroup);
-    setup2FB(referenceAccsGroup);
+    const setupDelay = config.delayBetweenSetupInSeconds || 0;
+    setup2FB(targetAccsGroup, setupDelay);
+    setup2FB(referenceAccsGroup, setupDelay);
     checkBrowserAndPage("", isSetupReady, browsers, pages, lastStartTime, [
       ...targetAccsGroup,
       ...referenceAccsGroup,
