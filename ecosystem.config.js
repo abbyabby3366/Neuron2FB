@@ -2,7 +2,7 @@
 module.exports = {
   apps: [
     {
-      name: "neuronwin",
+      name: "neuron2fb",
       script: "express.js",
       instances: 1,
       autorestart: true,
