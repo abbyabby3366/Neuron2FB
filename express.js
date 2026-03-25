@@ -10,14 +10,14 @@ const { readData } = require("./mongodb/db");
 const path = require("path");
 // const { _, browsers, pages, isReady } = require('./run/runSBO.js');
 const { runSBOs, browsers, pages, isSetupReady } = require("./run/runSBOs.js");
+const { pages: pages2FB, browsers: browsers2FB } = require("./run/run2FB.js");
 
 const { startNgrokTunnel } = require("./utils/ngrok");
-
 
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3290;
 
 app.use((req, res, next) => {
   res.setHeader("X-Content-Type-Options", "nosniff");
@@ -48,7 +48,6 @@ app.use(
     },
   }),
 );
-app.use(express.static("public")); // To serve static files like CSS
 
 app.get("/pending", (req, res) => {
   res.sendFile(__dirname + "/public/pending.html");
@@ -197,7 +196,9 @@ app.post("/api/save-cooldown/:account", (req, res) => {
       `./TargetBookie/${acc}.json`,
       JSON.stringify(autobet_params),
     );
-    console.log(`[COOLDOWN] Updated ${acc} cooldown to ${cooldownTimeInSeconds}s`);
+    console.log(
+      `[COOLDOWN] Updated ${acc} cooldown to ${cooldownTimeInSeconds}s`,
+    );
     res.json({
       success: true,
       message: `Cooldown time = ${Number(cooldownTimeInSeconds)} updated for ${acc}`,
@@ -246,7 +247,35 @@ app.post("/bet", async (req, res) => {
   res.status(200).send(true);
 });
 
-
+app.post("/api/focus/:account", async (req, res) => {
+  const acc = req.params.account;
+  console.log(`[FOCUS] Request received for ${acc}`);
+  try {
+    const page = pages[acc] || pages2FB[acc];
+    const browser = browsers[acc] || browsers2FB[acc];
+    if (!page || !browser) {
+      return res
+        .status(404)
+        .json({ success: false, message: `No active page for ${acc}` });
+    }
+    await page.bringToFront();
+    // Bring the OS-level window to the foreground on Windows
+    const pid = browser.process()?.pid;
+    if (pid) {
+      const { exec } = require("child_process");
+      exec(
+        `powershell -command "(New-Object -ComObject wscript.shell).AppActivate((Get-Process -Id ${pid}).Id)"`,
+        (err) => {
+          if (err) console.error(`[FOCUS] AppActivate error:`, err.message);
+        },
+      );
+    }
+    res.json({ success: true, message: `Focused ${acc}` });
+  } catch (e) {
+    console.error(`[FOCUS] Error focusing ${acc}:`, e.message);
+    res.status(500).json({ success: false, message: e.message });
+  }
+});
 
 app.get("/", (req, res) => {
   res.send("Hello xiren");

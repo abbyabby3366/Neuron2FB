@@ -950,6 +950,24 @@ input[type="checkbox"].fb-input {
   color: var(--accent-color);
 }
 
+.focus-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.focus-btn:hover {
+  background: var(--hover-bg);
+  color: var(--success-color);
+}
+
 .dropdown-content {
   display: none;
   position: absolute;

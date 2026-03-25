@@ -84,6 +84,12 @@ export function renderAccountCard(accId, data, container, isUsed, groupType) {
             </div>
         </div>
         <div class="acc-actions">
+            <button class="focus-btn" title="Focus Chrome Window">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
             <div class="dropdown">
                 <button class="menu-btn" title="More options">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -143,6 +149,24 @@ export function renderAccountCard(accId, data, container, isUsed, groupType) {
 
     const passwordInput = card.querySelector('.password-input');
     if (passwordInput) passwordInput.addEventListener('change', (e) => saveQuickInput(e, 'password'));
+
+    // Focus button
+    const focusBtn = card.querySelector('.focus-btn');
+    if (focusBtn) {
+        focusBtn.onclick = async () => {
+            try {
+                const res = await fetch(`/api/focus/${accId}`, { method: 'POST' });
+                const result = await res.json();
+                if (result.success) {
+                    showToast(`Focused ${accId}`);
+                } else {
+                    showToast(result.message || 'Focus failed', 'error');
+                }
+            } catch (e) {
+                showToast('Cannot reach server', 'error');
+            }
+        };
+    }
 
     // Dropdown Actions
     const dropdown = card.querySelector('.dropdown');
