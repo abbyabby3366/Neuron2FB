@@ -36,7 +36,16 @@
                     <!-- 2fb*.json tabs will be populated here -->
                 </ul>
             </nav>
-            <div class="top-actions">
+            <div class="top-actions" style="display: flex; align-items: center;">
+                <div class="dropdown" style="position: relative; display: inline-block; margin-right: 8px;">
+                    <button id="bookie-links-btn" class="btn btn-secondary btn-sm" style="display: flex; align-items: center; gap: 4px;">
+                        Links
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div id="bookie-links-content" style="display: none; position: absolute; top: 100%; right: 0; background-color: #1e1e2e; min-width: 250px; max-height: 400px; overflow-y: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.5); z-index: 1000; border: 1px solid #333; border-radius: 6px; margin-top: 4px; padding: 4px;">
+                        <div style="padding: 8px; color: #aaa; font-size: 11px; text-align: center;">Loading links...</div>
+                    </div>
+                </div>
                 <button id="league-filter-btn" class="btn btn-secondary btn-sm" style="margin-right: 8px;">League Filter</button>
                 <button id="new-2fb-btn" class="btn btn-primary btn-sm">+ New 2FB</button>
             </div>
@@ -224,6 +233,72 @@
                 document.body.appendChild(debugLog);
             }
             debugLog.innerHTML += `<div>[PROMISE REJECTION] ${e.reason}</div>`;
+        });
+
+        // Dropdown logic for Bookie Links
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('bookie-links-btn');
+            const content = document.getElementById('bookie-links-content');
+            if (btn && content) {
+                // Fetch links dynamically
+                fetch('links.txt')
+                    .then(r => r.ok ? r.text() : Promise.reject('Failed to load links'))
+                    .then(text => {
+                        const links = text.split('\n').map(l => l.trim()).filter(l => l);
+                        if (links.length === 0) {
+                            content.innerHTML = '<div style="padding:8px;color:#aaa;font-size:11px;text-align:center;">No links found</div>';
+                            return;
+                        }
+                        content.innerHTML = '';
+                        links.forEach((link, index) => {
+                            const item = document.createElement('div');
+                            item.className = 'link-item';
+                            item.style.cssText = `display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; ${index !== links.length - 1 ? 'border-bottom: 1px solid #2a2a35;' : ''}`;
+                            
+                            const span = document.createElement('span');
+                            span.style.cssText = 'font-family: monospace; font-size: 11px; color: #aaa;';
+                            span.textContent = link;
+                            
+                            const copyBtn = document.createElement('button');
+                            copyBtn.className = 'btn btn-xs btn-primary copy-link-btn';
+                            copyBtn.style.cssText = 'padding: 2px 6px; margin-left: 12px;';
+                            copyBtn.textContent = 'Copy';
+                            copyBtn.setAttribute('data-link', link);
+                            
+                            copyBtn.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                navigator.clipboard.writeText(link).then(() => {
+                                    const origText = copyBtn.textContent;
+                                    copyBtn.textContent = 'Copied!';
+                                    copyBtn.classList.replace('btn-primary', 'btn-success');
+                                    setTimeout(() => {
+                                        copyBtn.textContent = origText;
+                                        copyBtn.classList.replace('btn-success', 'btn-primary');
+                                    }, 1500);
+                                }).catch(err => console.error('Failed to copy: ', err));
+                            });
+                            
+                            item.appendChild(span);
+                            item.appendChild(copyBtn);
+                            content.appendChild(item);
+                        });
+                    })
+                    .catch(err => {
+                        content.innerHTML = '<div style="padding:8px;color:#ff5555;font-size:12px;text-align:center;">Error loading links.txt</div>';
+                        console.error(err);
+                    });
+
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isVisible = content.style.display === 'block';
+                    content.style.display = isVisible ? 'none' : 'block';
+                });
+                document.addEventListener('click', (e) => {
+                    if (!content.contains(e.target) && e.target !== btn) {
+                        content.style.display = 'none';
+                    }
+                });
+            }
         });
     </script>
     <script type="module" src="./js/main.js"></script>
