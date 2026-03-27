@@ -23,16 +23,16 @@ const checkBrowserAndPage = async (
       if (isSetupReady[acc] === true && !isAccWithinOpeningHours(acc, fb2ConfigId)) {
         console.log(`[HOURS] ${acc} outside opening hours, closing browser`);
         await cleanupBrowser(browsers[acc], acc);
-        isSetupReady[acc] = false;
+        isSetupReady[acc] = "hours_closed";
         continue;
       }
 
       // Recovery: re-setup account when back within opening hours
-      if (isSetupReady[acc] === false && isAccWithinOpeningHours(acc, fb2ConfigId)) {
+      if (isSetupReady[acc] === "hours_closed" && isAccWithinOpeningHours(acc, fb2ConfigId)) {
         console.log(`[HOURS] ${acc} back within opening hours, queueing setup`);
         isSetupReady[acc] = "ongoing";
         queueSetup(acc);
-        lastStartTime[acc] = new Date();
+        lastStartTime[accNo] = new Date();
         continue;
       }
 

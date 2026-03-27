@@ -1408,18 +1408,19 @@ hr {
 .settings-field label {
   white-space: normal;
   line-height: 1.2;
-  word-break: normal;
-  overflow-wrap: break-word;
-  font-size: 0.75rem;
 }
 
 .settings-field input:not([type="checkbox"]) {
-  width: 80px !important;
+  width: 80px;
   text-align: right;
-  padding: 2px 6px;
+  padding: 4px 6px;
   border-radius: 3px;
   background: rgba(0, 0, 0, 0.2);
-  height: 24px; /* Fixed height for consistency */
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  height: 24px;
+  font-family: inherit;
+  font-size: 0.8rem;
 }
 
 .settings-field input[type="checkbox"] {
@@ -1434,51 +1435,24 @@ hr {
 
 .settings-field.full-width {
   grid-column: span 2;
-  display: grid; /* restored grid for full-width items */
-  grid-template-columns: 300px 1fr !important; /* Massive space for labels and inputs */
-  align-items: center;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 8px;
+  width: 100%;
+}
+
+.settings-grid-2 .settings-field.full-width {
+  display: grid !important;
+  grid-template-columns: 300px 1fr !important;
+  align-items: center !important;
   gap: 12px;
 }
 
 .settings-field.full-width input {
   width: 100% !important;
-  text-align: left; /* Better for long strings/regex */
-}
-
-/* League Filter Specialized Layout */
-.league-filter-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  width: 100%;
-}
-
-.league-filter-field label {
-  font-size: 0.78rem;
-  color: var(--accent-color);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 2px;
-}
-
-.league-filter-field textarea {
-  width: 100%;
-  min-height: 100px;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  padding: 12px;
-  border-radius: 4px;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.85rem;
-  resize: vertical;
-  transition: all 0.2s;
-}
-
-.league-filter-field textarea:focus {
-  border-color: var(--accent-color);
-  outline: none;
+  text-align: left !important;
+  max-width: none !important;
 }
 
 /* Field Info Tooltip */
@@ -1490,19 +1464,26 @@ hr {
 }
 
 .field-info-btn {
-  background: none;
-  border: none;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-radius: 50%;
   color: var(--accent-color);
-  font-size: 0.85rem;
+  font-size: 0.7rem;
+  font-weight: 700;
   cursor: pointer;
-  padding: 0 2px;
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
-  opacity: 0.7;
-  transition: opacity 0.2s;
+  opacity: 1;
+  transition: all 0.2s;
 }
 
 .field-info-btn:hover {
-  opacity: 1;
+  background: rgba(59, 130, 246, 0.3);
+  border-color: var(--accent-color);
 }
 
 .field-info-tooltip {

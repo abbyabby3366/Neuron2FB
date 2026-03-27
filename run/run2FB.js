@@ -25,6 +25,8 @@ const setup2FB = async (accounts, delaySeconds = 0, fb2ConfigId = "") => {
       // Check opening hours before setup
       if (!isAccWithinOpeningHours(acc, fb2ConfigId)) {
         console.log(`[HOURS] ${acc} outside opening hours, skipping setup`);
+        isSetupReady[acc] = "hours_closed";
+        lastStartTime[acc] = new Date();
         continue;
       }
       // Delay between accounts (skip delay for the first one)
