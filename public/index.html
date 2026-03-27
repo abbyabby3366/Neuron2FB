@@ -190,11 +190,37 @@
             <h3 class="text-danger">Confirm Deletion</h3>
             <p>Type <strong id="delete-acc-filename-target"></strong> to delete permanently.</p>
             <div class="form-group" style="margin-top: 12px">
-                <input type="text" id="delete-acc-confirm-input" placeholder="Filename...">
+                 <input type="text" id="delete-acc-confirm-input" placeholder="Filename...">
             </div>
             <div class="modal-footer">
                 <button id="cancel-delete-acc-btn" class="btn btn-secondary">Cancel</button>
                 <button id="confirm-delete-acc-btn" class="btn btn-danger" disabled>Confirm Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Market Params Editor Modal -->
+    <div id="market-params-modal" class="modal hidden">
+        <div class="modal-content modal-lg" style="max-width: 900px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 id="market-params-modal-title" style="margin: 0;">Market Lines Editor</h3>
+                <div class="market-params-tabs">
+                    <button class="btn btn-xs btn-primary tab-btn active" data-tab="htOver">HT Over</button>
+                    <button class="btn btn-xs btn-secondary tab-btn" data-tab="htUnder">HT Under</button>
+                    <button class="btn btn-xs btn-secondary tab-btn" data-tab="ftOver">FT Over</button>
+                    <button class="btn btn-xs btn-secondary tab-btn" data-tab="ftUnder">FT Under</button>
+                    <button class="btn btn-xs btn-secondary tab-btn" data-tab="htAh">HT AH</button>
+                    <button class="btn btn-xs btn-secondary tab-btn" data-tab="ftAh">FT AH</button>
+                </div>
+            </div>
+            
+            <div id="market-params-container" class="market-params-container">
+                <!-- Content injected dynamically via JS -->
+            </div>
+
+            <div class="modal-footer" style="margin-top: 20px;">
+                <button id="cancel-market-params-btn" class="btn btn-secondary">Cancel</button>
+                <button id="save-market-params-btn" class="btn btn-success">Save Selection</button>
             </div>
         </div>
     </div>

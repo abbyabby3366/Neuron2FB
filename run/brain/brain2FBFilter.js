@@ -285,6 +285,59 @@ function filterData(
         return false;
 
       // Odds Range
+      // New Specific Market Params Filtering
+      const isHT = entry.periodId === PERIOD_IDS.FIRST_HALF;
+      const isFT = entry.periodId === PERIOD_IDS.REGULAR_TIME;
+
+      // HT Over
+      if (isHT && entry.marketId === 19) {
+          if (brainParams.allowHtOver === false) return false;
+          if (brainParams.htOverMarketParams && brainParams.htOverMarketParams.length > 0) {
+              if (!brainParams.htOverMarketParams.includes("Bet All") && 
+                  !brainParams.htOverMarketParams.includes(parseFloat(entry.marketParam))) return false;
+          }
+      }
+      // HT Under
+      if (isHT && entry.marketId === 20) {
+          if (brainParams.allowHtUnder === false) return false;
+          if (brainParams.htUnderMarketParams && brainParams.htUnderMarketParams.length > 0) {
+              if (!brainParams.htUnderMarketParams.includes("Bet All") && 
+                  !brainParams.htUnderMarketParams.includes(parseFloat(entry.marketParam))) return false;
+          }
+      }
+      // FT Over
+      if (isFT && entry.marketId === 19) {
+          if (brainParams.allowFtOver === false) return false;
+          if (brainParams.ftOverMarketParams && brainParams.ftOverMarketParams.length > 0) {
+              if (!brainParams.ftOverMarketParams.includes("Bet All") && 
+                  !brainParams.ftOverMarketParams.includes(parseFloat(entry.marketParam))) return false;
+          }
+      }
+      // FT Under
+      if (isFT && entry.marketId === 20) {
+          if (brainParams.allowFtUnder === false) return false;
+          if (brainParams.ftUnderMarketParams && brainParams.ftUnderMarketParams.length > 0) {
+              if (!brainParams.ftUnderMarketParams.includes("Bet All") && 
+                  !brainParams.ftUnderMarketParams.includes(parseFloat(entry.marketParam))) return false;
+          }
+      }
+      // HT AH
+      if (isHT && [17, 18].includes(entry.marketId)) {
+          if (brainParams.allowHtAh === false) return false;
+          if (brainParams.htAhMarketParams && brainParams.htAhMarketParams.length > 0) {
+              if (!brainParams.htAhMarketParams.includes("Bet All") && 
+                  !brainParams.htAhMarketParams.includes(parseFloat(entry.marketParam))) return false;
+          }
+      }
+      // FT AH
+      if (isFT && [17, 18].includes(entry.marketId)) {
+          if (brainParams.allowFtAh === false) return false;
+          if (brainParams.ftAhMarketParams && brainParams.ftAhMarketParams.length > 0) {
+              if (!brainParams.ftAhMarketParams.includes("Bet All") && 
+                  !brainParams.ftAhMarketParams.includes(parseFloat(entry.marketParam))) return false;
+          }
+      }
+
       if (!isOddsInRange(entry.odds, brainParams)) return false;
 
       // Vig Check (Support both generic and ref-specific names)

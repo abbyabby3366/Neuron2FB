@@ -24,11 +24,12 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
         {
             title: 'Market Allowances (Brain)',
             fields: [
+                'editSpecificMarketLines',
                 'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 
                 'allowFirstHalf', 'allowRegularTime',
                 'allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'disallowedMatchMinutes'
             ],
-            fullWidthFields: ['allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'disallowedMatchMinutes'],
+            fullWidthFields: ['editSpecificMarketLines', 'allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'disallowedMatchMinutes'],
             columns: 2
         },
         {
@@ -118,7 +119,35 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
         } catch (e) {
             showToast('Save failed', 'error');
         }
-    }, { sections, modalClass: 'modal-lg' });
+    }, { 
+        sections, 
+        modalClass: 'modal-lg',
+        customRender: {
+            editSpecificMarketLines: () => `
+                <button type="button" class="btn btn-primary btn-sm" id="open-market-lines-btn" onclick="document.dispatchEvent(new CustomEvent('openMarketLinesConfig', { detail: 'settings' }))">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                    Edit Specific Market Lines
+                </button>
+                <span style="font-size: 0.75rem; color: var(--text-secondary); margin-left: 12px; align-self: center;">(Note: The filters here will overlap with the filters below)</span>
+            `
+        }
+    });
+
+    // Remove any previous custom event listeners to avoid duplicates
+    const evtHandler = () => {
+        if (!config.brainParams) config.brainParams = {};
+        openMarketParamsEditorModal(config.brainParams, (newParams) => {
+            Object.assign(config.brainParams, newParams);
+        });
+    };
+    document.removeEventListener('openMarketLinesConfig', document._marketLinesConfigHandler);
+    document._marketLinesConfigHandler = (e) => {
+        if (e.detail === 'settings') evtHandler();
+    };
+    document.addEventListener('openMarketLinesConfig', document._marketLinesConfigHandler);
 }
 
 export function renderSettingsField(key, value, container, parentKey = null) {
@@ -193,12 +222,13 @@ export function openBrainParamsModal(accId, data, onSave) {
         {
             title: 'Market Allowances',
             fields: [
+                'editSpecificMarketLines',
                 'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 
                 'allowFirstHalf', 'allowRegularTime',
                 'allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'timePeriodOfBetPlaced',
                 'disallowedMatchMinutes'
             ],
-            fullWidthFields: ['allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'timePeriodOfBetPlaced', 'disallowedMatchMinutes'],
+            fullWidthFields: ['editSpecificMarketLines', 'allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'timePeriodOfBetPlaced', 'disallowedMatchMinutes'],
             columns: 2
         },
         {
@@ -258,7 +288,33 @@ export function openBrainParamsModal(accId, data, onSave) {
     renderSpecializedModal(`Brain Params: ${accId}`, config, (updatedConfig) => {
         data.brainParams = updatedConfig;
         onSave(data);
-    }, { sections, modalClass: 'modal-lg' });
+    }, { 
+        sections, 
+        modalClass: 'modal-lg',
+        customRender: {
+            editSpecificMarketLines: () => `
+                <button type="button" class="btn btn-primary btn-sm" id="open-market-lines-btn2" onclick="document.dispatchEvent(new CustomEvent('openMarketLinesConfig2', { detail: 'brain' }))">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                    Edit Specific Market Lines
+                </button>
+                <span style="font-size: 0.75rem; color: var(--text-secondary); margin-left: 12px; align-self: center;">(Note: The filters here will overlap with the filters below)</span>
+            `
+        }
+    });
+
+    const evtHandler2 = () => {
+        openMarketParamsEditorModal(config, (newParams) => {
+            Object.assign(config, newParams);
+        });
+    };
+    document.removeEventListener('openMarketLinesConfig2', document._marketLinesConfigHandler2);
+    document._marketLinesConfigHandler2 = (e) => {
+        if (e.detail === 'brain') evtHandler2();
+    };
+    document.addEventListener('openMarketLinesConfig2', document._marketLinesConfigHandler2);
 }
 
 export function openStakeInputModal(accId, data, onSave) {
@@ -811,3 +867,174 @@ document.addEventListener('click', (e) => {
         document.querySelectorAll('.field-info-wrap.active').forEach(w => w.classList.remove('active'));
     }
 });
+
+export function openMarketParamsEditorModal(config, onSaveParams) {
+    const modal = document.getElementById('market-params-modal');
+    const container = document.getElementById('market-params-container');
+    const saveBtn = document.getElementById('save-market-params-btn');
+    const cancelBtn = document.getElementById('cancel-market-params-btn');
+    const tabs = modal.querySelectorAll('.tab-btn');
+
+    // Make local copies of the market params
+    let localConfig = {
+        htOverMarketParams: config.htOverMarketParams || [],
+        htUnderMarketParams: config.htUnderMarketParams || [],
+        ftOverMarketParams: config.ftOverMarketParams || [],
+        ftUnderMarketParams: config.ftUnderMarketParams || [],
+        htAhMarketParams: config.htAhMarketParams || [],
+        ftAhMarketParams: config.ftAhMarketParams || [],
+        allowHtOver: config.allowHtOver !== false,
+        allowHtUnder: config.allowHtUnder !== false,
+        allowFtOver: config.allowFtOver !== false,
+        allowFtUnder: config.allowFtUnder !== false,
+        allowHtAh: config.allowHtAh !== false,
+        allowFtAh: config.allowFtAh !== false
+    };
+
+    let currentTab = 'htOver';
+
+    const renderGrid = () => {
+        const isAh = currentTab.toLowerCase().includes('ah');
+        let html = '';
+        
+        const enabledKey = 'allow' + currentTab.charAt(0).toUpperCase() + currentTab.slice(1);
+        const paramsKey = currentTab + 'MarketParams';
+        
+        // Generate Checkboxes
+        let checkboxes = [];
+        if (isAh) {
+            for (let i = -10; i <= 10; i += 0.25) {
+                checkboxes.push(i);
+            }
+        } else {
+            for (let i = 0.5; i <= 10; i += 0.25) {
+                checkboxes.push(i);
+            }
+        }
+
+        const isEnabled = localConfig[enabledKey];
+        
+        // Convert legacy "Bet All" string to actual numerical values
+        if (localConfig[paramsKey].includes("Bet All")) {
+            localConfig[paramsKey] = [...checkboxes];
+        }
+        const selectedParams = localConfig[paramsKey];
+        
+        const isBetAll = checkboxes.length > 0 && checkboxes.every(val => selectedParams.includes(val));
+
+        // Header Actions
+        html += `
+            <div class="market-header-actions">
+                <div class="market-enable-toggle">
+                    <label class="switch switch-sm">
+                        <input type="checkbox" id="market-enable-checkbox" ${isEnabled ? 'checked' : ''}>
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="toggle-label">Enable Market</span>
+                </div>
+                <div class="helper-btns ${!isEnabled ? 'disabled-view' : ''}">
+                    <button class="btn btn-xs btn-secondary helper-btn" data-action="selectAll">Select All</button>
+                    ${isAh ? `
+                        <button class="btn btn-xs btn-secondary helper-btn" data-action="selectPos">Select (+)</button>
+                        <button class="btn btn-xs btn-secondary helper-btn" data-action="selectNeg">Select (-)</button>
+                    ` : ''}
+                    <button class="btn btn-xs btn-secondary helper-btn" data-action="clearAll">Clear</button>
+                </div>
+            </div>
+        `;
+
+        html += `<div class="market-params-content ${!isEnabled ? 'disabled-view' : ''}">`;
+
+        // Bet All Checkbox
+        html += `
+            <div class="market-bet-all-wrapper">
+                <label>
+                    <input type="checkbox" id="market-bet-all-checkbox" ${isBetAll ? 'checked' : ''}>
+                    Bet All Lines
+                </label>
+            </div>
+        `;
+
+        html += `<div class="market-params-grid">`;
+
+
+        checkboxes.forEach(val => {
+            const isChecked = selectedParams.includes(val);
+            html += `
+                <label class="checkbox-label ${isChecked ? 'is-checked' : ''}">
+                    <input type="checkbox" class="market-param-cb" value="${val}" ${isChecked ? 'checked' : ''}>
+                    ${val > 0 && isAh ? '+' + val : val}
+                </label>
+            `;
+        });
+
+        html += `</div></div>`;
+        container.innerHTML = html;
+
+        // Attach event listeners
+        document.getElementById('market-enable-checkbox').addEventListener('change', (e) => {
+            localConfig[enabledKey] = e.target.checked;
+            renderGrid();
+        });
+
+        document.getElementById('market-bet-all-checkbox').addEventListener('change', (e) => {
+            if (e.target.checked) {
+                localConfig[paramsKey] = [...checkboxes];
+            } else {
+                localConfig[paramsKey] = [];
+            }
+            renderGrid();
+        });
+
+        container.querySelectorAll('.market-param-cb').forEach(cb => {
+            cb.addEventListener('change', (e) => {
+                const val = parseFloat(e.target.value);
+                if (e.target.checked) {
+                    if (!localConfig[paramsKey].includes(val)) localConfig[paramsKey].push(val);
+                } else {
+                    localConfig[paramsKey] = localConfig[paramsKey].filter(p => p !== val);
+                }
+                const label = e.target.closest('.checkbox-label');
+                if (e.target.checked) label.classList.add('is-checked');
+                else label.classList.remove('is-checked');
+            });
+        });
+
+        container.querySelectorAll('.helper-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const action = e.target.dataset.action;
+                if (action === 'selectAll') {
+                    localConfig[paramsKey] = checkboxes;
+                } else if (action === 'clearAll') {
+                    localConfig[paramsKey] = [];
+                } else if (action === 'selectPos') {
+                    localConfig[paramsKey] = checkboxes.filter(v => v > 0);
+                } else if (action === 'selectNeg') {
+                    localConfig[paramsKey] = checkboxes.filter(v => v < 0);
+                }
+                renderGrid();
+            });
+        });
+    };
+
+    tabs.forEach(tab => {
+        tab.onclick = () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            currentTab = tab.dataset.tab;
+            renderGrid();
+        };
+    });
+
+    renderGrid();
+    modal.classList.remove('hidden');
+
+    cancelBtn.onclick = () => {
+        modal.classList.add('hidden');
+    };
+
+    saveBtn.onclick = () => {
+        modal.classList.add('hidden');
+        onSaveParams(localConfig);
+    };
+}
