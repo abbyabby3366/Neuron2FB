@@ -65,7 +65,14 @@ function isAccWithinOpeningHours(acc, fb2ConfigId) {
   } catch (e) {}
 
   // Intersection: both must pass (empty = always open)
-  return isWithinWindows(fb2Windows) && isWithinWindows(accWindows);
+  if (!isWithinWindows(fb2Windows)) {
+    return { isOpen: false, reason: `2fb${fb2ConfigId}.json` };
+  }
+  if (!isWithinWindows(accWindows)) {
+    return { isOpen: false, reason: `${acc}.json` };
+  }
+
+  return { isOpen: true, reason: null };
 }
 
 module.exports = { isWithinWindows, isAccWithinOpeningHours };

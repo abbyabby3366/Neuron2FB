@@ -19,16 +19,18 @@ const checkBrowserAndPage = async (
     for (const accNo of args) {
       const acc = `${bookie}${accNo}`;
 
+      const hoursCheck = isAccWithinOpeningHours(acc, fb2ConfigId);
+
       // Opening hours check — close browser if outside hours
-      if (isSetupReady[acc] === true && !isAccWithinOpeningHours(acc, fb2ConfigId)) {
-        console.log(`[HOURS] ${acc} outside opening hours, closing browser`);
+      if (isSetupReady[acc] === true && !hoursCheck.isOpen) {
+        console.log(`[HOURS] ${acc} outside opening hours, closing browser (Blocked by ${hoursCheck.reason})`);
         await cleanupBrowser(browsers[acc], acc);
         isSetupReady[acc] = "hours_closed";
         continue;
       }
 
       // Recovery: re-setup account when back within opening hours
-      if (isSetupReady[acc] === "hours_closed" && isAccWithinOpeningHours(acc, fb2ConfigId)) {
+      if (isSetupReady[acc] === "hours_closed" && hoursCheck.isOpen) {
         console.log(`[HOURS] ${acc} back within opening hours, queueing setup`);
         isSetupReady[acc] = "ongoing";
         queueSetup(acc);

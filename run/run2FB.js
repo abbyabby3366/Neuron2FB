@@ -23,8 +23,9 @@ const setup2FB = async (accounts, delaySeconds = 0, fb2ConfigId = "") => {
     const acc = accounts[i];
     if (!isSetupReady[acc]) {
       // Check opening hours before setup
-      if (!isAccWithinOpeningHours(acc, fb2ConfigId)) {
-        console.log(`[HOURS] ${acc} outside opening hours, skipping setup`);
+      const hoursCheck = isAccWithinOpeningHours(acc, fb2ConfigId);
+      if (!hoursCheck.isOpen) {
+        console.log(`[HOURS] ${acc} outside opening hours, skipping setup (Blocked by ${hoursCheck.reason})`);
         isSetupReady[acc] = "hours_closed";
         lastStartTime[acc] = new Date();
         continue;
@@ -92,7 +93,8 @@ const run2FB = async (args) => {
           try {
             if (isSetupReady[targetAcc]) {
               // Skip if outside opening hours
-              if (!isAccWithinOpeningHours(targetAcc, fb2ConfigId)) {
+              const hoursCheck = isAccWithinOpeningHours(targetAcc, fb2ConfigId);
+              if (!hoursCheck.isOpen) {
                 continue;
               }
               // Run SBB2FB
