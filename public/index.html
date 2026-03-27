@@ -43,7 +43,7 @@
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </button>
                     <div id="bookie-links-content" style="display: none; position: absolute; top: 100%; right: 0; background-color: #1e1e2e; min-width: 250px; max-height: 400px; overflow-y: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.5); z-index: 1000; border: 1px solid #333; border-radius: 6px; margin-top: 4px; padding: 4px;">
-                        <div style="padding: 8px; color: #aaa; font-size: 11px; text-align: center;">Loading links...</div>
+                        <div style="padding: 8px; color: #ffffff; font-size: 11px; text-align: center;">Loading links...</div>
                     </div>
                 </div>
                 <button id="league-filter-btn" class="btn btn-secondary btn-sm" style="margin-right: 8px;">League Filter</button>
@@ -246,7 +246,7 @@
                     .then(text => {
                         const links = text.split('\n').map(l => l.trim()).filter(l => l);
                         if (links.length === 0) {
-                            content.innerHTML = '<div style="padding:8px;color:#aaa;font-size:11px;text-align:center;">No links found</div>';
+                            content.innerHTML = '<div style="padding:8px;color:#ffffff;font-size:11px;text-align:center;">No links found</div>';
                             return;
                         }
                         content.innerHTML = '';
@@ -256,7 +256,7 @@
                             item.style.cssText = `display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; ${index !== links.length - 1 ? 'border-bottom: 1px solid #2a2a35;' : ''}`;
                             
                             const span = document.createElement('span');
-                            span.style.cssText = 'font-family: monospace; font-size: 11px; color: #aaa;';
+                            span.style.cssText = 'font-family: monospace; font-size: 11px; color: #ffffff;';
                             span.textContent = link;
                             
                             const copyBtn = document.createElement('button');

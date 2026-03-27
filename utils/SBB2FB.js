@@ -76,9 +76,9 @@ const SBB2FB = async (
       }
 
       let isCoolingDown = checkCooldownStatus(targetAcc);
-      console.log("isCoolingDown", isCoolingDown);
+      // console.log("isCoolingDown", isCoolingDown);
       if (isCoolingDown) return;
-      console.log("targetAcc", targetAcc);
+      // console.log("targetAcc", targetAcc);
 
       // Check autobet from 2fb config
       const fb2Config = JSON.parse(
@@ -91,9 +91,9 @@ const SBB2FB = async (
         isCoolingDown,
         isFb2AutobetDisabled,
       );
-      console.log("isCoolingDown", isCoolingDown);
-      console.log("isFb2AutobetDisabled", isFb2AutobetDisabled);
-      console.log("autoBetRestraint", autoBetRestraint);
+      // console.log("isCoolingDown", isCoolingDown);
+      // console.log("isFb2AutobetDisabled", isFb2AutobetDisabled);
+      // console.log("autoBetRestraint", autoBetRestraint);
       if (autoBetRestraint) return;
 
       const bestBet = allPendingBets[0];
