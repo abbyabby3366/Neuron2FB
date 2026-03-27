@@ -299,6 +299,19 @@ body.dark-theme {
   color: var(--text-secondary);
 }
 
+.acc-card.out-of-hours {
+  background: rgba(255, 60, 60, 0.08);
+  border-left: 3px solid rgba(255, 60, 60, 0.5);
+}
+
+.acc-card.out-of-hours .acc-id {
+  color: #ff8888;
+}
+
+body.global-out-of-hours {
+  background-color: #1a0f11 !important;
+}
+
 .acc-card-header {
   display: flex;
   align-items: center;

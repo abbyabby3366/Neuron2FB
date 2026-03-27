@@ -3,6 +3,7 @@ import { showToast } from './ui.js';
 export const state = {
     allConfigs: [],
     current2fb: null,
+    currentFbConfig: null,
     currentFile: null,
     linkedConfigs: {}
 };
@@ -31,6 +32,7 @@ export async function load2fb(filename, elements, renderFbMeta, loadLinkedAccoun
         state.currentFile = null;
         const res = await fetch(`/api/configs/${filename}`);
         const fbConfig = await res.json();
+        state.currentFbConfig = fbConfig;
         
         elements.welcomeScreen.classList.add('hidden');
         elements.editorScreen.classList.add('hidden');

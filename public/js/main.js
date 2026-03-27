@@ -3,6 +3,7 @@ import { state, fetchAllConfigs, load2fb } from "./api.js";
 import { renderNav, renderFbMeta } from "./render.js";
 import { loadLinkedAccounts, renderAccountCard } from "./accountManager.js";
 import { saveSettingsFromModalSelection, openLeagueFilterModal } from "./modals.js";
+import { isWithinWindows } from "./timeUtils.js";
 
 // --- Initialization ---
 
@@ -18,6 +19,25 @@ async function init() {
 
   // Global event listeners
   setupEventListeners(boundLoad2fb);
+
+  // Real-time Opening Hours visual updates (every 10s)
+  setInterval(() => {
+    if (!state.currentFbConfig) return;
+    
+    // 1. Global 2fb Config check
+    document.body.classList.toggle('global-out-of-hours', !isWithinWindows(state.currentFbConfig.openingHours));
+    
+    // 2. Account level checks
+    document.querySelectorAll('.acc-card').forEach(card => {
+      const accId = card.querySelector('.acc-id')?.textContent;
+      if (!accId) return;
+      const filename = accId.endsWith('.json') ? accId : `${accId}.json`;
+      const config = state.linkedConfigs[filename];
+      if (config) {
+        card.classList.toggle('out-of-hours', !isWithinWindows(config.openingHours));
+      }
+    });
+  }, 10000);
 }
 
 function setupEventListeners(load2fb) {

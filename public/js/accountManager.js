@@ -1,6 +1,7 @@
 import { state, saveAccountConfig, fetchAccountConfig } from './api.js';
 import { elements, showToast } from './ui.js';
 import { openBrainParamsModal, openStakeInputModal, openBrowserDetailsModal, openScheduleModal, openSuccessBetListModal } from './modals.js';
+import { isWithinWindows } from './timeUtils.js';
 
 export async function loadLinkedAccounts(fbConfig, renderAccountCard) {
     const targets = fbConfig.targetAccsGroup || [];
@@ -47,7 +48,8 @@ export async function loadLinkedAccounts(fbConfig, renderAccountCard) {
 
 export function renderAccountCard(accId, data, container, isUsed, groupType) {
     const card = document.createElement('div');
-    card.className = `acc-card ${isUsed ? '' : 'is-unused'}`;
+    const outOfHoursClass = isWithinWindows(data.openingHours) ? '' : 'out-of-hours';
+    card.className = `acc-card ${isUsed ? '' : 'is-unused'} ${outOfHoursClass}`;
     
     const lowerId = accId.toLowerCase();
     let logoSrc = '';

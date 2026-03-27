@@ -1,6 +1,7 @@
 import { state } from './api.js';
 import { elements } from './ui.js';
 import { openSettingsModal } from './modals.js';
+import { isWithinWindows } from './timeUtils.js';
 
 export function renderNav(load2fb) {
     elements.fbTabs.innerHTML = '';
@@ -16,6 +17,8 @@ export function renderNav(load2fb) {
 }
 
 export function renderFbMeta(config) {
+    document.body.classList.toggle('global-out-of-hours', !isWithinWindows(config.openingHours));
+    
     elements.fbMetaParams.innerHTML = '';
     elements.fbTitleControls.innerHTML = '';
     
