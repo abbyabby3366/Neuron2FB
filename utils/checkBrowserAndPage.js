@@ -4,6 +4,8 @@ const { queueSetup } = require("./setupQueue");
 const { cleanupBrowser } = require("./cleanupBrowser");
 const { isAccWithinOpeningHours } = require("./openingHours");
 
+const pendingRestartSince = {};
+
 const checkBrowserAndPage = async (
   bookie,
   isSetupReady,
@@ -38,15 +40,53 @@ const checkBrowserAndPage = async (
         continue;
       }
 
-      let params = JSON.parse(
-        fsSync.readFileSync(`TargetBookie/${acc}.json`, "utf-8"),
-      );
+      let params;
+      try {
+        params = JSON.parse(
+          await fsSync.promises.readFile(`TargetBookie/${acc}.json`, "utf-8")
+        );
+      } catch (e) {
+        console.error(`[checkBrowserAndPage] Error reading TargetBookie/${acc}.json:`, e.message);
+        continue;
+      }
+
+      let shouldRestartForInterval = false;
 
       if (
-        isSetupReady[acc] &&
+        isSetupReady[acc] === true &&
         currentTime - lastStartTime[accNo] >
           params.targetBrowserRestartIntervalInMins * 60 * 1000
       ) {
+        const { isAutoBettingObj } = require("./SBB2FB");
+        if (isAutoBettingObj[acc]) {
+          if (!pendingRestartSince[acc]) {
+            pendingRestartSince[acc] = currentTime;
+            console.log(
+              `[RESTART MGR] ${acc} restart requested, but autobetting is active. Waiting...`
+            );
+          } else if (currentTime - pendingRestartSince[acc] > 60 * 1000) {
+            console.log(
+              `[RESTART MGR] ${acc} autobetting wait timeout (1 min) reached. Forcing restart.`
+            );
+            delete pendingRestartSince[acc];
+            shouldRestartForInterval = true;
+          }
+        } else {
+          if (pendingRestartSince[acc]) {
+            console.log(
+              `[RESTART MGR] ${acc} finished autobetting. Proceeding with pending restart.`
+            );
+            delete pendingRestartSince[acc];
+          }
+          shouldRestartForInterval = true;
+        }
+      } else {
+        if (pendingRestartSince[acc]) {
+          delete pendingRestartSince[acc];
+        }
+      }
+
+      if (shouldRestartForInterval) {
         console.log(
           `${bookie} ${accNo} browser restart interval of ${params.targetBrowserRestartIntervalInMins} mins reached, restarting browser`,
         );
