@@ -1,16 +1,20 @@
 {
   "run": true,
   "autobet": true,
-  "targetAccsGroup": ["sbo0"],
-  "referenceAccsGroup": ["ps38380"],
-  "cooldownTimeInSeconds": 55,
-  "msBetweenSBB2FB": 500,
+  "targetAccsGroup": ["sbo1", "sbo2", "sbo3", "sbo4", "sbo5"],
+  "referenceAccsGroup": ["ps38380", "ps38381"],
+  "cooldownTimeInSeconds": 30,
+  "msBetweenSBB2FB": 50,
+  "delayBetweenSetupInSeconds": 20,
+  "openingHours": [],
   "successBetListKey": "2fb0",
   "brainParams": {
-    "maxEV": 0.11,
-    "minEV": -0.05,
-    "maxOdds": 400,
-    "minOdds": -1,
+    "maxEV": 0.15,
+    "minEV": -0.015,
+    "oddsRanges": [
+      [-1, -0.4],
+      [0.35, 1]
+    ],
     "allowOver": true,
     "allowUnder": true,
     "allowHandicap": true,
@@ -23,9 +27,9 @@
     "disallowedMatchMinutes": "",
     "maxNumberOfRepeatBets": 1,
     "maxNumberOfRepeatedEvents": 2,
-    "maxNumberOfRepeatedEventsAH": 20,
+    "maxNumberOfRepeatedEventsAH": 1,
     "maxNumberOfRepeatedEventsOU": 1,
-    "maxNumberOfRepeatedEvents1X2": 1,
+    "maxNumberOfRepeatedEvents1X2": 0,
     "maxNumberOfRepeatedEvents1stHalf": 1,
     "sameGameDelayInSeconds": 150,
     "matchLeagueBoolean": true,
@@ -39,5 +43,6 @@
     "timeBetweenEVFail": 20,
     "timeBetweenRefMaxStakeFail": 120,
     "timeBetweenTargetMaxStakeFail": 120
-  }
+  },
+  "unusedTargetAccsGroup": []
 }
