@@ -206,10 +206,12 @@ export function renderAccountCard(accId, data, container, isUsed, groupType) {
         }
     };
 
-    card.querySelector('.brain-params-opt').onclick = (e) => {
+    card.querySelector('.brain-params-opt').onclick = async (e) => {
         e.preventDefault();
-        openBrainParamsModal(accId, data, saveAndNotify);
         dropdown.classList.remove('active');
+        const filename = accId.endsWith('.json') ? accId : `${accId}.json`;
+        const freshData = await fetchAccountConfig(filename);
+        openBrainParamsModal(accId, freshData || data, saveAndNotify);
     };
 
     card.querySelector('.stake-input-opt').onclick = (e) => {

@@ -255,7 +255,10 @@ export function openBrainParamsModal(accId, data, onSave) {
                     'timeBetweenTicketFail', 'timeBetweenOddsFail', 'timeBetweenEVFail', 
                     'timeBetweenRefMaxStakeFail', 'timeBetweenTargetMaxStakeFail',
                     'minVig', 'maxVig', 'minRefVig', 'maxRefVig',
-                    'minTargetMaxStake', 'maxTargetMaxStake', 'minRefMaxStake', 'maxRefMaxStake'
+                    'minTargetMaxStake', 'maxTargetMaxStake', 'minRefMaxStake', 'maxRefMaxStake',
+                    'allowHtOver', 'allowHtUnder', 'allowFtOver', 'allowFtUnder', 'allowHtAh', 'allowFtAh',
+                    'htOverMarketParams', 'htUnderMarketParams', 'ftOverMarketParams', 'ftUnderMarketParams',
+                    'htAhMarketParams', 'ftAhMarketParams'
                 ].includes(k)
             ),
             columns: 2
@@ -263,6 +266,15 @@ export function openBrainParamsModal(accId, data, onSave) {
     ];
 
     renderSpecializedModal(`Brain Params: ${accId}`, config, (updatedConfig) => {
+        // Merge market line params from the sub-modal (they're not form inputs)
+        const marketKeys = [
+            'allowHtOver', 'allowHtUnder', 'allowFtOver', 'allowFtUnder', 'allowHtAh', 'allowFtAh',
+            'htOverMarketParams', 'htUnderMarketParams', 'ftOverMarketParams', 'ftUnderMarketParams',
+            'htAhMarketParams', 'ftAhMarketParams'
+        ];
+        for (const k of marketKeys) {
+            if (config[k] !== undefined) updatedConfig[k] = config[k];
+        }
         data.brainParams = updatedConfig;
         onSave(data);
     }, { 
