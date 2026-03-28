@@ -1,6 +1,9 @@
 import { elements, showToast } from './ui.js';
 import { state, load2fb } from './api.js';
 
+// In-memory clipboard for brain params copy/paste
+let _brainParamsClipboard = null;
+
 export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
     // Prepare a flat structure for the specialized modal
     const flatConfig = { ...config };
@@ -24,12 +27,11 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
         {
             title: 'Market Allowances (Brain)',
             fields: [
-                'editSpecificMarketLines',
                 'allowOver', 'allowUnder', 'allowHandicap', 'allow1X2', 
                 'allowFirstHalf', 'allowRegularTime',
                 'allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'disallowedMatchMinutes'
             ],
-            fullWidthFields: ['editSpecificMarketLines', 'allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'disallowedMatchMinutes'],
+            fullWidthFields: ['allowAHMarketParamsRegex', 'allowOverMarketParamsRegex', 'allowUnderMarketParamsRegex', 'disallowedMatchMinutes'],
             columns: 2
         },
         {
@@ -121,33 +123,8 @@ export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
         }
     }, { 
         sections, 
-        modalClass: 'modal-lg',
-        customRender: {
-            editSpecificMarketLines: () => `
-                <button type="button" class="btn btn-primary btn-sm" id="open-market-lines-btn" onclick="document.dispatchEvent(new CustomEvent('openMarketLinesConfig', { detail: 'settings' }))">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
-                        <path d="M12 20h9"></path>
-                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                    </svg>
-                    Edit Specific Market Lines
-                </button>
-                <span style="font-size: 0.75rem; color: var(--text-secondary); margin-left: 12px; align-self: center;">(Note: The filters here will overlap with the filters below)</span>
-            `
-        }
+        modalClass: 'modal-lg'
     });
-
-    // Remove any previous custom event listeners to avoid duplicates
-    const evtHandler = () => {
-        if (!config.brainParams) config.brainParams = {};
-        openMarketParamsEditorModal(config.brainParams, (newParams) => {
-            Object.assign(config.brainParams, newParams);
-        });
-    };
-    document.removeEventListener('openMarketLinesConfig', document._marketLinesConfigHandler);
-    document._marketLinesConfigHandler = (e) => {
-        if (e.detail === 'settings') evtHandler();
-    };
-    document.addEventListener('openMarketLinesConfig', document._marketLinesConfigHandler);
 }
 
 export function renderSettingsField(key, value, container, parentKey = null) {
@@ -291,6 +268,7 @@ export function openBrainParamsModal(accId, data, onSave) {
     }, { 
         sections, 
         modalClass: 'modal-lg',
+        copyPaste: true,
         customRender: {
             editSpecificMarketLines: () => `
                 <button type="button" class="btn btn-primary btn-sm" id="open-market-lines-btn2" onclick="document.dispatchEvent(new CustomEvent('openMarketLinesConfig2', { detail: 'brain' }))">
@@ -377,13 +355,116 @@ export function openScheduleModal(accId, data, onSave) {
 }
 
 function renderSpecializedModal(title, config, onSave, options = {}) {
-    elements.settingsModalTitle.textContent = title;
     elements.settingsForm.innerHTML = '';
     
     // Reset modal size
     elements.fbSettingsModal.querySelector('.modal-content').className = 'modal-content';
     if (options.modalClass) {
         elements.fbSettingsModal.querySelector('.modal-content').classList.add(options.modalClass);
+    }
+
+    // Title with optional copy/paste buttons
+    if (options.copyPaste) {
+        elements.settingsModalTitle.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:space-between;width:100%;padding-right:20px;">
+                <span>${title}</span>
+                <div style="display:flex;gap:6px;">
+                    <button id="brain-copy-btn" class="btn btn-secondary btn-xs" title="Copy all params" style="display:flex;align-items:center;gap:4px;font-size:0.72rem;padding:4px 8px;">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copy
+                    </button>
+                    <button id="brain-paste-btn" class="btn btn-secondary btn-xs" title="Paste params from clipboard" style="display:flex;align-items:center;gap:4px;font-size:0.72rem;padding:4px 8px;${_brainParamsClipboard ? '' : 'opacity:0.4;cursor:not-allowed;'}">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+                        Paste
+                    </button>
+                </div>
+            </div>
+        `;
+        // Wire up copy/paste after DOM is ready
+        setTimeout(() => {
+            const copyBtn = document.getElementById('brain-copy-btn');
+            const pasteBtn = document.getElementById('brain-paste-btn');
+
+            if (copyBtn) {
+                copyBtn.onclick = () => {
+                    // Read current form values
+                    const snapshot = {};
+                    elements.settingsForm.querySelectorAll('input, select').forEach(input => {
+                        const key = input.dataset.key;
+                        if (!key) return;
+                        const isJson = input.dataset.keyJson === 'true';
+                        if (input.tagName === 'SELECT') {
+                            snapshot[key] = input.value;
+                        } else if (isJson) {
+                            try { snapshot[key] = JSON.parse(input.value); } catch { snapshot[key] = input.value; }
+                        } else {
+                            snapshot[key] = input.type === 'checkbox' ? input.checked :
+                                            input.type === 'number' ? Number(input.value) : input.value;
+                        }
+                    });
+                    _brainParamsClipboard = snapshot;
+                    showToast('Brain params copied to clipboard');
+                    // Enable paste button
+                    if (pasteBtn) {
+                        pasteBtn.style.opacity = '1';
+                        pasteBtn.style.cursor = 'pointer';
+                    }
+                };
+            }
+
+            if (pasteBtn) {
+                pasteBtn.onclick = () => {
+                    if (!_brainParamsClipboard) {
+                        showToast('Nothing copied yet', 'error');
+                        return;
+                    }
+                    // Show warning confirmation
+                    const overlay = document.createElement('div');
+                    overlay.className = 'modal';
+                    overlay.style.cssText = 'z-index:10001;';
+                    overlay.innerHTML = `
+                        <div class="modal-content" style="max-width:420px;">
+                            <h3 style="color:#f59e0b;display:flex;align-items:center;gap:8px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                Overwrite Warning
+                            </h3>
+                            <p style="color:var(--text-secondary);margin:12px 0;line-height:1.6;">
+                                This will <strong style="color:#ef4444;">replace all current brain params</strong> with the copied values. The old values will be lost.
+                            </p>
+                            <div class="modal-footer">
+                                <button id="paste-cancel-btn" class="btn btn-secondary">Cancel</button>
+                                <button id="paste-confirm-btn" class="btn btn-danger">Overwrite</button>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(overlay);
+
+                    document.getElementById('paste-cancel-btn').onclick = () => overlay.remove();
+                    document.getElementById('paste-confirm-btn').onclick = () => {
+                        // Apply clipboard values to form fields
+                        const clip = _brainParamsClipboard;
+                        elements.settingsForm.querySelectorAll('input, select').forEach(input => {
+                            const key = input.dataset.key;
+                            if (!key || clip[key] === undefined) return;
+                            const isJson = input.dataset.keyJson === 'true';
+                            if (input.tagName === 'SELECT') {
+                                input.value = clip[key];
+                            } else if (isJson) {
+                                input.value = typeof clip[key] === 'string' ? clip[key] : JSON.stringify(clip[key]);
+                            } else if (input.type === 'checkbox') {
+                                input.checked = !!clip[key];
+                            } else {
+                                input.value = clip[key];
+                            }
+                        });
+                        overlay.remove();
+                        showToast('Brain params pasted successfully');
+                    };
+                };
+            }
+        }, 0);
+    } else {
+        elements.settingsModalTitle.textContent = title;
     }
     
     if (options.sections) {
@@ -877,18 +958,18 @@ export function openMarketParamsEditorModal(config, onSaveParams) {
 
     // Make local copies of the market params
     let localConfig = {
-        htOverMarketParams: config.htOverMarketParams || [],
-        htUnderMarketParams: config.htUnderMarketParams || [],
-        ftOverMarketParams: config.ftOverMarketParams || [],
-        ftUnderMarketParams: config.ftUnderMarketParams || [],
-        htAhMarketParams: config.htAhMarketParams || [],
-        ftAhMarketParams: config.ftAhMarketParams || [],
-        allowHtOver: config.allowHtOver !== false,
-        allowHtUnder: config.allowHtUnder !== false,
-        allowFtOver: config.allowFtOver !== false,
-        allowFtUnder: config.allowFtUnder !== false,
-        allowHtAh: config.allowHtAh !== false,
-        allowFtAh: config.allowFtAh !== false
+        htOverMarketParams: Array.isArray(config.htOverMarketParams) ? [...config.htOverMarketParams] : [],
+        htUnderMarketParams: Array.isArray(config.htUnderMarketParams) ? [...config.htUnderMarketParams] : [],
+        ftOverMarketParams: Array.isArray(config.ftOverMarketParams) ? [...config.ftOverMarketParams] : [],
+        ftUnderMarketParams: Array.isArray(config.ftUnderMarketParams) ? [...config.ftUnderMarketParams] : [],
+        htAhMarketParams: Array.isArray(config.htAhMarketParams) ? [...config.htAhMarketParams] : [],
+        ftAhMarketParams: Array.isArray(config.ftAhMarketParams) ? [...config.ftAhMarketParams] : [],
+        allowHtOver: config.allowHtOver === true || config.allowHtOver === undefined,
+        allowHtUnder: config.allowHtUnder === true || config.allowHtUnder === undefined,
+        allowFtOver: config.allowFtOver === true || config.allowFtOver === undefined,
+        allowFtUnder: config.allowFtUnder === true || config.allowFtUnder === undefined,
+        allowHtAh: config.allowHtAh === true || config.allowHtAh === undefined,
+        allowFtAh: config.allowFtAh === true || config.allowFtAh === undefined
     };
 
     let currentTab = 'htOver';
@@ -1016,6 +1097,12 @@ export function openMarketParamsEditorModal(config, onSaveParams) {
             });
         });
     };
+
+    // Reset tabs to initial state (htOver) on every open
+    tabs.forEach(t => {
+        t.classList.remove('active');
+        if (t.dataset.tab === 'htOver') t.classList.add('active');
+    });
 
     tabs.forEach(tab => {
         tab.onclick = () => {

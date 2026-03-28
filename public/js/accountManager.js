@@ -23,21 +23,33 @@ export async function loadLinkedAccounts(fbConfig, renderAccountCard) {
             ...unusedGroup.map(id => ({ id, isUsed: false }))
         ];
 
-        const promises = allAccs.map(async ({ id: accId, isUsed }) => {
+        // Sort by numeric suffix so cards always render in ascending order (sbo0, sbo1, sbo2...)
+        allAccs.sort((a, b) => {
+            const numA = parseInt((a.id.match(/(\d+)$/) || [0, 0])[1], 10);
+            const numB = parseInt((b.id.match(/(\d+)$/) || [0, 0])[1], 10);
+            return numA - numB;
+        });
+
+        // Fetch all configs concurrently for speed, then render in sorted order
+        const results = await Promise.all(allAccs.map(async ({ id: accId, isUsed }) => {
             try {
                 const filename = accId.endsWith('.json') ? accId : `${accId}.json`;
                 const data = await fetchAccountConfig(filename);
-                if (data) {
-                    state.linkedConfigs[filename] = data;
-                    renderAccountCard(accId, data, container, isUsed, groupType);
-                } else {
-                    import('./render.js').then(m => m.renderErrorCard(accId, container));
-                }
+                return { accId, filename, data, isUsed, error: false };
             } catch (e) {
-                import('./render.js').then(m => m.renderErrorCard(accId, container));
+                return { accId, data: null, isUsed, error: true };
             }
-        });
-        await Promise.all(promises);
+        }));
+
+        for (const { accId, filename, data, isUsed, error } of results) {
+            if (!error && data) {
+                state.linkedConfigs[filename] = data;
+                renderAccountCard(accId, data, container, isUsed, groupType);
+            } else {
+                const m = await import('./render.js');
+                m.renderErrorCard(accId, container);
+            }
+        }
     };
 
     await Promise.all([
