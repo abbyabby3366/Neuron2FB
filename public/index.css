@@ -1924,3 +1924,21 @@ input[type='number'] {
   align-items: center;
   gap: 8px;
 }
+
+.paste-brain-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.paste-brain-btn:hover {
+  background: var(--hover-bg);
+  color: #f59e0b;
+}

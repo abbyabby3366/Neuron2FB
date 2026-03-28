@@ -3,6 +3,7 @@ import { state, load2fb } from './api.js';
 
 // In-memory clipboard for brain params copy/paste
 let _brainParamsClipboard = null;
+export function getBrainParamsClipboard() { return _brainParamsClipboard; }
 
 export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
     // Prepare a flat structure for the specialized modal

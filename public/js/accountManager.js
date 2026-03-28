@@ -1,6 +1,6 @@
 import { state, saveAccountConfig, fetchAccountConfig } from './api.js';
 import { elements, showToast } from './ui.js';
-import { openBrainParamsModal, openStakeInputModal, openBrowserDetailsModal, openScheduleModal, openSuccessBetListModal } from './modals.js';
+import { openBrainParamsModal, openStakeInputModal, openBrowserDetailsModal, openScheduleModal, openSuccessBetListModal, getBrainParamsClipboard } from './modals.js';
 import { isWithinWindows } from './timeUtils.js';
 
 export async function loadLinkedAccounts(fbConfig, renderAccountCard) {
@@ -98,6 +98,9 @@ export function renderAccountCard(accId, data, container, isUsed, groupType) {
             </div>
         </div>
         <div class="acc-actions">
+            <button class="paste-brain-btn" title="Paste Brain Params">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+            </button>
             <button class="focus-btn" title="Focus Chrome Window">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
@@ -165,6 +168,55 @@ export function renderAccountCard(accId, data, container, isUsed, groupType) {
 
     const passwordInput = card.querySelector('.password-input');
     if (passwordInput) passwordInput.addEventListener('change', (e) => saveQuickInput(e, 'password'));
+
+    // Paste Brain Params button
+    const pasteBrainBtn = card.querySelector('.paste-brain-btn');
+    if (pasteBrainBtn) {
+        pasteBrainBtn.onclick = () => {
+            const clip = getBrainParamsClipboard();
+            if (!clip) {
+                showToast('Nothing copied yet — copy from Brain Params modal first', 'error');
+                return;
+            }
+            // Show warning confirmation
+            const overlay = document.createElement('div');
+            overlay.className = 'modal';
+            overlay.style.cssText = 'z-index:10001;';
+            overlay.innerHTML = `
+                <div class="modal-content" style="max-width:420px;">
+                    <h3 style="color:#f59e0b;display:flex;align-items:center;gap:8px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        Overwrite Warning
+                    </h3>
+                    <p style="color:var(--text-secondary);margin:12px 0;line-height:1.6;">
+                        This will <strong style="color:#ef4444;">replace all brain params</strong> for <strong>${accId}</strong> with the copied values. The old values will be lost.
+                    </p>
+                    <div class="modal-footer">
+                        <button id="card-paste-cancel-btn" class="btn btn-secondary">Cancel</button>
+                        <button id="card-paste-confirm-btn" class="btn btn-danger">Overwrite</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+
+            document.getElementById('card-paste-cancel-btn').onclick = () => overlay.remove();
+            document.getElementById('card-paste-confirm-btn').onclick = async () => {
+                overlay.remove();
+                const filename = accId.endsWith('.json') ? accId : `${accId}.json`;
+                const currentData = await fetchAccountConfig(filename);
+                if (currentData) {
+                    currentData.brainParams = { ...clip };
+                    const ok = await saveAccountConfig(filename, currentData);
+                    if (ok) {
+                        showToast(`Brain params pasted & saved for ${accId}`);
+                        state.linkedConfigs[filename] = currentData;
+                    } else {
+                        showToast('Save failed', 'error');
+                    }
+                }
+            };
+        };
+    }
 
     // Focus button
     const focusBtn = card.querySelector('.focus-btn');
