@@ -1,6 +1,6 @@
 import { state, saveAccountConfig, fetchAccountConfig } from './api.js';
 import { elements, showToast } from './ui.js';
-import { openBrainParamsModal, openStakeInputModal, openBrowserDetailsModal, openScheduleModal, openSuccessBetListModal, getBrainParamsClipboard } from './modals.js';
+import { openBrainParamsModal, openStakeInputModal, openBrowserDetailsModal, openScheduleModal, openSuccessBetListModal, getBrainParamsClipboard, getBrainParamsClipboardSource } from './modals.js';
 import { isWithinWindows } from './timeUtils.js';
 
 export async function loadLinkedAccounts(fbConfig, renderAccountCard) {
@@ -208,7 +208,8 @@ export function renderAccountCard(accId, data, container, isUsed, groupType) {
                     currentData.brainParams = { ...clip };
                     const ok = await saveAccountConfig(filename, currentData);
                     if (ok) {
-                        showToast(`Brain params pasted & saved for ${accId}`);
+                        const sourceAccId = getBrainParamsClipboardSource() || 'Unknown';
+                        showToast(`Brain params ${sourceAccId} pasted & saved for ${accId}`);
                         state.linkedConfigs[filename] = currentData;
                     } else {
                         showToast('Save failed', 'error');

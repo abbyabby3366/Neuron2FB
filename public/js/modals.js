@@ -3,7 +3,9 @@ import { state, load2fb } from './api.js';
 
 // In-memory clipboard for brain params copy/paste
 let _brainParamsClipboard = null;
+let _brainParamsClipboardSource = null;
 export function getBrainParamsClipboard() { return _brainParamsClipboard; }
+export function getBrainParamsClipboardSource() { return _brainParamsClipboardSource; }
 
 export function openSettingsModal(config, renderFbMeta, loadLinkedAccounts) {
     // Prepare a flat structure for the specialized modal
@@ -401,7 +403,7 @@ function renderSpecializedModal(title, config, onSave, options = {}) {
             if (copyBtn) {
                 copyBtn.onclick = () => {
                     // Read current form values
-                    const snapshot = {};
+                    const snapshot = JSON.parse(JSON.stringify(config));
                     elements.settingsForm.querySelectorAll('input, select').forEach(input => {
                         const key = input.dataset.key;
                         if (!key) return;
@@ -415,7 +417,8 @@ function renderSpecializedModal(title, config, onSave, options = {}) {
                                             input.type === 'number' ? Number(input.value) : input.value;
                         }
                     });
-                    _brainParamsClipboard = snapshot;
+                    _brainParamsClipboard = JSON.parse(JSON.stringify(snapshot));
+                    _brainParamsClipboardSource = title.split(': ')[1] || 'Unknown';
                     showToast('Brain params copied to clipboard');
                     // Enable paste button
                     if (pasteBtn) {
@@ -455,7 +458,8 @@ function renderSpecializedModal(title, config, onSave, options = {}) {
                     document.getElementById('paste-cancel-btn').onclick = () => overlay.remove();
                     document.getElementById('paste-confirm-btn').onclick = () => {
                         // Apply clipboard values to form fields
-                        const clip = _brainParamsClipboard;
+                        const clip = JSON.parse(JSON.stringify(_brainParamsClipboard));
+                        Object.assign(config, clip);
                         elements.settingsForm.querySelectorAll('input, select').forEach(input => {
                             const key = input.dataset.key;
                             if (!key || clip[key] === undefined) return;
@@ -1044,7 +1048,7 @@ export function openMarketParamsEditorModal(config, onSaveParams) {
             <div class="market-bet-all-wrapper">
                 <label>
                     <input type="checkbox" id="market-bet-all-checkbox" ${isBetAll ? 'checked' : ''}>
-                    Bet All Lines
+                    Check All Lines
                 </label>
             </div>
         `;
