@@ -1,6 +1,7 @@
 {
   "run": true,
   "autobet": true,
+  "openAllAtOnce": false,
   "targetAccsGroup": ["sbo1", "sbo2", "sbo3", "sbo4", "sbo5"],
   "referenceAccsGroup": ["ps38380", "ps38381"],
   "cooldownTimeInSeconds": 30,

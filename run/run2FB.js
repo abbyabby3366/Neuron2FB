@@ -17,27 +17,51 @@ let ticketEventQueueIBC = createTicketEventQueue();
 let ticketEventQueueObet = createTicketEventQueue();
 let ticketEventQueueHGA = createTicketEventQueue();
 
-// Set up accounts one by one
-const setup2FB = async (accounts, delaySeconds = 0, fb2ConfigId = "") => {
-  for (let i = 0; i < accounts.length; i++) {
-    const acc = accounts[i];
-    if (!isSetupReady[acc]) {
-      // Check opening hours before setup
-      const hoursCheck = isAccWithinOpeningHours(acc, fb2ConfigId);
-      if (!hoursCheck.isOpen) {
-        console.log(`[HOURS] ${acc} outside opening hours, skipping setup (Blocked by ${hoursCheck.reason})`);
-        isSetupReady[acc] = "hours_closed";
+// Set up accounts one by one or all at once based on toggle
+const setup2FB = async (accounts, delaySeconds = 0, fb2ConfigId = "", openAllAtOnce = false) => {
+  if (openAllAtOnce) {
+    const promises = accounts.map(async (acc, i) => {
+      if (!isSetupReady[acc]) {
+        // Check opening hours before setup
+        const hoursCheck = isAccWithinOpeningHours(acc, fb2ConfigId);
+        if (!hoursCheck.isOpen) {
+          console.log(`[HOURS] ${acc} outside opening hours, skipping setup (Blocked by ${hoursCheck.reason})`);
+          isSetupReady[acc] = "hours_closed";
+          lastStartTime[acc] = new Date();
+          return;
+        }
+        // Delay between accounts (skip delay for the first one)
+        if (i > 0 && delaySeconds > 0) {
+          console.log(`Waiting ${i * delaySeconds}s before setting up ${acc}...`);
+          await new Promise((resolve) => setTimeout(resolve, i * delaySeconds * 1000));
+        }
+        isSetupReady[acc] = "ongoing";
+        await setupBookie(acc, browsers, pages, isSetupReady);
         lastStartTime[acc] = new Date();
-        continue;
       }
-      // Delay between accounts (skip delay for the first one)
-      if (i > 0 && delaySeconds > 0) {
-        console.log(`Waiting ${delaySeconds}s before setting up ${acc}...`);
-        await new Promise((resolve) => setTimeout(resolve, delaySeconds * 1000));
+    });
+    await Promise.all(promises);
+  } else {
+    for (let i = 0; i < accounts.length; i++) {
+      const acc = accounts[i];
+      if (!isSetupReady[acc]) {
+        // Check opening hours before setup
+        const hoursCheck = isAccWithinOpeningHours(acc, fb2ConfigId);
+        if (!hoursCheck.isOpen) {
+          console.log(`[HOURS] ${acc} outside opening hours, skipping setup (Blocked by ${hoursCheck.reason})`);
+          isSetupReady[acc] = "hours_closed";
+          lastStartTime[acc] = new Date();
+          continue;
+        }
+        // Delay between accounts (skip delay for the first one)
+        if (i > 0 && delaySeconds > 0) {
+          console.log(`Waiting ${delaySeconds}s before setting up ${acc}...`);
+          await new Promise((resolve) => setTimeout(resolve, delaySeconds * 1000));
+        }
+        isSetupReady[acc] = "ongoing";
+        await setupBookie(acc, browsers, pages, isSetupReady);
+        lastStartTime[acc] = new Date();
       }
-      isSetupReady[acc] = "ongoing";
-      await setupBookie(acc, browsers, pages, isSetupReady);
-      lastStartTime[acc] = new Date();
     }
   }
 };
@@ -65,8 +89,9 @@ const run2FB = async (args) => {
 
     // Setup accounts in two separate queues (target and reference) in background
     const setupDelay = config.delayBetweenSetupInSeconds || 0;
-    setup2FB(targetAccsGroup, setupDelay, fb2ConfigId);
-    setup2FB(referenceAccsGroup, setupDelay, fb2ConfigId);
+    const openAllAtOnce = config.openAllAtOnce || false;
+    setup2FB(targetAccsGroup, setupDelay, fb2ConfigId, openAllAtOnce);
+    setup2FB(referenceAccsGroup, setupDelay, fb2ConfigId, openAllAtOnce);
     checkBrowserAndPage("", isSetupReady, browsers, pages, lastStartTime, [
       ...targetAccsGroup,
       ...referenceAccsGroup,
