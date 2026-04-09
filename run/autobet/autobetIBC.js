@@ -177,6 +177,8 @@ async function autoBetIbc(page, betEvent, referenceAcc, successBetListKey) {
     }
 
     if (
+      !ticketDataTarget.maxStake ||
+      isNaN(ticketDataTarget.maxStake) ||
       ticketDataTarget.maxStake < brain_params.minTargetMaxStake ||
       ticketDataTarget.maxStake > brain_params.maxTargetMaxStake
     ) {
@@ -186,9 +188,9 @@ async function autoBetIbc(page, betEvent, referenceAcc, successBetListKey) {
       await writeData("tempFailBetList", betEvent);
       throw new Error(
         `${acc} - TargetMaxStake is not within range. Min: ` +
-          brain_params.minMaxStake +
+          brain_params.minTargetMaxStake +
           " Max: " +
-          brain_params.maxMaxStake +
+          brain_params.maxTargetMaxStake +
           " Current: " +
           ticketDataTarget.maxStake,
       );
